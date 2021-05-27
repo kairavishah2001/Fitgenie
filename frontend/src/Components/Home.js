@@ -1,10 +1,16 @@
 import React, { Component } from 'react';
 import { Card, CardImg, CardImgOverlay, CardText } from 'reactstrap';
+import Aos from 'aos';
+import "aos/dist/aos.css";
 
 class Home extends Component {
+    componentDidMount() {
+        Aos.init({duration: 1000});
+    }
+
     render() {
         return (
-            <div className="container">
+            <div className="container" data-aos="fade-up">
                 <div className="row d-flex justify-content-center">
                     <div className="col-md-6">
                         <h2 className="d-flex mt-2 justify-content-center">For the <span className="text-primary mx-2"> love </span> of fit</h2>
@@ -31,7 +37,7 @@ class Home extends Component {
                         <img alt="Home_Image" className="img-fluid" src="https://cdn.discordapp.com/attachments/700657636718149735/847435279879241738/Fitness_tracker-bro.png" />
                     </div>
                 </div>
-                <div className='d-flex justify-content-center'>
+                <div className='d-flex justify-content-center' data-aos="fade-up">
                     <div className="mt-3 col-md-6">
                         <Card style={{ border: 'white' }}>
                             <div className="row">
