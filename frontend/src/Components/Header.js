@@ -22,7 +22,7 @@ class Header extends Component {
     render() {
         return (
             <div className="box-shadow">
-                <Navbar color="light" className="sticky-top" expand="md">
+                <Navbar light className="sticky-top" expand="md">
                     <div className="container ml-auto">
                         <img alt="Logo" src="logo.jpg" style={{ height: "55px", width: "55px" }} className="mr-5"></img>
                         <h3 className="mr-auto text-dark" href="/">FitGenie</h3>
