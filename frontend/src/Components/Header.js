@@ -7,7 +7,7 @@ class Header extends Component {
         super(props);
 
         this.state = {
-            isNavOpen: false,
+            isNavOpen: false
         }
     }
 
@@ -20,32 +20,40 @@ class Header extends Component {
     render() {
         return (
             <div className="box-shadow">
-                <Navbar dark expand="md">
-                    <div className="container">
-                        <NavbarBrand style={{ color: 'Black' }}>Fitgenie</NavbarBrand>
-                        <NavbarToggler onClick={this.toggleNav} />
-                        <Collapse isOpen={this.state.isNavOpen} className="dark">
-                            <Nav dark navbar className="d-flex justify-content-center">
-                                <NavItem>
+                <Navbar className="color-nav sticky-top" dark expand="md">
+                <div className="container ml-auto">
+                    <img src="logo.jpg" style={{height:"55px", width:"55px"}} className="mr-5"></img>
+                    <h3 className="mr-auto text-dark" href="/">FitGenie</h3>
+                    <NavbarToggler onClick={this.toggleNav} />
+                    <Collapse isOpen={this.state.isNavOpen} navbar className="dark">
+                        <Nav navbar className="mx-auto col-6">
+                                 <NavItem className="mt-2">
                                     <NavLink className="nav-link" to="/care">
-                                        <div className="text-dark">
-                                            <span className="fa fa-cutlery mr-1" /> Eat
-                                            </div>
+                                        <h5 className="text-dark ml-1">
+                                            <span className="fa fa-cutlery" /> Eat
+                                        </h5>
                                     </NavLink>
                                 </NavItem>
-                                <NavItem>
+                                <NavItem className="mt-2 mx-auto">
                                     <NavLink className="nav-link" to="/care">
-                                        <div className="text-dark">
-                                            <span className="fa fa-stethoscope mr-1" /> Care
-                                            </div>
+                                        <h5 className="text-dark">
+                                            <span className="fa fa-stethoscope ml-5" /> Care
+                                        </h5>
                                     </NavLink>
                                 </NavItem>
-
+                                <NavItem className="mt-2 ml-5">
+                                    <NavLink className="nav-link" to="/care">
+                                        <h5 className="text-dark">
+                                            <span className="fa fa-handshake-o ml-5" /> Subscription
+                                        </h5>
+                                    </NavLink>
+                                </NavItem>
                             </Nav>
                         </Collapse>
                     </div>
                 </Navbar>
             </div>
+
         );
     }
 }
