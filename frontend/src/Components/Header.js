@@ -48,6 +48,13 @@ class Header extends Component {
                                         </h5>
                                     </NavLink>
                                 </NavItem>
+                                <NavItem className="mt-2 ml-5 mx-auto">
+                                    <NavLink className="nav-link" to="/login">
+                                        <h5 className="text-dark">
+                                            <span className="fa fa-sign-in ml-5" /> Login
+                                        </h5>
+                                    </NavLink>
+                                </NavItem>
                             </Nav>
                         </Collapse>
                     </div>
