@@ -1,6 +1,8 @@
 import React, { Component } from 'react';
 import { Card, CardBody, CardFooter, CardHeader, Form, FormGroup, Button } from "reactstrap";
 import GoogleLogin from 'react-google-login';
+import axios from 'axios';
+
 
 class Login extends Component {
 
@@ -59,9 +61,16 @@ class Login extends Component {
         return (
             <div className="loginBG  my-auto">
                 <div className="d-flex justify-content-end">
-                    <Card className="col-md-5 mx-auto ">
+                    <Card className="col-md-5 mt-5 mx-auto shadow">
+                        <div className="d-flex justify-content-center mt-3">
+                            <h3>
+                                <img src="https://upload.wikimedia.org/wikipedia/en/thumb/3/37/Jumpman_logo.svg/1200px-Jumpman_logo.svg.png" style={{height:"40px", width:"40px"}}></img>
+                                <strong> Login to join us</strong>
+                            </h3>
+                            <div>
 
-                        <CardHeader>Login</CardHeader>
+                            </div>
+                        </div>
                         <CardBody >
                             <Form method="post">
                                 <div className="d-flex justify-content-center">
@@ -82,7 +91,6 @@ class Login extends Component {
                                 </FormGroup>
                             </Form>
                         </CardBody>
-                        <CardFooter>Foof</CardFooter>
                     </Card>
 
                 </div>
