@@ -45,9 +45,9 @@ class Header extends Component {
                                     </NavLink>
                                 </NavItem>
                                 <NavItem className="mt-2 mx-auto">
-                                    <NavLink className="nav-link" to="/subscriptions">
+                                    <NavLink className="nav-link" to="/cart">
                                         <h5 className="text-dark">
-                                            <span className="fa fa-handshake-o" /> Subscription
+                                            <span className="fa fa-shopping-cart" /> Cart
                                         </h5>
                                     </NavLink>
                                 </NavItem>

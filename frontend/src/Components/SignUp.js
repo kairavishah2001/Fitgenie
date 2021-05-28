@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
-import axios from 'axios';
 import {Form, FormGroup, Input, Card, Button, Label, CardHeader, FormFeedback} from 'reactstrap';
+import axios from 'axios';
 import { Redirect } from 'react-router';
 
 class SignUp extends Component {
@@ -61,7 +61,7 @@ class SignUp extends Component {
                 TEMP: true,
             });
         }
-        if (this.state.TEMP && this.state.standardSignUpError.length == 0) {
+        if (this.state.TEMP && this.state.standardSignUpError.length === 0) {
             event.preventDefault();
             this.setState({
                 redirectVarSignUp: true,
@@ -73,21 +73,21 @@ class SignUp extends Component {
                 lastName: this.state.lastname,
             }
 
-            // axios.defaults.withCredentials = true;
-            // axios.post('http://localhost:5000/signUp', data)
-            //     .then(response => {
-            //         if (response.success) {
-            //             this.setState({
-            //                 redirectVarSignUp: true,
-            //             });
-            //         }
-            //         else {
-            //             alert(response.data.msg);
-            //         }
-            //     })
-            //     .catch(response => {
-            //         alert('Something went wrong. Please try again later');
-            //     })
+            axios.defaults.withCredentials = true;
+            axios.post('http://localhost:5000/signUp', data)
+                .then(response => {
+                    if (response.data.success) {
+                        this.setState({
+                            redirectVarSignUp: true,
+                        });
+                    }
+                    else {
+                        alert(response.data.msg);
+                    }
+                })
+                .catch(response => {
+                    alert('Something went wrong. Please try again later');
+                })
         }
     }
 
@@ -132,7 +132,7 @@ class SignUp extends Component {
                     <Card className="col-md-3 mt-5 mx-auto shadow">
                         <div className="d-flex justify-content-center mt-3">
                             <h3>
-                                <img src="https://upload.wikimedia.org/wikipedia/en/thumb/3/37/Jumpman_logo.svg/1200px-Jumpman_logo.svg.png" style={{ height: "40px", width: "40px" }}></img>
+                                <img alt="demo" src="https://upload.wikimedia.org/wikipedia/en/thumb/3/37/Jumpman_logo.svg/1200px-Jumpman_logo.svg.png" style={{ height: "40px", width: "40px" }}></img>
                                 <strong> Sign Up to join us</strong>
                             </h3>
                         </div>
@@ -141,7 +141,7 @@ class SignUp extends Component {
                         </CardHeader>                        
                         <Form method="post" className="m-3">
                         <div className="d-flex justify-content-center">
-                            <img src="https://res-console.cloudinary.com/dzqhcry3r/thumbnails/v1/image/upload/v1622209466/U2lnblVwX3Bqanpwdw==/preview" style={{ width:"70%", height:"70%"}}/>
+                            <img alt="demo" src="https://res-console.cloudinary.com/dzqhcry3r/thumbnails/v1/image/upload/v1622209466/U2lnblVwX3Bqanpwdw==/preview" style={{ width:"70%", height:"70%"}}/>
                         </div>
                             <FormGroup>
                                 <Label className="text-light" htmlFor="firstname">First Name</Label>
