@@ -11,13 +11,20 @@ class Login extends Component {
         super(props);
 
         this.state ={
-            redirectVar: false
+            redirectVar: false,
+            signUp: false,
         }
         // BIND METHODS SO THAT CONTEXT IS PRESERVED
         this.handleSubmit = this.handleSubmit.bind(this);
         this.handleInputChange = this.handleInputChange.bind(this);
         this.responseGoogle = this.responseGoogle.bind(this);
+        this.SignUp = this.SignUp.bind(this);
+    }
 
+    SignUp(){
+        this.setState({
+            signUp: true,
+        })
     }
 
     responseGoogle = (response) => {
@@ -89,6 +96,11 @@ class Login extends Component {
 
     render() {
 
+        if (this.state.signUp) {
+            return(
+                <Redirect to='/signUp' />
+            )
+        }
         if (this.state.redirectVar) {
             return(
                 <Redirect to='/home' />
@@ -105,17 +117,14 @@ class Login extends Component {
                             </h3>
                         </div>
                         <CardHeader className="d-flex justify-content-center" style={{ backgroundColor: "white" }}>
-
                             <h6> Choose Fit over Fat</h6>
                         </CardHeader>
-                        <CardBody >
                             <Form method="post">
+                                {/* CROP GIF */}
                                 <div className="d-flex justify-content-center">
                                     <img style={{ width: '100%', height: '100%' }} src="https://res.cloudinary.com/dzqhcry3r/image/upload/v1622198945/LoginPic_ahfi1o.gif" />
                                 </div>
-                                <FormGroup className="d-flex justify-content-center">
-
-
+                                <div className="d-flex justify-content-center">
                                     <GoogleLogin
                                         onSuccess={this.responseGoogle} onFaliure={this.responseGoogle}
                                         clientId="671959910473-q5vu4qnig20dkibffi718pha5vcsjvn2.apps.googleusercontent.com"
@@ -126,9 +135,9 @@ class Login extends Component {
                                             <Button style={{ buttonColor: "#0D50DA" }} onClick={renderProps.onClick} disabled={renderProps.disabled}>Login With Google</Button>
                                         )}
                                     />
-                                </FormGroup>
+                                </div>
+                                <a onClick={this.SignUp} className="d-flex justify-content-center mt-1 mb-2">Sign Up</a>
                             </Form>
-                        </CardBody>
                     </Card>
 
                 </div>

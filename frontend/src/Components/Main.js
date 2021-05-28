@@ -4,6 +4,7 @@ import Header from './Header';
 import Home from './Home';
 import Login from './Login';
 import Menu from './Menu';
+import SignUp from './SignUp';
 
 class Main extends Component {
     render() {
@@ -13,6 +14,7 @@ class Main extends Component {
                     <Route exact path="/home" component={Home} />
                     <Route path = "/login" component={Login} />
                     <Route path="/eat" component={Menu} />
+                    <Route path="/signUp" component={SignUp} />
                     <Redirect to="/home" />
                 </Switch>
             </div>
