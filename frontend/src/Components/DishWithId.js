@@ -1,7 +1,6 @@
 import axios from 'axios'
 import React, { Component } from 'react';
 import { Button } from 'reactstrap';
-import 'react-circular-progressbar/dist/styles.css';
 import Header from './Header';
 
 export default class DishWithId extends Component {
