@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import { NavLink } from 'react-router-dom';
 import { Navbar, NavItem, Nav, Collapse, NavbarToggler, NavbarBrand } from 'reactstrap';
+import cookie from 'react-cookies';
 
 class Header extends Component {
     constructor(props) {
@@ -28,8 +29,8 @@ class Header extends Component {
                         <NavbarBrand href='/home' className="mr-auto text-dark" >FitGenie</NavbarBrand>
                         <NavbarToggler onClick={this.toggleNav} />
                         <Collapse isOpen={this.state.isNavOpen} navbar>
-                            <Nav navbar className="mx-auto col-6">
-                                <NavItem className="mt-2">
+                            <Nav navbar className="mx-auto col-12">
+                                <NavItem className="mt-2 mx-auto">
                                     <NavLink className="nav-link" to="/eat">
                                         <h5 className="text-dark ml-1">
                                             <span className="fa fa-cutlery" /> Eat
@@ -43,18 +44,16 @@ class Header extends Component {
                                         </h5>
                                     </NavLink>
                                 </NavItem>
-                                <NavItem className="mt-2 ml-5">
-                                    <NavLink className="nav-link" to="/profile">
-                                        <h5 className="text-dark ">
-                                            <span className="fa fa-user ml-5" /> Profile
+                                <NavItem className="mt-2 mx-auto">
+                                    <NavLink className="nav-link" to="/subscriptions">
+                                        <h5 className="text-dark">
+                                            <span className="fa fa-handshake-o" /> Subscription
                                         </h5>
                                     </NavLink>
                                 </NavItem>
-                                <NavItem className="mt-2 ml-5 mx-auto">
-                                    <NavLink className="nav-link" to="/cart">
-                                        <h5 className="text-dark ">
-                                            <span className="fa fa-shopping-cart ml-5" /> Cart
-                                        </h5>
+                                <NavItem className="mt-2 ml-5">
+                                    <NavLink className="nav-link" to="/">
+                                        <img alt="Profile" src={cookie.load("cookie").imageUrl} className="rounded-circle mr-2" style={{height:"45px", width:"45px"}} ></img>
                                     </NavLink>
                                 </NavItem>
                             </Nav>

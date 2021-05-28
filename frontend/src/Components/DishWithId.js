@@ -22,7 +22,7 @@ export default class DishWithId extends Component {
                     this.setState({
                         dishName: response.data.data[0].dishName,
                         price: response.data.data[0].price,
-                        image: response.data.data[0].imageUrl,
+                        // image: response.data.data[0].imageUrl,
                     });
                 }
             })

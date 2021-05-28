@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 import { Card, CardImg, CardImgOverlay, CardText } from 'reactstrap';
 import Aos from 'aos';
 import "aos/dist/aos.css";
+import Header from './Header';
 
 class Home extends Component {
     componentDidMount() {
@@ -10,6 +11,8 @@ class Home extends Component {
 
     render() {
         return (
+            <div>
+            <Header/>
             <div className="container" data-aos="fade-up">
                 <div className="row d-flex justify-content-center">
                     <div className="col-md-6">
@@ -92,6 +95,7 @@ class Home extends Component {
                         </Card>
                     </div>
                 </div>
+            </div>
             </div>
         );
     }

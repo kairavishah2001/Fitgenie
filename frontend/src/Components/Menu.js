@@ -2,6 +2,7 @@ import React, { Component, useState } from 'react';
 import { Card, CardImg, Button } from 'reactstrap';
 import { Redirect } from 'react-router-dom';
 import axios from 'axios';
+import Header from './Header';
 
 function DisplayMenu({ result }) {
     const [redirectVar, changeRedirectVar] = useState(false);
@@ -69,6 +70,7 @@ export default class Menu extends Component {
     render() {
         return (
             <div>
+                <Header />
                 <img style={{ width: '100vw' }} src="https://cdn-images.cure.fit/www-curefit-com/image/upload/fl_progressive,f_auto,q_auto:eco,w_1440,ar_2880:595/dpr_2/image/vm/52dad53b-dd43-489f-9ed4-02fb2c3461be.jpeg" alt="Offer" />
                 <div className="mt-5">
                     <div className="container">

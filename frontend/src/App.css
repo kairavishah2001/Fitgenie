@@ -1,3 +1,19 @@
 .box-shadow {
   box-shadow: 0px 1px grey;
 }
+
+.card{
+  background-color: white;
+}
+
+.loginBG{
+  background-image: url("https://images.unsplash.com/photo-1581660545544-83b8812f9516?ixid=MnwxMjA3fDB8MHxzZWFyY2h8OHx8aG9yaXpvbnxlbnwwfHwwfHw%3D&ixlib=rb-1.2.1&w=1000&q=80");
+  background-size:cover;
+  min-height: 100vh;
+  min-width: 100vw;
+}
+
+.shadow{
+  box-shadow: 0px 0px 100px black;
+}
+
