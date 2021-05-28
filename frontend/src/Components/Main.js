@@ -3,6 +3,7 @@ import { Switch, Route, Redirect } from 'react-router-dom';
 import Header from './Header';
 import Home from './Home';
 import Login from './Login';
+import Menu from './Menu';
 
 class Main extends Component {
     render() {
@@ -11,6 +12,7 @@ class Main extends Component {
                 <Switch location={window.location} key={window.location.pathname}>
                     <Route exact path="/home" component={Home} />
                     <Route path = "/login" component={Login} />
+                    <Route path="/eat" component={Menu} />
                     <Redirect to="/home" />
                 </Switch>
             </div>

@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import { NavLink } from 'react-router-dom';
-import { Navbar, NavItem, Nav, Collapse, NavbarToggler, NavbarBrand } from 'reactstrap';
+import { Navbar, NavItem, Nav, Collapse, NavbarToggler } from 'reactstrap';
 
 class Header extends Component {
     constructor(props) {
@@ -9,6 +9,8 @@ class Header extends Component {
         this.state = {
             isNavOpen: false
         }
+
+        this.toggleNav = this.toggleNav.bind(this);
     }
 
     toggleNav() {
@@ -20,15 +22,15 @@ class Header extends Component {
     render() {
         return (
             <div className="box-shadow">
-                <Navbar className="color-nav sticky-top" dark expand="md">
-                <div className="container ml-auto">
-                    <img src="logo.jpg" alt="" style={{height:"55px", width:"55px"}} className="mr-5"></img>
-                    <h3 className="mr-auto text-dark" href="/">FitGenie</h3>
-                    <NavbarToggler onClick={this.toggleNav} />
-                    <Collapse isOpen={this.state.isNavOpen} navbar className="dark">
-                        <Nav navbar className="mx-auto col-6">
-                                 <NavItem className="mt-2">
-                                    <NavLink className="nav-link" to="/care">
+                <Navbar light className="sticky-top" expand="md">
+                    <div className="container ml-auto">
+                        <img alt="Logo" src="logo.jpg" style={{ height: "55px", width: "55px" }} className="mr-5"></img>
+                        <h3 className="mr-auto text-dark" href="/">FitGenie</h3>
+                        <NavbarToggler onClick={this.toggleNav} />
+                        <Collapse isOpen={this.state.isNavOpen} navbar>
+                            <Nav navbar className="mx-auto col-6">
+                                <NavItem className="mt-2">
+                                    <NavLink className="nav-link" to="/eat">
                                         <h5 className="text-dark ml-1">
                                             <span className="fa fa-cutlery" /> Eat
                                         </h5>
@@ -42,7 +44,7 @@ class Header extends Component {
                                     </NavLink>
                                 </NavItem>
                                 <NavItem className="mt-2 ml-5">
-                                    <NavLink className="nav-link" to="/care">
+                                    <NavLink className="nav-link" to="/subscriptions">
                                         <h5 className="text-dark">
                                             <span className="fa fa-handshake-o ml-5" /> Subscription
                                         </h5>
