@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { Card, CardBody, CardFooter, CardHeader, Form, FormGroup, Button } from "reactstrap";
+import { Card, CardHeader, Form, Button } from "reactstrap";
 import GoogleLogin from 'react-google-login';
 import axios from 'axios';
 import cookie from 'react-cookies';
@@ -40,21 +40,21 @@ class Login extends Component {
             redirectVar: true,
         })
 
-        // axios.post("http://localhost:5000/login", data)
-        //     .then((response) => {
-        //         if(response.data.success){
-        //             alert(response.data.data)
-        //             cookie.save("cookie", {email:response.data.data.email, role:response.data.data.email}, {path: '/'});
-        //             this.setState({
-        //                 redirectVar: true,
-        //             })
-        //         } else {
-        //             alert(response.data.msg);
-        //         }
-        //     })
-        //     .catch((response) => {
-        //         alert('Something went wrong, please try again later!');
-        //     })
+        axios.post("http://localhost:5000/login", data)
+            .then((response) => {
+                if(response.data.success){
+                    alert(response.data.data)
+                    cookie.save("cookie", {email:response.data.data.email, role:response.data.data.email}, {path: '/'});
+                    this.setState({
+                        redirectVar: true,
+                    })
+                } else {
+                    alert(response.data.msg);
+                }
+            })
+            .catch((response) => {
+                alert('Something went wrong, please try again later!');
+            })
 
     }
 
@@ -121,13 +121,13 @@ class Login extends Component {
                         </CardHeader>
                             <Form method="post">
                                 <div className="d-flex justify-content-center">
-                                    <img style={{ width: '80%', height: '80%' }} src="https://res.cloudinary.com/dzqhcry3r/image/upload/v1622208837/LoginPic_n5py55.gif" className="mt-3 mb-5"/>
+                                    <img alt="demo" style={{ width: '80%', height: '80%' }} src="https://res.cloudinary.com/dzqhcry3r/image/upload/v1622208837/LoginPic_n5py55.gif" className="mt-3 mb-5"/>
                                 </div>
                                 <div className="d-flex justify-content-center">
                                     <GoogleLogin
                                         onSuccess={this.responseGoogle} onFaliure={this.responseGoogle}
                                         clientId="507034768121-uet7c6i282spo8kr3qolrmh8lh3r9msa.apps.googleusercontent.com"
-                                        buttonText="Login" onSuccess={this.responseGoogle} onFaliure={this.responseGoogle}
+                                        buttonText="Login"
                                         cookiePolicy={'single_host_origin'}
                                         // className="bg-success"
                                         render={renderProps => (
@@ -135,7 +135,7 @@ class Login extends Component {
                                         )}
                                     />
                                 </div>
-                                <a onClick={this.SignUp} role="button" className="d-flex justify-content-center mt-1 mb-2">Sign Up</a>
+                                <a href='/signUp' onClick={this.SignUp} role="button" className="d-flex justify-content-center mt-1 mb-2">Sign Up</a>
                             </Form>
                     </Card>
 
