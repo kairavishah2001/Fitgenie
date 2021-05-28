@@ -5,3 +5,10 @@
 .card{
   background-color: white;
 }
+
+.loginBG{
+  background-image: url("https://files.123freevectors.com/wp-content/original/131104-abstract-colorful-polygon-pattern-background-vector-art.jpg");
+  background-size:cover;
+  min-height: 100vh;
+  min-width: 100vw;
+}

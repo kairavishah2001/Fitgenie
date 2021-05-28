@@ -22,7 +22,7 @@ class Header extends Component {
             <div className="box-shadow">
                 <Navbar className="color-nav sticky-top" dark expand="md">
                 <div className="container ml-auto">
-                    <img src="logo.jpg" style={{height:"55px", width:"55px"}} className="mr-5"></img>
+                    <img src="logo.jpg" alt="" style={{height:"55px", width:"55px"}} className="mr-5"></img>
                     <h3 className="mr-auto text-dark" href="/">FitGenie</h3>
                     <NavbarToggler onClick={this.toggleNav} />
                     <Collapse isOpen={this.state.isNavOpen} navbar className="dark">
