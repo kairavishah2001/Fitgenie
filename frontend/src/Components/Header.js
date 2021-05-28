@@ -30,7 +30,7 @@ class Header extends Component {
                         <Collapse isOpen={this.state.isNavOpen} navbar>
                             <Nav navbar className="mx-auto col-6">
                                 <NavItem className="mt-2">
-                                    <NavLink className="nav-link" to="/care">
+                                    <NavLink className="nav-link" to="/eat">
                                         <h5 className="text-dark ml-1">
                                             <span className="fa fa-cutlery" /> Eat
                                         </h5>
@@ -44,7 +44,7 @@ class Header extends Component {
                                     </NavLink>
                                 </NavItem>
                                 <NavItem className="mt-2 ml-5">
-                                    <NavLink className="nav-link" to="/care">
+                                    <NavLink className="nav-link" to="/subscriptions">
                                         <h5 className="text-dark">
                                             <span className="fa fa-handshake-o ml-5" /> Subscription
                                         </h5>
