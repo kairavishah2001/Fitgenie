@@ -120,23 +120,22 @@ class Login extends Component {
                             <h6> Choose Fit over Fat</h6>
                         </CardHeader>
                             <Form method="post">
-                                {/* CROP GIF */}
                                 <div className="d-flex justify-content-center">
-                                    <img alt="img" style={{ width: '100%', height: '100%' }} src="https://res.cloudinary.com/dzqhcry3r/image/upload/v1622208837/LoginPic_n5py55.gif" />
+                                    <img style={{ width: '80%', height: '80%' }} src="https://res.cloudinary.com/dzqhcry3r/image/upload/v1622208837/LoginPic_n5py55.gif" className="mt-3 mb-5"/>
                                 </div>
                                 <div className="d-flex justify-content-center">
                                     <GoogleLogin
                                         onSuccess={this.responseGoogle} onFaliure={this.responseGoogle}
-                                        clientId="671959910473-q5vu4qnig20dkibffi718pha5vcsjvn2.apps.googleusercontent.com"
+                                        clientId="507034768121-uet7c6i282spo8kr3qolrmh8lh3r9msa.apps.googleusercontent.com"
                                         buttonText="Login" onSuccess={this.responseGoogle} onFaliure={this.responseGoogle}
                                         cookiePolicy={'single_host_origin'}
                                         // className="bg-success"
                                         render={renderProps => (
-                                            <Button style={{ backgroundColor: "#0D50DA" }} onClick={renderProps.onClick} disabled={renderProps.disabled}>Login With Google</Button>
+                                            <Button style={{backgroundColor: "#0D50DA" }} onClick={renderProps.onClick} disabled={renderProps.disabled}>Login With Google</Button>
                                         )}
                                     />
                                 </div>
-                                <a href='/signUp' onClick={this.SignUp} className="d-flex justify-content-center mt-1 mb-2">Sign Up</a>
+                                <a onClick={this.SignUp} role="button" className="d-flex justify-content-center mt-1 mb-2">Sign Up</a>
                             </Form>
                     </Card>
 
