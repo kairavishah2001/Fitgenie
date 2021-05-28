@@ -1,6 +1,6 @@
 const pool = require('../pool'); 
 
-exports.eat = (req, res) => {
+exports.getDish = (req, res) => {
     pool.getConnection((err) => {
         if(err) {
             res.send({
@@ -10,7 +10,7 @@ exports.eat = (req, res) => {
                 data: null,
             });
         } else {
-            let fetch = 'select * from menu;';
+            let fetch = "select * from menu where dishId = " + req.headers.id + ";";
             pool.query(fetch, (err, result) => {
                 if(err) {
                     res.send({

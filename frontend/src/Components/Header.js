@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import { NavLink } from 'react-router-dom';
-import { Navbar, NavItem, Nav, Collapse, NavbarToggler } from 'reactstrap';
+import { Navbar, NavItem, Nav, Collapse, NavbarToggler, NavbarBrand } from 'reactstrap';
 
 class Header extends Component {
     constructor(props) {
@@ -24,8 +24,8 @@ class Header extends Component {
             <div className="box-shadow">
                 <Navbar light className="sticky-top" expand="md">
                     <div className="container ml-auto">
-                        <img alt="Logo" src="logo.jpg" style={{ height: "55px", width: "55px" }} className="mr-5"></img>
-                        <h3 className="mr-auto text-dark" href="/">FitGenie</h3>
+                        <img alt="Logo" src="https://upload.wikimedia.org/wikipedia/en/thumb/3/37/Jumpman_logo.svg/1200px-Jumpman_logo.svg.png" style={{ height: "55px", width: "55px" }} className="mr-5"></img>
+                        <NavbarBrand href='/home' className="mr-auto text-dark" >FitGenie</NavbarBrand>
                         <NavbarToggler onClick={this.toggleNav} />
                         <Collapse isOpen={this.state.isNavOpen} navbar>
                             <Nav navbar className="mx-auto col-6">
@@ -38,22 +38,22 @@ class Header extends Component {
                                 </NavItem>
                                 <NavItem className="mt-2 mx-auto">
                                     <NavLink className="nav-link" to="/care">
-                                        <h5 className="text-dark">
+                                        <h5 className="text-dark ">
                                             <span className="fa fa-stethoscope ml-5" /> Care
                                         </h5>
                                     </NavLink>
                                 </NavItem>
                                 <NavItem className="mt-2 ml-5">
-                                    <NavLink className="nav-link" to="/subscriptions">
-                                        <h5 className="text-dark">
-                                            <span className="fa fa-handshake-o ml-5" /> Subscription
+                                    <NavLink className="nav-link" to="/profile">
+                                        <h5 className="text-dark ">
+                                            <span className="fa fa-user ml-5" /> Profile
                                         </h5>
                                     </NavLink>
                                 </NavItem>
                                 <NavItem className="mt-2 ml-5 mx-auto">
-                                    <NavLink className="nav-link" to="/login">
-                                        <h5 className="text-dark">
-                                            <span className="fa fa-sign-in ml-5" /> Login
+                                    <NavLink className="nav-link" to="/cart">
+                                        <h5 className="text-dark ">
+                                            <span className="fa fa-shopping-cart ml-5" /> Cart
                                         </h5>
                                     </NavLink>
                                 </NavItem>

@@ -41,37 +41,8 @@ class Home extends Component {
                     <div className="mt-3 col-md-6">
                         <Card style={{ border: 'white' }}>
                             <div className="row">
-                                <h3 className="col-10" style={{ fontFamily: 'cursive' }}>Subscriptions</h3>
-                                <a href="/" className="stretched-link col-2 mt-1 text-decoration-none d-flex justify-content-end" role="button" style={{ fontFamily: 'cursive' }}>Explore</a>
-                            </div>
-                            <h6>Make Fitness fun and easy</h6>
-                            <p style={{fontSize: '10px'}}>Make Fitness fun and easy</p>
-                            <div className="d-flex justify-content-center mb-2">
-                                
-                                <CardImg style={{borderRadius: '2%'}} src="https://cdn-images.cure.fit/www-curefit-com/image/upload/w_600,h_470,fl_progressive,f_auto,q_auto:eco/dpr_2/image/vm/6285c073-5e3d-4abf-9189-21403628a1f4.png" />
-                                <CardImgOverlay>
-                                    <CardText>
-                                        <div className="text-light pt-5 mt-5">
-                                            <CardText><strong>Find a cult center near you</strong></CardText>
-                                            <small style={{color: 'whitesmoke'}}>Work out at our world class cult centers with <br />
-                                                the safest measures. From ample workout space <br />
-                                                to ensure social distancing to frequent <br />
-                                                sanitsation, cult is playing it safe so you don't <br /> 
-                                                have to.
-                                            </small>
-                                        </div>
-                                    </CardText>
-                                </CardImgOverlay>
-                            </div>
-                        </Card>
-                    </div>
-                </div>
-                <div className='d-flex justify-content-center' data-aos="fade-up">
-                    <div className="mt-3 col-md-6">
-                        <Card style={{ border: 'white' }}>
-                            <div className="row">
                                 <h3 className="col-10" style={{ fontFamily: 'cursive' }}>Eat</h3>
-                                <a href="/" className="stretched-link col-2 mt-1 text-decoration-none d-flex justify-content-end" role="button" style={{ fontFamily: 'cursive' }}>Explore</a>
+                                <a href="/eat" className="stretched-link col-2 mt-1 text-decoration-none d-flex justify-content-end" role="button" style={{ fontFamily: 'cursive' }}>Explore</a>
                             </div>
                             <h6>Healthy, Tasty, Everyday Food!</h6>
                             <p style={{fontSize: '10px'}}>Indulge in healthy meals that are both nutritious and delicious</p>
