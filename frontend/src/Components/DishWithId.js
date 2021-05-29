@@ -59,7 +59,7 @@ export default class DishWithId extends Component {
                                 <div className="col-md-6 d-flex justify-content-start pb-4">
                                     <h4><strong style={{ fontFamily: 'cursive' }}>Nutritional Info.</strong></h4>
                                 </div>
-                                <img src="/Demo_Pie.png" alt="demo" />
+                                <img src="https://cdn.discordapp.com/attachments/772136891709521943/848122168911200296/Demo_Pie.PNG" alt="demo" />
                                 <div>
                                     <p>
                                         Eat fit’s Indian touch to burger with regional favourites - kulcha and butter paneer <br />
