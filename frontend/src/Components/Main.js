@@ -7,6 +7,7 @@ import Cart from './Cart';
 import DishWithId from './DishWithId';
 import SignUp from './SignUp';
 import Care from './Care';
+import Profile from './Profile';
 
 class Main extends Component {
     render() {
@@ -26,6 +27,7 @@ class Main extends Component {
                     <Route path="/eat" component={Menu} />
                     <Route path="/signUp" component={SignUp} />
                     <Route path="/care" component={Care} />
+                    <Route path='/profile' component={Profile} />
                     <Redirect to="/login" />
                 </Switch>
             </div>

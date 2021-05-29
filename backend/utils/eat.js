@@ -1,8 +1,9 @@
-const pool = require('../pool'); 
+const pool = require('../pool');
 
 exports.eat = (req, res) => {
     pool.getConnection((err) => {
-        if(err) {
+        if (err) {
+            console.log("SQL CONNECTION ERROR: " + err.message);
             res.send({
                 status: 0,
                 msg: err.message,
@@ -12,7 +13,8 @@ exports.eat = (req, res) => {
         } else {
             let fetch = 'select * from menu;';
             pool.query(fetch, (err, result) => {
-                if(err) {
+                if (err) {
+                    console.log("SQL QUERY RUN ERROR: " + err.message);
                     res.send({
                         status: 0,
                         msg: err.message,

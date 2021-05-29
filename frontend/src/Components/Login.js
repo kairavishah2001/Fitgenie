@@ -126,7 +126,7 @@ class Login extends Component {
                                 <div className="d-flex justify-content-center">
                                     <GoogleLogin
                                         onSuccess={this.responseGoogle} onFaliure={this.responseGoogle}
-                                        clientId="507034768121-uet7c6i282spo8kr3qolrmh8lh3r9msa.apps.googleusercontent.com"
+                                        clientId="38617884169-qtrirrbfg3t1j6bfs7oi3aeconfelfjj.apps.googleusercontent.com"
                                         buttonText="Login"
                                         cookiePolicy={'single_host_origin'}
                                         // className="bg-success"

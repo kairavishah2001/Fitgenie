@@ -3,6 +3,7 @@ const pool = require('../pool');
 exports.getDish = (req, res) => {
     pool.getConnection((err) => {
         if(err) {
+            console.log("CONNECTION ERROR: " + err.message);
             res.send({
                 status: 0,
                 msg: err.message,
@@ -10,9 +11,10 @@ exports.getDish = (req, res) => {
                 data: null,
             });
         } else {
-            let fetch = "select * from menu where dishId = " + req.headers.id + ";";
+            let fetch = "select * from menu where dishId = '" + req.headers.id + "';";
             pool.query(fetch, (err, result) => {
                 if(err) {
+                    console.log("QUERY ERROR: " + err.message);
                     res.send({
                         status: 0,
                         msg: err.message,

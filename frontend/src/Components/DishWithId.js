@@ -18,11 +18,12 @@ export default class DishWithId extends Component {
     componentDidMount() {
         axios.get('http://localhost:5000/getDish', { headers: { id: this.props.dishId } })
             .then(response => {
+                alert(JSON.stringify(response.data.data) + " " + this.props.dishId)
                 if (response.data.success) {
                     this.setState({
                         dishName: response.data.data[0].dishName,
                         price: response.data.data[0].price,
-                        // image: response.data.data[0].imageUrl,
+                        image: response.data.data[0].image,
                     });
                 }
             })
@@ -40,7 +41,7 @@ export default class DishWithId extends Component {
 
                     <div className="row">
                         <div className="col-md-6">
-                            <img style={{ width: '100%', height: '75%', borderRadius: '5%' }} className="img-fluid" alt="Food_Image" src="https://cdn-images.cure.fit/www-curefit-com/image/upload/w_295,ar_1.33,fl_progressive,f_auto,q_auto:eco/dpr_2/image/singles/eat/meals/EAT6108/primary/5_1.jpg" />
+                            <img style={{ width: '100%', height: '75%', borderRadius: '5%' }} className="img-fluid" alt="Food_Image" src={this.state.image} />
                         </div>
                         <div className="col-md-6">
                             <div style={{ height: '11vh' }} className="row">

@@ -22,10 +22,12 @@ function DisplayMenu({ result }) {
         return (
             <div className="col-md-4">
                 <Card style={{ borderColor: 'white' }}>
-                    <CardImg style={{ width: '90%', height: '60%', borderRadius: '7.5%' }} id={rl.dishId} role="button" onClick={description} src={rl.image} />
+                    <div className="d-flex justify-content-center">
+                        <CardImg style={{ width: '90%', height: '60%', borderRadius: '7.5%' }} id={rl.dishId} role="button" onClick={description} src={rl.image} />
+                    </div>
                     <p style={{ fontSize: '14px' }} className="mt-2">{rl.dishName}</p>
                     <div className="row">
-                        <div className="col-md-6">
+                        <div className="col-6">
                             <p>	&#8377; {rl.price}</p>
                         </div>
                         <div className="d-flex justify-content-end col-6">
