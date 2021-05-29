@@ -1,5 +1,5 @@
 import React, { Component } from 'react'
-import { Card, CardBody, FormGroup, Input, Label } from 'reactstrap';
+import { Card, CardBody, FormGroup, Label } from 'reactstrap';
 import Header from './Header';
 
 export default class Care extends Component {
