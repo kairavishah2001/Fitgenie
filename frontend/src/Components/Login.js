@@ -10,41 +10,21 @@ class Login extends Component {
     constructor(props) {
         super(props);
 
-        this.state ={
+        this.state = {
             redirectVar: false,
             signUp: false,
         }
+
         // BIND METHODS SO THAT CONTEXT IS PRESERVED
-        this.handleSubmit = this.handleSubmit.bind(this);
         this.handleInputChange = this.handleInputChange.bind(this);
         this.responseGoogle = this.responseGoogle.bind(this);
-        this.SignUp = this.SignUp.bind(this);
     }
 
-    SignUp(){
-        this.setState({
-            signUp: true,
-        })
-    }
-
-    responseGoogle = (response) => {
-        let data = {
-            google: true,
-            email: response.profileObj.email,
-            imageUrl: response.profileObj.imageUrl,
-        }
-
-        cookie.save("cookie", {email: response.profileObj.email, imageUrl: response.profileObj.imageUrl}, {path: '/'});
-
-        this.setState({
-            redirectVar: true,
-        })
-
-        axios.post("http://localhost:5000/login", data)
+    responseGoogle = (res) => {
+        axios.get("http://localhost:5000/login", { headers: { email: res.profileObj.email } })
             .then((response) => {
-                if(response.data.success){
-                    alert(response.data.data)
-                    cookie.save("cookie", {email:response.data.data.email, role:response.data.data.email}, {path: '/'});
+                if (response.data.success) {
+                    cookie.save("cookie", { email: response.data.data.email, imageUrl: res.profileObj.imageUrl }, { path: '/' });
                     this.setState({
                         redirectVar: true,
                     })
@@ -70,39 +50,10 @@ class Login extends Component {
         });
     }
 
-    // SEND REQUEST TO BACKEND
-    handleSubmit() {
-        let data = {
-            email: this.state.email,
-            password: this.state.password,
-        }
-
-        axios.defaults.withCredentials = true;
-        axios.post('http://localhost:5000/addSeller', data)
-            .then((response) => {
-                console.log(response.data);
-                if (response.data.status === 1) {
-                    this.setState({
-                        msg: 'Succesfully added',
-                    });
-                }
-            })
-            .catch((err) => {
-                alert(err);
-            })
-    }
-
-
-
     render() {
 
-        if (this.state.signUp) {
-            return(
-                <Redirect to='/signUp' />
-            )
-        }
         if (this.state.redirectVar) {
-            return(
+            return (
                 <Redirect to='/home' />
             )
         }
@@ -119,26 +70,23 @@ class Login extends Component {
                         <CardHeader className="d-flex justify-content-center" style={{ backgroundColor: "white" }}>
                             <h6> Choose Fit over Fat</h6>
                         </CardHeader>
-                            <Form method="post">
-                                <div className="d-flex justify-content-center">
-                                    <img alt="demo" style={{ width: '75%', height: '75%' }} src="https://res.cloudinary.com/dzqhcry3r/image/upload/v1622208837/LoginPic_n5py55.gif" className="mt-3 mb-5"/>
-                                </div>
-                                <div className="d-flex justify-content-center">
-                                    <GoogleLogin
-                                        onSuccess={this.responseGoogle} onFaliure={this.responseGoogle}
-                                        clientId="38617884169-qtrirrbfg3t1j6bfs7oi3aeconfelfjj.apps.googleusercontent.com"
-                                        buttonText="Login"
-                                        cookiePolicy={'single_host_origin'}
-                                        // className="bg-success"
-                                        render={renderProps => (
-                                            <Button style={{backgroundColor: "#0D50DA" }} onClick={renderProps.onClick} disabled={renderProps.disabled}>Login With Google</Button>
-                                        )}
-                                    />
-                                </div>
-                                <a href='/signUp' onClick={this.SignUp} role="button" className="d-flex justify-content-center mt-1 mb-2">Sign Up</a>
-                            </Form>
+                        <Form method="post">
+                            <div className="d-flex justify-content-center">
+                                <img alt="demo" style={{ width: '75%', height: '75%' }} src="https://res.cloudinary.com/dzqhcry3r/image/upload/v1622208837/LoginPic_n5py55.gif" className="mt-3 mb-5" />
+                            </div>
+                            <div className="d-flex justify-content-center">
+                                <GoogleLogin
+                                    onSuccess={this.responseGoogle}
+                                    clientId="38617884169-qtrirrbfg3t1j6bfs7oi3aeconfelfjj.apps.googleusercontent.com"
+                                    cookiePolicy={'single_host_origin'}
+                                    render={renderProps => (
+                                        <Button style={{ backgroundColor: "#0D50DA" }} onClick={renderProps.onClick} disabled={renderProps.disabled}>Login With Google</Button>
+                                    )}
+                                />
+                            </div>
+                            <a href='/signUp' onClick={this.SignUp} role="button" className="d-flex justify-content-center mt-1 mb-2">Sign Up</a>
+                        </Form>
                     </Card>
-
                 </div>
             </div>
         );

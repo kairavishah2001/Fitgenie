@@ -2,20 +2,19 @@ create database dim;
 use dim;
 
 CREATE TABLE `user` (
-	`userId` varchar(255) NOT NULL,
+	`userId` int NOT NULL auto_increment,
 	`firstName` varchar(255) NOT NULL,
 	`lastName` varchar(255) NOT NULL,
 	`email` varchar(255) NOT NULL,
 	`age` INT NOT NULL,
 	`weight` FLOAT NOT NULL,
-	`gender` varchar(255) NOT NULL,
 	`height` FLOAT NOT NULL,
 	`bloodGroup` VARCHAR(255) NOT NULL,
 	PRIMARY KEY (`userId`)
 );
 
 CREATE TABLE `medicalDetails` (
-	`userId` varchar(255) NOT NULL
+	`userId` int NOT NULL
 );
 
 CREATE TABLE `ingredients` (
@@ -46,7 +45,7 @@ CREATE TABLE `medicalIssues` (
 );
 
 CREATE TABLE `preferences` (
-	`userId` varchar(255) NOT NULL,
+	`userId` int NOT NULL,
 	`ingredientId` varchar(255) NOT NULL
 );
 
@@ -57,7 +56,7 @@ CREATE TABLE `exercise` (
 );
 
 CREATE TABLE `workout` (
-	`userId` varchar(255) NOT NULL,
+	`userId` int NOT NULL,
 	`workoutType` varchar(255) NOT NULL
 );
 
@@ -69,14 +68,14 @@ CREATE TABLE `professional` (
 );
 
 CREATE TABLE `cart` (
-	`userId` varchar(255) NOT NULL,
+	`userId` int NOT NULL,
 	`dishId` varchar(255) NOT NULL,
 	`quantity` INT NOT NULL,
 	`date` DATETIME NOT NULL
 );
 
 CREATE TABLE `order` (
-	`userId` varchar(255) NOT NULL,
+	`userId` int NOT NULL,
 	`orderId` varchar(255) NOT NULL,
 	`dishId` varchar(255) NOT NULL,
 	`date` DATETIME NOT NULL,
