@@ -53,7 +53,7 @@ export default class Menu extends Component {
     }
 
     componentDidMount() {
-        axios.get('http://localhost:5000/eat')
+        axios.get('http://162.245.221.122:5000/eat')
             .then(response => {
                 if (response.data.success) {
                     this.setState({
