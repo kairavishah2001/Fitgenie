@@ -7,7 +7,7 @@ import Header from './Header';
 function DisplayMenu({ result }) {
     const [redirectVar, changeRedirectVar] = useState(false);
     const [id, changeId] = useState(0);
-    const [addToCart, changeAddToCart] = useState(0);
+    // const [addToCart, changeAddToCart] = useState(0);
 
     function description(event) {
         changeId(event.target.id);
@@ -15,7 +15,6 @@ function DisplayMenu({ result }) {
     }
 
     function addItemToCart(event){
-        alert("clicked "+ event.target.id);
         axios.get("http://localhost:5000/addToCart", {headers: {id: event.target.id}})
             .then( response => {
                 if(response.data.success){
