@@ -7,10 +7,21 @@ import Header from './Header';
 function DisplayMenu({ result }) {
     const [redirectVar, changeRedirectVar] = useState(false);
     const [id, changeId] = useState(0);
+    const [addToCart, changeAddToCart] = useState(0);
 
     function description(event) {
         changeId(event.target.id);
         changeRedirectVar(true);
+    }
+
+    function addItemToCart(event){
+        alert("clicked "+ event.target.id);
+        axios.get("http://localhost:5000/addToCart", {headers: {id: event.target.id}})
+            .then( response => {
+                if(response.data.success){
+                    console.log("Dish Added");
+                }
+            })
     }
 
     let renderList = result.map((rl) => {
@@ -31,7 +42,7 @@ function DisplayMenu({ result }) {
                             <p>	&#8377; {rl.price}</p>
                         </div>
                         <div className="d-flex justify-content-end col-6">
-                            <Button style={{ height: '30px', width: '100px', borderRadius: '10vw', borderColor: 'red' }} className="btn-sm" color="white" onClick={() => { alert("ADDED") }}>ADD</Button>
+                            <Button style={{ height: '30px', width: '100px', borderRadius: '10vw', borderColor: 'red' }} className="btn-sm" color="white" id={rl.dishId} onClick={addItemToCart}>ADD</Button>
                         </div>
                     </div>
                 </Card>
