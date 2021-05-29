@@ -109,7 +109,7 @@ class Login extends Component {
         return (
             <div className="loginBG  my-auto">
                 <div className="d-flex justify-content-end">
-                    <Card className="col-md-4 mt-4 mx-auto shadow">
+                    <Card className="col-lg-4 col-7 mt-5 mx-auto shadow">
                         <div className="d-flex justify-content-center mt-3">
                             <h3>
                                 <img alt="img" src="https://upload.wikimedia.org/wikipedia/en/thumb/3/37/Jumpman_logo.svg/1200px-Jumpman_logo.svg.png" style={{ height: "40px", width: "40px" }}></img>
@@ -121,7 +121,7 @@ class Login extends Component {
                         </CardHeader>
                             <Form method="post">
                                 <div className="d-flex justify-content-center">
-                                    <img alt="demo" style={{ width: '80%', height: '80%' }} src="https://res.cloudinary.com/dzqhcry3r/image/upload/v1622208837/LoginPic_n5py55.gif" className="mt-3 mb-5"/>
+                                    <img alt="demo" style={{ width: '75%', height: '75%' }} src="https://res.cloudinary.com/dzqhcry3r/image/upload/v1622208837/LoginPic_n5py55.gif" className="mt-3 mb-5"/>
                                 </div>
                                 <div className="d-flex justify-content-center">
                                     <GoogleLogin

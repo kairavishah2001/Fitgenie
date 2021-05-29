@@ -8,10 +8,18 @@ class Header extends Component {
         super(props);
 
         this.state = {
-            isNavOpen: false
+            isNavOpen: false,
+            cartCount: 0,
         }
 
         this.toggleNav = this.toggleNav.bind(this);
+        this.increamentCart = this.increamentCart.bind(this);
+    }
+
+    increamentCart(){
+        this.setState({
+            cartCount: (this.state.cartCount + 1),
+        })
     }
 
     toggleNav() {
@@ -44,14 +52,19 @@ class Header extends Component {
                                         </h5>
                                     </NavLink>
                                 </NavItem>
-                                <NavItem className="mt-2 mx-auto">
-                                    <NavLink className="nav-link" to="/cart">
+                                <NavItem className="mt-3 mx-auto">
+                                        <h5 className="text-dark" role="button" onClick={this.increamentCart}>
+                                            <span className="fa fa-shopping-cart" /> Cart
+                                            <span className="cart-icon">{this.state.cartCount}</span>
+                                        </h5>
+                                    {/* <NavLink className="nav-link" to="/cart">
                                         <h5 className="text-dark">
                                             <span className="fa fa-shopping-cart" /> Cart
+                                            <span className="cart-icon">0</span>
                                         </h5>
-                                    </NavLink>
+                                    </NavLink> */}
                                 </NavItem>
-                                <NavItem className="mt-2 ml-5">
+                                <NavItem className=" ml-5">
                                     <NavLink className="nav-link" to="/">
                                         {/* <img alt="Profile" src={cookie.load("cookie").imageUrl} className="rounded-circle mr-2" style={{height:"45px", width:"45px"}} ></img> */}
                                     </NavLink>
