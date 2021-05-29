@@ -66,7 +66,7 @@ class Header extends Component {
                                 </NavItem>
                                 <NavItem className=" ml-5">
                                     <NavLink className="nav-link" to="/">
-                                        <img alt="Profile" src={cookie.load("cookie").imageUrl} className="rounded-circle mr-2" style={{height:"45px", width:"45px"}} ></img>
+                                        {/* <img alt="Profile" src={cookie.load("cookie").imageUrl} className="rounded-circle mr-2" style={{height:"45px", width:"45px"}} ></img> */}
                                     </NavLink>
                                 </NavItem>
                             </Nav>
