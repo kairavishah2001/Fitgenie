@@ -18,7 +18,6 @@ export default class DishWithId extends Component {
     componentDidMount() {
         axios.get('http://localhost:5000/getDish', { headers: { id: this.props.dishId } })
             .then(response => {
-                alert(JSON.stringify(response.data.data) + " " + this.props.dishId)
                 if (response.data.success) {
                     this.setState({
                         dishName: response.data.data[0].dishName,
@@ -49,7 +48,7 @@ export default class DishWithId extends Component {
                                     <h3><strong style={{ fontFamily: 'cursive' }}>{this.state.dishName}</strong></h3>
                                 </div>
                                 <div className="col-md-6 d-flex justify-content-end">
-                                    <h3 style={{ color: '#ff3278' }}>&#8377; 99</h3>
+                                    <h3 style={{ color: '#ff3278' }}>&#8377; {this.state.price}</h3>
                                 </div>
                             </div>
                             <div className="d-flex justify-content-end">
