@@ -81,7 +81,7 @@ export default class Profile extends Component {
                                         <p className="text-sm">Weight: {this.state.weight} kg</p>
                                         <p className="text-sm">Email: {this.state.email}</p>
                                         <button className="bg-green-700 hover:bg-green-900 text-white font-bold py-2 px-4 rounded-full" onClick={this.handleClick}>
-                                           Care
+                                           Get in Touch
                                         </button>
                                     </div>
                                     {/* Use https://simpleicons.org/ to find the svg for your preferred product */}

@@ -23,6 +23,7 @@ exports.profile = (req, res) => {
                         data: null,
                     });
                 } else {
+                    console.log(result);
                     res.send({
                         status: 1,
                         success: true,
