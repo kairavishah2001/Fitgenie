@@ -52,6 +52,13 @@ class Header extends Component {
                                         </h5>
                                     </NavLink>
                                 </NavItem>
+                                <NavItem className="mt-2 mx-auto">
+                                    <NavLink className="nav-link" to="/schedule">
+                                        <h5 className="text-dark ">
+                                            <span className="fa fa-calendar-o ml-5" /> Schedule
+                                        </h5>
+                                    </NavLink>
+                                </NavItem>
                                 <NavItem className="mt-3 mx-auto">
                                         <h5 className="text-dark" role="button" onClick={this.increamentCart}>
                                             <span className="fa fa-shopping-cart" /> Cart
