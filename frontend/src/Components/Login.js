@@ -24,7 +24,7 @@ class Login extends Component {
         axios.get("http://localhost:5000/login", { headers: { email: res.profileObj.email } })
             .then((response) => {
                 if (response.data.success) {
-                    cookie.save("cookie", { email: res.profileObj.email, imageUrl: res.profileObj.imageUrl }, { path: '/' });
+                    cookie.save("cookie", { userId: response.data.data[0].userId, email: response.data.data[0].email, imageUrl: res.profileObj.imageUrl}, { path: '/' });
                     this.setState({
                         redirectVar: true,
                     })
@@ -33,7 +33,7 @@ class Login extends Component {
                 }
             })
             .catch((response) => {
-                alert('Something went wrong, please try again later!');
+                alert('Something went wrong, please try again later!' + response);
             })
 
     }
