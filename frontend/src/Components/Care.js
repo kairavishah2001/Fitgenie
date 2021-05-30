@@ -25,7 +25,9 @@ export default class Care extends Component {
         axios.get('http://localhost:5000/getList')
             .then(response => {
                 if(response.data.success) {
-                    
+                    this.setState({
+                        
+                    });
                 }
             })
             .catch(err => {
