@@ -12,7 +12,7 @@ export default class Schedule extends Component {
                     <p style={{ color: "#6B7284", size: "10px" }}>Whatever cardigan tote bag tumblr hexagon brooklyn asymmetrical gentrify, subway tile poke farm to table. Franzen you probably have not heard of them man bun deep jianbing selfies heirloom prism food truck ugh squid celiac humblebrag.</p>
 
                     <div className="row d-flex justify-content-center ">
-                        <Card className="m-2 col-lg-3 col-md-3 col-10" style={{ backgroundColor: "#F3F4F6", borderColor: "#F3F4F6" }}>
+                        <Card className="m-2 col-md-3" style={{ backgroundColor: "#F3F4F6", borderColor: "#F3F4F6" }}>
                             <div>
                                 <CardImg className="mt-2" src="https://cdn-images.cure.fit/www-curefit-com/image/upload/fl_progressive,f_auto,q_auto:eco,w_600,c_fit/dpr_2/v1/cult-media/v2web/workouts/22_id/PRODUCT_BNR_2020-03-04T11:36:46.263Z.png"></CardImg>
                                 <CardBody>
@@ -22,7 +22,7 @@ export default class Schedule extends Component {
                                 </CardBody>
                             </div>
                         </Card>
-                        <Card className="m-2 col-lg-3 col-md-3 col-10" style={{ backgroundColor: "#F3F4F6", borderColor: "#F3F4F6" }}>
+                        <Card className="m-2 col-md-3" style={{ backgroundColor: "#F3F4F6", borderColor: "#F3F4F6" }}>
                             <div>
                                 <CardImg className="mt-2" src="https://cdn-images.cure.fit/www-curefit-com/image/upload/fl_progressive,f_auto,q_auto:eco,w_600,c_fit/dpr_2/v1/cult-media/v2web/workouts/22_id/PRODUCT_BNR_2020-03-04T11:36:46.263Z.png"></CardImg>
                                 <CardBody>
@@ -32,7 +32,7 @@ export default class Schedule extends Component {
                                 </CardBody>
                             </div>
                         </Card>
-                        <Card className="m-2 col-lg-3 col-md-6 col-10" style={{ backgroundColor: "#F3F4F6", borderColor: "#F3F4F6" }}>
+                        <Card className="m-2 col-md-3" style={{ backgroundColor: "#F3F4F6", borderColor: "#F3F4F6" }}>
                             <div>
                                 <CardImg className="mt-2" src="https://cdn-images.cure.fit/www-curefit-com/image/upload/fl_progressive,f_auto,q_auto:eco,w_600,c_fit/dpr_2/v1/cult-media/v2web/workouts/22_id/PRODUCT_BNR_2020-03-04T11:36:46.263Z.png"></CardImg>
                                 <CardBody>
@@ -42,7 +42,7 @@ export default class Schedule extends Component {
                                 </CardBody>
                             </div>
                         </Card>
-                        <Card className="m-2 col-lg-3 col-md-3 col-10" style={{ backgroundColor: "#F3F4F6", borderColor: "#F3F4F6" }}>
+                        <Card className="m-2 col-md-3" style={{ backgroundColor: "#F3F4F6", borderColor: "#F3F4F6" }}>
                             <div>
                                 <CardImg className="mt-2" src="https://cdn-images.cure.fit/www-curefit-com/image/upload/fl_progressive,f_auto,q_auto:eco,w_600,c_fit/dpr_2/v1/cult-media/v2web/workouts/22_id/PRODUCT_BNR_2020-03-04T11:36:46.263Z.png"></CardImg>
                                 <CardBody>
@@ -52,7 +52,7 @@ export default class Schedule extends Component {
                                 </CardBody>
                             </div>
                         </Card>
-                        <Card className="m-2 col-lg-3 col-md-3 col-10" style={{ backgroundColor: "#F3F4F6", borderColor: "#F3F4F6" }}>
+                        <Card className="m-2 col-md-3" style={{ backgroundColor: "#F3F4F6", borderColor: "#F3F4F6" }}>
                             <div>
                                 <CardImg className="mt-2" src="https://cdn-images.cure.fit/www-curefit-com/image/upload/fl_progressive,f_auto,q_auto:eco,w_600,c_fit/dpr_2/v1/cult-media/v2web/workouts/22_id/PRODUCT_BNR_2020-03-04T11:36:46.263Z.png"></CardImg>
                                 <CardBody>
@@ -62,7 +62,7 @@ export default class Schedule extends Component {
                                 </CardBody>
                             </div>
                         </Card>
-                        <Card className="m-2 col-lg-3 col-md-3 col-10" style={{ backgroundColor: "#F3F4F6", borderColor: "#F3F4F6" }}>
+                        <Card className="m-2 col-md-3" style={{ backgroundColor: "#F3F4F6", borderColor: "#F3F4F6" }}>
                             <div>
                                 <CardImg className="mt-2" src="https://cdn-images.cure.fit/www-curefit-com/image/upload/fl_progressive,f_auto,q_auto:eco,w_600,c_fit/dpr_2/v1/cult-media/v2web/workouts/22_id/PRODUCT_BNR_2020-03-04T11:36:46.263Z.png"></CardImg>
                                 <CardBody>
