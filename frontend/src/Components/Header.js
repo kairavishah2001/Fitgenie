@@ -16,7 +16,7 @@ class Header extends Component {
         this.increamentCart = this.increamentCart.bind(this);
     }
 
-    increamentCart(){
+    increamentCart() {
         this.setState({
             cartCount: (this.state.cartCount + 1),
         })
@@ -59,21 +59,21 @@ class Header extends Component {
                                         </h5>
                                     </NavLink>
                                 </NavItem>
-                                <NavItem className="mt-3 mx-auto">
-                                        <h5 className="text-dark" role="button" onClick={this.increamentCart}>
-                                            <span className="fa fa-shopping-cart" /> Cart
+                                <NavItem className="mt-2 mx-auto">
+                                    {/* <h5 className="text-dark" role="button" onClick={this.increamentCart}>
+                                        <span className="fa fa-shopping-cart" /> Cart
                                             <span className="cart-icon">{this.state.cartCount}</span>
-                                        </h5>
-                                    {/* <NavLink className="nav-link" to="/cart">
+                                    </h5> */}
+                                    <NavLink className="nav-link" to="/cart">
                                         <h5 className="text-dark">
                                             <span className="fa fa-shopping-cart" /> Cart
                                             <span className="cart-icon">0</span>
                                         </h5>
-                                    </NavLink> */}
+                                    </NavLink>
                                 </NavItem>
                                 <NavItem className="ml-5 mx-auto">
                                     <NavLink className="nav-link" to="/profile">
-                                        <img alt="Profile" src={cookie.load("cookie").imageUrl} className="rounded-circle mr-2" style={{height:"45px", width:"45px"}} ></img>
+                                        <img alt="Profile" src={cookie.load("cookie").imageUrl} className="rounded-circle mr-2" style={{ height: "45px", width: "45px" }} ></img>
                                     </NavLink>
                                 </NavItem>
                             </Nav>
