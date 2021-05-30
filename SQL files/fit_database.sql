@@ -48,7 +48,8 @@ CREATE TABLE `medicalIssues` (
 -- User Id is the only foreign key here
 CREATE TABLE `preferences` (
 	`userId` int NOT NULL,
-	`ingredientId` varchar(255) NOT NULL
+	`ingredientId` varchar(255) NOT NULL,
+	primary key(`userId`)
 );
 
 
@@ -71,7 +72,8 @@ CREATE TABLE `professional` (
 	`pFirstname` varchar(50) NOT NULL,
     `pLastname` varchar(50) NOT NULL,
 	`role` varchar(50) NOT NULL,
-	`qualification` varchar(50) NOT NULL
+	`qualification` varchar(50) NOT NULL,
+	primary key(`pId`)
 );
 
 -- Date column is dropped and UserId is PK
@@ -93,12 +95,12 @@ CREATE TABLE `order` (
 -- User id is PK
 create table `appointments`(
 	`userId` int not null ,
-    `pFirstname` varchar(50),
-	`pLastname` varchar(50),
-    `appointmentTime` varchar(50),
-    `role` varchar(50));
-    
- alter table appointments add primary key(`userId`);   
+    `pName` varchar(100),
+    `appointmentDate` date,
+	`appointmentTime` varchar(50),
+    `role` varchar(50),
+	primary key(`userId`, `appointmentDate`, `appointmentTime`)
+);
 
 ALTER TABLE `medicalDetails` ADD CONSTRAINT `medicalDetails_fk0` FOREIGN KEY (`userId`) REFERENCES `user`(`userId`);
 

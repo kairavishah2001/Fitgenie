@@ -20,13 +20,29 @@ export default class Care extends Component {
         this.book = this.book.bind(this);
     }
 
+    componentDidMount() {
+        axios.defaults.withCredentials = true;
+        axios.get('http://localhost:5000/getList')
+            .then(response => {
+                if(response.data.success) {
+                    
+                }
+            })
+            .catch(err => {
+                alert(err);
+            })
+    }
+
     book(event) {
+        // alert(JSON.stringify(this.state))
         let data = {
             role: this.state.role,
             name: this.state.professional,
-            data: this.state.date,
+            date: this.state.date,
             time: this.state.time,
         };
+
+        axios.defaults.withCredentials = true;
         axios.post('http://localhost:5000/appointment', data)
             .then(response => {
                 if(response.data.success) {
@@ -53,6 +69,10 @@ export default class Care extends Component {
         if (this.state.role === 'trainer') {
             displayProfessional = <select onChange={this.handleInputChange} className="mt-2" name="professional" style={{ border: '1px solid black', width: "100%" }} id="professional">
                 <option value="Malav Doshi">Malav Doshi</option>
+            </select>
+        } else if(this.state.role === 'physiotherapist') {
+            displayProfessional = <select onChange={this.handleInputChange} onBlur={this.handleInputChange} className="mt-2" name="professional" style={{ border: '1px solid black', width: "100%" }} id="professional">
+                <option value="Samkit Kundalia">Samkit Kundalia</option>
             </select>
         } else {
             displayProfessional = <select onChange={this.handleInputChange} onBlur={this.handleInputChange} className="mt-2" name="professional" style={{ border: '1px solid black', width: "100%" }} id="professional">
@@ -102,6 +122,7 @@ export default class Care extends Component {
                                     <select onChange={this.handleInputChange} className="mt-2" name="role" style={{ border: '1px solid black', width: "100%" }} id="role">
                                         <option value="trainer">Trainer</option>
                                         <option value="nutritionist">Nutritionist</option>
+                                        <option value="physiotherapist">Physiotherapist</option>
                                     </select>
                                 </FormGroup>
                                 <FormGroup className="mt-2">

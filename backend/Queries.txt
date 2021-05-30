@@ -2,3 +2,5 @@ insert into user(firstName, lastName, email, age, weight, height, bloodGroup) va
 insert into user(firstName, lastName, email, age, weight, height, bloodGroup) values('Parth','Shah','parth.s5@ahduni.edu.in','20','55','170','B+');
 insert into user(firstName, lastName, email, age, weight, height, bloodGroup) values('Sameep','Vani','sameep.v@ahduni.edu.in','20','75','175','AB+');
 insert into user(firstName, lastName, email, age, weight, height, bloodGroup) values('Sameep','Vani','sameep0112vani@gmail.com','28','80','190','AB+');
+insert into appointments values ("6","Aneri Dalwadi","2021-05-12","slot2","nutritionist");
+insert into appointments values ("6","Malav Doshi","2021-05-13","slot3","trainer");
