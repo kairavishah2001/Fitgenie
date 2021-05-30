@@ -1,8 +1,11 @@
+const cookieParser = require('cookie-parser');
 const pool = require('../pool');
 
 exports.addToCart = (req, res) => {
 
     let id = req.headers.id;
+    console.log(req.cookies);
+    let userId = req.cookies.cookie.userId ;
 
     pool.getConnection((err) => {
         if (err) {
@@ -14,8 +17,9 @@ exports.addToCart = (req, res) => {
                 data: null,
             });
         } else {
-            console.log("dish id to be added= " + id);
-            let fetch = "insert into cart '" + id + "';";
+            
+            let fetch = "insert into cart values('"+ userId +"','" + id +"','"+ 1 + "';";
+
             pool.query(fetch, (err, result) => {
                 if (err) {
                     console.log("SQL QUERY RUN ERROR: " + err.message);
