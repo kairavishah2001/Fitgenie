@@ -32,7 +32,7 @@ export default class Schedule extends Component {
                                 </CardBody>
                             </div>
                         </Card>
-                        <Card className="m-2 col-lg-3 col-md-6 col-10" style={{ backgroundColor: "#F3F4F6", borderColor: "#F3F4F6" }}>
+                        <Card className="m-2 col-lg-3 col-md-3 col-10" style={{ backgroundColor: "#F3F4F6", borderColor: "#F3F4F6" }}>
                             <div>
                                 <CardImg className="mt-2" src="https://cdn-images.cure.fit/www-curefit-com/image/upload/fl_progressive,f_auto,q_auto:eco,w_600,c_fit/dpr_2/v1/cult-media/v2web/workouts/22_id/PRODUCT_BNR_2020-03-04T11:36:46.263Z.png"></CardImg>
                                 <CardBody>
