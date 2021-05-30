@@ -20,7 +20,7 @@ class ScheduleWithId extends Component {
 
     handleInputChange( event ){
         let target = event.target
-        let name = target.name;
+        // let name = target.name;
         let value = target.value;
         this.setState({
             slot: value
@@ -28,7 +28,7 @@ class ScheduleWithId extends Component {
     }
 
     handleSubmit(){
-        if(!this.state.slot == ""){
+        if(!this.state.slot === ""){
             this.setState({
                 redirectVar: true,
             })
