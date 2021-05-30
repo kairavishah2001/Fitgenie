@@ -142,3 +142,7 @@ INSERT INTO medicalIssues VALUES
 ('thyroid','Dairy Gluten Sugar'),
 ('blood pressure','Sugar Meat Caffeine');
 
+insert into user(firstName, lastName, email, age, weight, height, bloodGroup) values('Aneri','Dalwadi','aneri.d@ahduni.edu.in','20','55','150','B+');
+insert into user(firstName, lastName, email, age, weight, height, bloodGroup) values('Parth','Shah','parth.s5@ahduni.edu.in','20','55','170','B+');
+insert into user(firstName, lastName, email, age, weight, height, bloodGroup) values('Sameep','Vani','sameep.v@ahduni.edu.in','20','75','175','AB+');
+insert into user(firstName, lastName, email, age, weight, height, bloodGroup) values('Sameep','Vani','sameep0112vani@gmail.com','28','80','190','AB+');
