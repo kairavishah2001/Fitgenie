@@ -8,6 +8,7 @@ import DishWithId from './DishWithId';
 import SignUp from './SignUp';
 import Care from './Care';
 import Profile from './Profile';
+import Schedule from './Schedule';
 
 class Main extends Component {
     render() {
@@ -28,6 +29,7 @@ class Main extends Component {
                     <Route path="/signUp" component={SignUp} />
                     <Route path="/care" component={Care} />
                     <Route path='/profile' component={Profile} />
+                    <Route path='/schedule' component={Schedule} />
                     <Redirect to="/login" />
                 </Switch>
             </div>

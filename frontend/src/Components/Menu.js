@@ -30,7 +30,7 @@ function DisplayMenu({ result }) {
             );
         }
         return (
-            <div className="col-md-4">
+            <div className="col-md-3">
                 <Card style={{ borderColor: 'white' }}>
                     <div className="d-flex justify-content-center">
                         <CardImg style={{ width: '90%', height: '60%', borderRadius: '7.5%' }} id={rl.dishId} role="button" onClick={description} src={rl.image} />
