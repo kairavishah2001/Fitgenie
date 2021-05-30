@@ -24,7 +24,7 @@ class Login extends Component {
         axios.get("http://localhost:5000/login", { headers: { email: res.profileObj.email } })
             .then((response) => {
                 if (response.data.success) {
-                    cookie.save("cookie", { email: response.data.data.email, imageUrl: res.profileObj.imageUrl }, { path: '/' });
+                    cookie.save("cookie", { email: res.profileObj.email, imageUrl: res.profileObj.imageUrl }, { path: '/' });
                     this.setState({
                         redirectVar: true,
                     })
