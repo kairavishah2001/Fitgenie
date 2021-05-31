@@ -72,12 +72,8 @@ CREATE TABLE `professional` (
 	`pFirstname` varchar(50) NOT NULL,
     `pLastname` varchar(50) NOT NULL,
 	`role` varchar(50) NOT NULL,
-<<<<<<< HEAD
-	`qualification` varchar(50) NOT NULL
-=======
 	`qualification` varchar(50) NOT NULL,
 	primary key(`pId`)
->>>>>>> 56bdb78257eca118b56e0bc53e91f5bfbacc9db3
 );
 
 -- Date column is dropped and UserId is PK
@@ -225,165 +221,165 @@ insert into professional values
 ('P106','Vikas', 'Bothra', 'Nutritionist','M.Sc in Nutrition');
 
 
-DROP PROCEDURE IF EXISTS  SP_SplitString_medDets;
-DELIMITER //
- CREATE PROCEDURE SP_SplitString_medDets(Value longtext)
-   BEGIN
-	DECLARE front TEXT DEFAULT NULL;
-	DECLARE frontlen INT DEFAULT NULL;
-	DECLARE TempValue TEXT DEFAULT NULL;
-    declare b_disease longtext;
-	drop table if exists dim.medDets;
-	create table medDets(id int not null auto_increment primary key, medDets varchar(30));
-	drop table if exists deniedIng;
-	create table deniedIng(id int not null auto_increment primary key, ingredients varchar(30));
-	iterator:
-	LOOP  
-		IF LENGTH(TRIM(Value)) = 0 OR Value IS NULL THEN
-			LEAVE iterator;
-		END IF;
-		SET front = SUBSTRING_INDEX(Value,' ',1);
-		SET frontlen = LENGTH(front);
-		SET TempValue = TRIM(front);
-		INSERT INTO medDets (medDets) VALUES ( TempValue);
-		select deniedIngredients from medicalissues where disease=TempValue into b_disease;
-        call deniedingredients(b_disease);
-   END LOOP;
-   END //
-   delimiter ;
-
-
-DROP PROCEDURE IF EXISTS  deniedingredients ;
-DELIMITER //
- CREATE PROCEDURE deniedingredients(Value longtext)
-   BEGIN
-	DECLARE front TEXT DEFAULT NULL;
-	DECLARE frontlen INT DEFAULT NULL;
-	DECLARE TempValue TEXT DEFAULT NULL;
-	iterator:
-	LOOP  
-		IF LENGTH(TRIM(Value)) = 0 OR Value IS NULL THEN
-			LEAVE iterator;
-		END IF;
-		SET front = SUBSTRING_INDEX(Value,' ',1);
-		SET frontlen = LENGTH(front);
-		SET TempValue = TRIM(front);
-		INSERT INTO deniedIng (ingredients) VALUES ( TempValue);
-		SET Value = INSERT(Value,1,frontlen + 1,'');
-   END LOOP;
-   END //
-   delimiter ;
-
-DROP PROCEDURE IF EXISTS  preferencesIng ;
-DELIMITER //
- CREATE PROCEDURE preferencesIng(b_userId int)
-   BEGIN
-	DECLARE front TEXT DEFAULT NULL;
-	DECLARE frontlen INT DEFAULT NULL;
-	DECLARE TempValue TEXT DEFAULT NULL;
-    declare Value varchar(255);
-    select ingridientId from preferences where userId=b_userId into Value;
-	drop table if exists preflist;
-	create table preflist(id int not null auto_increment primary key, ingredients varchar(30));
-	iterator:
-	LOOP  
-		IF LENGTH(TRIM(Value)) = 0 OR Value IS NULL THEN
-			LEAVE iterator;
-		END IF;
-		SET front = SUBSTRING_INDEX(Value,' ',1);
-		SET frontlen = LENGTH(front);
-		SET TempValue = TRIM(front);
-		INSERT INTO preflist (ingredients) VALUES ( TempValue);
-		SET Value = INSERT(Value,1,frontlen + 1,'');
-   END LOOP;
-   END //
-   delimiter ;
-call preferencesIng('Malav Aneri Sameep Kashvi Nut I101' );
-select * from preflist;
+-- DROP PROCEDURE IF EXISTS  SP_SplitString_medDets;
+-- DELIMITER //
+--  CREATE PROCEDURE SP_SplitString_medDets(Value varchar(150))
+--    BEGIN
+-- 	DECLARE front TEXT DEFAULT NULL;
+-- 	DECLARE frontlen INT DEFAULT NULL;
+-- 	DECLARE TempValue TEXT DEFAULT NULL;
+--     declare b_disease varchar(150);
+-- 	drop table if exists dim.medDets;
+-- 	create table medDets(id int not null auto_increment primary key, medDets varchar(30));
+-- 	drop table if exists deniedIng;
+-- 	create table deniedIng(id int not null auto_increment primary key, ingredients varchar(30));
+-- 	iterator:
+-- 	LOOP  
+-- 		IF LENGTH(TRIM(Value)) = 0 OR Value IS NULL THEN
+-- 			LEAVE iterator;
+-- 		END IF;
+-- 		SET front = SUBSTRING_INDEX(Value,' ',1);
+-- 		SET frontlen = LENGTH(front);
+-- 		SET TempValue = TRIM(front);
+-- 		INSERT INTO medDets (medDets) VALUES ( TempValue);
+-- 		select deniedIngredients from medicalissues where disease=TempValue into b_disease;
+--         call deniedingredients(b_disease);
+--    END LOOP;
+--    END //
+--    delimiter ;
 
 
 
-drop procedure if exists denied_recommendation;
-delimiter $$ 
-create procedure denied_recommendation()
-begin 
-	declare finished int default 0;
-    declare r_dish varchar(100);
-    declare c_dish cursor for 
-		select dishId from menu;
-        declare continue handler for not found set finished = 1;
-        drop table if exists almostfinalTable;
-		create table almostfinalTable(dishId varchar(50) primary key);
-        open c_dish;
-			getdish:LOOP
-				FETCH c_dish into r_dish;
-				if finished = 1 then
-					leave getdish;
-                end if;
-                begin
-					declare finished1 int default 0;
-                    declare r_ing varchar(255);
-                    declare b_temp varchar(50);
-                    declare c_ing cursor for 
-						select ingredients from deniedIng;
-						open c_ing;
-							geting: LOOP
-								fetch c_ing into r_ing;
-                                if finished1 = 1 then
-									leave geting;
-								end if;
-								select dishId from menu where ingredients not like CONCAT ("%", r_ing, "%") into b_temp;
-                                insert into almostfinalTable value(b_temp);
-							END LOOP;
-                        close c_ing;
-                end;
-			END LOOP;
-        close c_dish;
-end$$
-delimiter ;
+-- DROP PROCEDURE IF EXISTS  deniedingredients ;
+-- DELIMITER //
+--  CREATE PROCEDURE deniedingredients(Value varchar(150))
+--    BEGIN
+-- 	DECLARE front TEXT DEFAULT NULL;
+-- 	DECLARE frontlen INT DEFAULT NULL;
+-- 	DECLARE TempValue TEXT DEFAULT NULL;
+-- 	iterator:
+-- 	LOOP  
+-- 		IF LENGTH(TRIM(Value)) = 0 OR Value IS NULL THEN
+-- 			LEAVE iterator;
+-- 		END IF;
+-- 		SET front = SUBSTRING_INDEX(Value,' ',1);
+-- 		SET frontlen = LENGTH(front);
+-- 		SET TempValue = TRIM(front);
+-- 		INSERT INTO deniedIng (ingredients) VALUES ( TempValue);
+-- 		SET Value = INSERT(Value,1,frontlen + 1,'');
+--    END LOOP;
+--    END //
+--    delimiter ;
+
+-- DROP PROCEDURE IF EXISTS  preferencesIng ;
+-- DELIMITER //
+--  CREATE PROCEDURE preferencesIng(b_userId int)
+--    BEGIN
+-- 	DECLARE front TEXT DEFAULT NULL;
+-- 	DECLARE frontlen INT DEFAULT NULL;
+-- 	DECLARE TempValue TEXT DEFAULT NULL;
+--     declare Value varchar(255);
+--     select ingredientId from preferences where userId=b_userId into Value;
+-- 	drop table if exists preflist;
+-- 	create table preflist(id int not null auto_increment primary key, ingredients varchar(30));
+-- 	iterator:
+-- 	LOOP  
+-- 		IF LENGTH(TRIM(Value)) = 0 OR Value IS NULL THEN
+-- 			LEAVE iterator;
+-- 		END IF;
+-- 		SET front = SUBSTRING_INDEX(Value,' ',1);
+-- 		SET frontlen = LENGTH(front);
+-- 		SET TempValue = TRIM(front);
+-- 		INSERT INTO preflist (ingredients) VALUES ( TempValue);
+-- 		SET Value = INSERT(Value,1,frontlen + 1,'');
+--    END LOOP;
+--    END //
+--    delimiter ;
 
 
 
-drop procedure if exists final_recommedation;
-delimiter $$ 
-create procedure final_recommendation(workoutId varchar(50))
-begin 
-	declare finished int default 0;
-    declare r_dish varchar(100);
-    declare nutrient varchar(50);
-    declare c_dish cursor for 
-		select dishId from menu;
-        declare continue handler for not found set finished = 1;
-        select reqNutrient from exercise e where e.workoutId=workoutId into nutrient;
-        drop table if exists finalTable;
-		create table finalTable(dishId varchar(50) primary key);
-        open c_dish;
-			getdish:LOOP
-				FETCH c_dish into r_dish;
-				if finished = 1 then
-					leave getdish;
-                end if;
-                begin
-					declare finished1 int default 0;
-                    declare r_ing varchar(255);
-                    declare b_temp varchar(50);
-                    declare c_ing cursor for 
-						select i.ingredientId from ingredients i right join preflist p on p.ingredients = i.ingredientId where i.ingredientType=nutrient;						
-                        open c_ing;
-							geting: LOOP
-								fetch c_ing into r_ing;
-                                if finished1 = 1 then
-									leave geting;
-								end if;
-								select dishId from almosfinaltTable where ingredients like CONCAT ("%", r_ing, "%") into b_temp;
-                                insert into finalTable value(b_temp);
-							END LOOP;
-                        close c_ing;
-                end;
-			END LOOP;
-        close c_dish;
-end$$
-delimiter ;
+-- -- |||||||||||||||||||||||||||||||||||||||||||
+-- drop procedure if exists denied_recommendation;
+-- delimiter $$ 
+-- create procedure denied_recommendation()
+-- begin 
+-- 	declare finished int default 0;
+--     declare r_dish varchar(100);
+--     declare c_dish cursor for 
+-- 		select dishId from menu;
+--         declare continue handler for not found set finished = 1;
+--         drop table if exists almostfinalTable;
+-- 		create table almostfinalTable(dishId varchar(50) primary key);
+--         open c_dish;
+-- 			getdish:LOOP
+-- 				FETCH c_dish into r_dish;
+-- 				if finished = 1 then
+-- 					leave getdish;
+--                 end if;
+--                 begin
+-- 					declare finished1 int default 0;
+--                     declare r_ing varchar(255);
+--                     declare b_temp varchar(50);
+--                     declare c_ing cursor for 
+-- 						select ingredients from deniedIng;
+-- 						open c_ing;
+-- 							geting: LOOP
+-- 								fetch c_ing into r_ing;
+--                                 if finished1 = 1 then
+-- 									leave geting;
+-- 								end if;
+-- 								select dishId from menu where ingredientId not like CONCAT ("%", r_ing, "%") into b_temp;
+--                                 insert into almostfinalTable value(b_temp);
+-- 							END LOOP;
+--                         close c_ing;
+--                 end;
+-- 			END LOOP;
+--         close c_dish;
+-- end$$
+-- delimiter ;
+
+
+
+-- drop procedure if exists final_recommedation;
+-- delimiter $$ 
+-- create procedure final_recommendation(workoutId varchar(50))
+-- begin 
+-- 	declare finished int default 0;
+--     declare r_dish varchar(100);
+--     declare nutrient varchar(50);
+--     declare c_dish cursor for 
+-- 		select dishId from menu;
+--         declare continue handler for not found set finished = 1;
+--         select reqNutrient from exercise e where e.workoutId=workoutId into nutrient;
+--         drop table if exists finalTable;
+-- 		create table finalTable(dishId varchar(50) primary key);
+--         open c_dish;
+-- 			getdish:LOOP
+-- 				FETCH c_dish into r_dish;
+-- 				if finished = 1 then
+-- 					leave getdish;
+--                 end if;
+--                 begin
+-- 					declare finished1 int default 0;
+--                     declare r_ing varchar(255);
+--                     declare b_temp varchar(50);
+--                     declare c_ing cursor for 
+-- 						select i.ingredientId from ingredients i right join preflist p on p.ingredients = i.ingredientId where i.ingredientType=nutrient;						
+--                         open c_ing;
+-- 							geting: LOOP
+-- 								fetch c_ing into r_ing;
+--                                 if finished1 = 1 then
+-- 									leave geting;
+-- 								end if;
+-- 								select dishId from almosfinaltTable where ingredients like CONCAT ("%", r_ing, "%") into b_temp;
+--                                 insert into finalTable value(b_temp);
+-- 							END LOOP;
+--                         close c_ing;
+--                 end;
+-- 			END LOOP;
+--         close c_dish;
+-- end$$
+-- delimiter ;
 
 
 -- insert into user(firstName, lastName, email, age, weight, height, bloodGroup) values('Aneri','Dalwadi','aneri.d@ahduni.edu.in','20','55','150','B+');

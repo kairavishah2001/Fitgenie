@@ -7,7 +7,6 @@ class Recomendations extends Component {
 
     constructor(props){
         super(props);
-
         this.state={
             data: []
         }
@@ -49,8 +48,9 @@ class Recomendations extends Component {
         axios.get("http://194.195.115.31:5000/getRecommendation", {headers: {id: this.props.id}})
         .then( response => {
             if(response.data.success){
+                alert(JSON.stringify(response.data))
                 this.setState({
-                    data: response.data.FinalResult,
+                    data: response.data,
                 })   
             }
         })
