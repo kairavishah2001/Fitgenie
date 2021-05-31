@@ -19,7 +19,7 @@ function DisplayMenu({ result }) {
         axios.get("http://194.195.115.31:5000/addToCart", {headers: {id: event.target.id}})
             .then( response => {
                 if(response.data.success){
-                    console.log("Dish Added");
+                    alert('Added to cart');
                 }
             })
     }
