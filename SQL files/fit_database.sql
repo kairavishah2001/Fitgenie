@@ -119,7 +119,7 @@ ALTER TABLE `order` ADD CONSTRAINT `order_fk0` FOREIGN KEY (`userId`) REFERENCES
 
 ALTER TABLE `order` ADD CONSTRAINT `order_fk1` FOREIGN KEY (`dishId`) REFERENCES `menu`(`dishId`);
 
-alter table workout add column date date;
+alter table workout add column date varchar(20);
 
 alter table workout add column time varchar(20);
 

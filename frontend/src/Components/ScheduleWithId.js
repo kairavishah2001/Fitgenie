@@ -33,7 +33,7 @@ class ScheduleWithId extends Component {
     handleSubmit() {
         // alert(JSON.stringify(this.state));
         let data = {
-            workType: this.state.result.workType,
+            workoutId: this.props.scheduleId,
             time: this.state.slot,
         }
 
