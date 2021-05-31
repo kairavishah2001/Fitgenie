@@ -15,6 +15,8 @@ class Recomendations extends Component {
         this.renderDishes = this.renderDishes.bind(this);
     }
 
+    
+
     renderDishes(){
         let renderList = this.state.map((rl) => {
             return (
