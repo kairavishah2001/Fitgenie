@@ -13,6 +13,7 @@ exports.profile = (req, res) => {
         } else {
             let id = JSON.parse(req.cookies.cookie).userId;
             let fetch = 'select * from user where userId = "' + id + '";';
+            // console.log(fetch);
             pool.query(fetch, (err, result) => {
                 if(err) {
                     console.log("QUERY ERROR: " + err);

@@ -3,7 +3,7 @@ const fs = require('fs');
 
 exports.addSchedule = (req, res) => {
 
-    let workType = req.body.workType;
+    let workoutId = req.body.workoutId;
     let time = req.body.time;
     let userId = JSON.parse(req.cookies.cookie).userId;
 
@@ -22,7 +22,7 @@ exports.addSchedule = (req, res) => {
             let month = today.getMonth();
             let year = today.getFullYear();
             let finalDate = date + '-' + month + '-' + year;
-            let fetch = "insert into workout values('" + userId + "','" + workType + "','" + finalDate + "','" + time + "');";
+            let fetch = "insert into workout values('" + userId + "','" + workoutId + "','" + finalDate + "','" + time + "');";
             console.log(fetch);
             pool.query(fetch, (err, result) => {
                 if (err) {

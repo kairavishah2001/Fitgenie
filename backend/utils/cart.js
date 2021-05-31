@@ -1,31 +1,31 @@
 const pool = require('../pool');
 
-exports.getSchedule = (req, res) => {
+exports.cart = (req, res) => {
     pool.getConnection((err) => {
         if (err) {
-            console.log("CONNECTION ERROR: " + err);
+            console.log("CONNECTION ERROR: " + err.message);
             res.send({
                 status: 0,
-                success: false,
                 msg: err.message,
+                success: false,
                 data: null,
             });
         } else {
-            let fetch = 'select * from exercise where workoutId = "' + req.headers.id + '";';
+            let fetch = "select c.*, d.* from cart c left join menu d on d.dishId = c.dishId where userId = '" + JSON.parse(req.cookies.cookie).userId + "';";
             pool.query(fetch, (err, result) => {
                 if (err) {
-                    console.log("QUERY ERROR: " + err);
+                    console.log("QUERY ERROR: " + err.message);
                     res.send({
                         status: 0,
-                        success: false,
                         msg: err.message,
+                        success: false,
                         data: null,
                     });
                 } else {
                     res.send({
                         status: 1,
-                        success: true,
                         msg: 'Fetched',
+                        success: true,
                         data: result,
                     });
                 }

@@ -1,6 +1,8 @@
 import React, { Component } from 'react';
 import axios from 'axios';
 import Header from './Header';
+import {Button, Card, CardImg} from 'reactstrap';
+
 class Recomendations extends Component {
 
     constructor(props){
@@ -13,13 +15,15 @@ class Recomendations extends Component {
         this.renderDishes = this.renderDishes.bind(this);
     }
 
+    
+
     renderDishes(){
         let renderList = this.state.map((rl) => {
             return (
                 <div className="col-md-3">
                     <Card style={{ borderColor: 'white' }}>
                         <div className="d-flex justify-content-center">
-                            <CardImg style={{ width: '90%', height: '60%', borderRadius: '7.5%' }} id={rl.dishId} role="button" onClick={description} src={rl.image} />
+                            <CardImg style={{ width: '90%', height: '60%', borderRadius: '7.5%' }} id={rl.dishId} role="button"  src={rl.image} />
                         </div>
                         <p style={{ fontSize: '14px' }} className="mt-2">{rl.dishName}</p>
                         <div className="row">
@@ -27,7 +31,7 @@ class Recomendations extends Component {
                                 <p>	&#8377; {rl.price}</p>
                             </div>
                             <div className="d-flex justify-content-end col-6">
-                                <Button style={{ height: '30px', width: '100px', borderRadius: '10vw', borderColor: 'red' }} className="btn-sm" color="white" id={rl.dishId} onClick={addItemToCart}>ADD</Button>
+                                <Button style={{ height: '30px', width: '100px', borderRadius: '10vw', borderColor: 'red' }} className="btn-sm" color="white" id={rl.dishId} >ADD</Button>
                             </div>
                         </div>
                     </Card>
@@ -54,7 +58,7 @@ class Recomendations extends Component {
 
     render() {
 
-        if(this.state.data.length==0){
+        if(this.state.data.length===0){
             return (
                 <div>
                     <Header/>

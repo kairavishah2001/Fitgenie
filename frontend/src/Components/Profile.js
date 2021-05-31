@@ -23,7 +23,7 @@ export default class Profile extends Component {
             workoutType: '',
             date: '',
             time: '',
-            imageWorkout: '',
+            imageWorkout: 'https://cdn.discordapp.com/attachments/802068802732425227/848872254607851550/deafaultSched.gif',
         }
 
         this.handleClick = this.handleClick.bind(this);
@@ -58,9 +58,9 @@ export default class Profile extends Component {
         axios.defaults.withCredentials = true;
         axios.get('http://localhost:5000/getUserSchedule')
             .then(response => {
-                if (response.data.success) {
+                if (response.data.success && response.data.data.length !== 0) {
                     this.setState({
-                        workoutType: response.data.data[0].workoutType,
+                        workoutType: response.data.data[0].workType,
                         date: response.data.data[0].date,
                         time: response.data.data[0].time,
                         imageWorkout: response.data.data[0].image,
@@ -73,7 +73,7 @@ export default class Profile extends Component {
     }
 
     render() {
-        let displayTime;
+        let displayTime, displaySchedule;
         if (this.state.redirectVar) {
             return (
                 <Redirect to="/care" />
@@ -86,6 +86,54 @@ export default class Profile extends Component {
         } else {
             displayTime = <p>Time: 6pm - 9pm</p>
         }
+
+        if (this.state.workoutType === '') {
+            displaySchedule =
+                <div className="max-w-4xl flex items-center h-auto lg:h-screen flex-wrap mx-auto my-32 lg:my-0">
+                    <div id="profile" className="w-full lg:w-3/5 rounded-lg lg:rounded-l-lg lg:rounded-r-none shadow-2xl bg-white mx-6 lg:mx-0">
+                        <div className="p-4 md:p-12 text-center lg:text-left">
+                            {/* Image for mobile view*/}
+                            <div className="block lg:hidden rounded-full shadow-xl mx-auto -mt-16 h-48 w-48 bg-cover bg-center" style={{ backgroundImage: `url(${this.state.imageWorkout})` }} />
+                            {/* <h1 className="text-3xl font-bold pt-8 lg:pt-0">{this.state.workoutType}</h1> */}
+                            <div className="mx-auto lg:mx-0 w-4/5 pt-3 border-b-2 border-green-500 opacity-25" />
+                            <span style={{ color: '#047857' }} className="fa fa-calendar mr-2" />Today's Schedule
+                    <p className="mt-2"><strong>Nothing is scheduled</strong></p>
+                            <a href="/schedule"><button className="bg-green-700 hover:bg-green-900 text-white font-bold py-2 px-4 rounded-full">
+                                Book Now
+                        </button>
+                            </a>
+                        </div>
+                        {/* Use https://simpleicons.org/ to find the svg for your preferred product */}
+                        
+                    </div>
+                    <div className="w-full lg:w-2/5">
+                            <img alt="Excercise_Photo" style={{ width: '80%', height: '80%' }} src={this.state.imageWorkout} className="lg:rounded-lg shadow-2xl hidden lg:block" />
+                        </div>
+                </div>
+        } else {
+            displaySchedule =
+                <div className="max-w-4xl flex items-center h-auto lg:h-screen flex-wrap mx-auto my-32 lg:my-0">
+                    <div id="profile" className="w-full lg:w-3/5 rounded-lg lg:rounded-l-lg lg:rounded-r-none shadow-2xl bg-white mx-6 lg:mx-0">
+                        <div className="p-4 md:p-12 text-center lg:text-left">
+                            {/* Image for mobile view*/}
+                            <div className="block lg:hidden rounded-full shadow-xl mx-auto -mt-16 h-48 w-48 bg-cover bg-center" style={{ backgroundImage: `url(${this.state.imageWorkout})` }} />
+                            <h1 className="text-3xl font-bold pt-8 lg:pt-0">{this.state.workoutType}</h1>
+                            <div className="mx-auto lg:mx-0 w-4/5 pt-3 border-b-2 border-green-500 opacity-25" />
+                            <span style={{ color: '#047857' }} className="fa fa-calendar mr-2" />Today's Schedule
+                <p className="mt-2 text-sm">Date: {this.state.date}</p>
+                            <p className="text-sm">{displayTime}</p>
+                            <button className="bg-green-700 hover:bg-green-900 text-white font-bold py-2 px-4 rounded-full" onClick={this.handleClick}>
+                                Get in Touch
+                </button>
+                        </div>
+                        {/* Use https://simpleicons.org/ to find the svg for your preferred product */}
+                    </div>
+
+                    <div className="w-full lg:w-2/5">
+                        <img alt="Excercise_Photo" style={{ width: '80%', height: '80%' }} src={this.state.imageWorkout} className="lg:rounded-lg shadow-2xl hidden lg:block" />
+                    </div>
+                </div>
+        }
         return (
             <div>
                 <Header />
@@ -93,27 +141,7 @@ export default class Profile extends Component {
                 <div className="container">
                     <div className="row mt-2">
                         <div>
-                            <div className="max-w-4xl flex items-center h-auto lg:h-screen flex-wrap mx-auto my-32 lg:my-0">
-                                {/*Main Col*/}
-                                <div id="profile" className="w-full lg:w-3/5 rounded-lg lg:rounded-l-lg lg:rounded-r-none shadow-2xl bg-white mx-6 lg:mx-0">
-                                    <div className="p-4 md:p-12 text-center lg:text-left">
-                                        {/* Image for mobile view*/}
-                                        <div className="block lg:hidden rounded-full shadow-xl mx-auto -mt-16 h-48 w-48 bg-cover bg-center" style={{ backgroundImage: `url(${this.state.imageWorkout})` }} />
-                                        <h1 className="text-3xl font-bold pt-8 lg:pt-0">{this.state.workoutType}</h1>
-                                        <div className="mx-auto lg:mx-0 w-4/5 pt-3 border-b-2 border-green-500 opacity-25" />
-                                        <span style={{color: '#047857'}} className="fa fa-calendar mr-2" />Today's Schedule
-                                        <p className="mt-2 text-sm">Date: {this.state.date}</p>
-                                        <p className="text-sm">{displayTime}</p>
-                                        <button className="bg-green-700 hover:bg-green-900 text-white font-bold py-2 px-4 rounded-full" onClick={this.handleClick}>
-                                            Get in Touch
-                                        </button>
-                                    </div>
-                                    {/* Use https://simpleicons.org/ to find the svg for your preferred product */}
-                                </div>
-                                <div className="w-full lg:w-2/5">
-                                    <img alt="Profile_Pic" src={this.state.imageWorkout} className="lg:rounded-lg shadow-2xl hidden lg:block" />
-                                </div>
-                            </div>
+                            {displaySchedule}
                         </div>
                     </div>
 

@@ -18,7 +18,7 @@ exports.addToCart = (req, res) => {
             });
         } else {
             
-            let fetch = "insert into cart values('"+ userId +"','" + id +"','"+ 1 + "';";
+            let fetch = "insert into cart values('"+ JSON.parse(req.cookies.cookie).userId +"','" + id +"','"+ 1 + "');";
 
             pool.query(fetch, (err, result) => {
                 if (err) {

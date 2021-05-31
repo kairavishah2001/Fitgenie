@@ -12,7 +12,8 @@ exports.getUserSchedule = (req, res) => {
             });
         } else {
             let objectCookies = JSON.parse(req.cookies.cookie);
-            let fetch = 'select w.*, e.image from workout w left join exercise e on e.workType = w.workoutType where userId = "' + objectCookies.userId + '";';
+            let fetch = 'select w.*, e.* from workout w left join exercise e on e.workoutId = w.workoutId where userId = "' + objectCookies.userId + '";';
+            // console.log(fetch);
             pool.query(fetch, (err, result) => {
                 if (err) {
                     console.log("QUERY ERROR: " + err);

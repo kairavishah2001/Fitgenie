@@ -72,12 +72,8 @@ CREATE TABLE `professional` (
 	`pFirstname` varchar(50) NOT NULL,
     `pLastname` varchar(50) NOT NULL,
 	`role` varchar(50) NOT NULL,
-<<<<<<< HEAD
-	`qualification` varchar(50) NOT NULL
-=======
 	`qualification` varchar(50) NOT NULL,
 	primary key(`pId`)
->>>>>>> 56bdb78257eca118b56e0bc53e91f5bfbacc9db3
 );
 
 -- Date column is dropped and UserId is PK
@@ -87,7 +83,6 @@ CREATE TABLE `cart` (
 	`quantity` INT NOT NULL,
 	`date` DATETIME NOT NULL
 );
-
 CREATE TABLE `order` (
 	`userId` int NOT NULL,
 	`orderId` varchar(255) NOT NULL,
@@ -108,6 +103,8 @@ create table `appointments`(
 
 alter table `appointments` modify appointmentDate varchar(50);
 
+alter table `user` add column fitCash int default 100;
+
 ALTER TABLE `medicalDetails` ADD CONSTRAINT `medicalDetails_fk0` FOREIGN KEY (`userId`) REFERENCES `user`(`userId`);
 
 ALTER TABLE `preferences` ADD CONSTRAINT `preferences_fk0` FOREIGN KEY (`userId`) REFERENCES `user`(`userId`);
@@ -116,15 +113,13 @@ ALTER TABLE `preferences` add CONSTRAINT `preferences_fk1` FOREIGN KEY (`ingredi
 
 ALTER TABLE `workout` ADD CONSTRAINT `workout_fk0` FOREIGN KEY (`userId`) REFERENCES `user`(`userId`);
 
-ALTER TABLE `cart` ADD CONSTRAINT `cart_fk0` FOREIGN KEY (`userId`) REFERENCES `user`(`userId`);
-
 ALTER TABLE `cart` ADD CONSTRAINT `cart_fk1` FOREIGN KEY (`dishId`) REFERENCES `menu`(`dishId`);
 
 ALTER TABLE `order` ADD CONSTRAINT `order_fk0` FOREIGN KEY (`userId`) REFERENCES `user`(`userId`);
 
 ALTER TABLE `order` ADD CONSTRAINT `order_fk1` FOREIGN KEY (`dishId`) REFERENCES `menu`(`dishId`);
 
-alter table workout add column date date;
+alter table workout add column date varchar(20);
 
 alter table workout add column time varchar(20);
 
@@ -138,11 +133,10 @@ alter table workout add primary key(`userId`,`date`,`time`);
 
 alter table cart drop column date;
 
-alter table `cart` add primary key(`userId`);
-
 alter table medicalDetails add primary key(`userId`);
 
 alter table exercise add column image varchar(255);
+
 
 INSERT INTO ingredients Values
 ('I101','Dairy', 'protein'),
@@ -187,6 +181,11 @@ INSERT INTO medicalIssues VALUES
 ('cholesterol','Dairy Chicken'),
 ('thyroid','Dairy Gluten Sugar'),
 ('blood pressure','Sugar Meat Caffeine');
+
+UPDATE `dim`.`medicalissues` SET `deniedIngredients` = 'I120 I115' WHERE (`disease` = 'blood pressure');
+UPDATE `dim`.`medicalissues` SET `deniedIngredients` = 'I101 I118' WHERE (`disease` = 'cholesterol');
+UPDATE `dim`.`medicalissues` SET `deniedIngredients` = 'I120' WHERE (`disease` = 'diabetes');
+UPDATE `dim`.`medicalissues` SET `deniedIngredients` = 'I101 I120 I119' WHERE (`disease` = 'thyroid');
 
 insert into exercise (`workType`, `reqNutrient`,`image`) values
 ('Leg Workout - Beginner', 'fibre','https://c4.wallpaperflare.com/wallpaper/409/386/366/legs-female-workout-crossfit-wallpaper-preview.jpg'),

@@ -1,6 +1,6 @@
 import axios from 'axios';
 import React, { Component } from 'react';
-import { Redirect } from 'react-router';
+// import { Redirect } from 'react-router';
 import { Card, CardImg, CardBody, Button, Form, Label, Input } from 'reactstrap';
 import Header from './Header';
 import Recommendation from './Recomendations';
@@ -33,7 +33,7 @@ class ScheduleWithId extends Component {
     handleSubmit() {
         // alert(JSON.stringify(this.state));
         let data = {
-            workType: this.state.result.workType,
+            workoutId: this.props.scheduleId,
             time: this.state.slot,
         }
 
@@ -72,7 +72,7 @@ class ScheduleWithId extends Component {
             alert("Get your recommend menu, best suited for you");
             return(
                 <div>
-                    {/* <Recommendation Data={ id= this.state.id, slot= this.state.slot} /> */}
+                    <Recommendation Data={this.state.id} />
                 </div>
             )
         }
