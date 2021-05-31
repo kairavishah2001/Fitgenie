@@ -72,12 +72,8 @@ CREATE TABLE `professional` (
 	`pFirstname` varchar(50) NOT NULL,
     `pLastname` varchar(50) NOT NULL,
 	`role` varchar(50) NOT NULL,
-<<<<<<< HEAD
-	`qualification` varchar(50) NOT NULL
-=======
 	`qualification` varchar(50) NOT NULL,
 	primary key(`pId`)
->>>>>>> 56bdb78257eca118b56e0bc53e91f5bfbacc9db3
 );
 
 -- Date column is dropped and UserId is PK
@@ -227,12 +223,12 @@ insert into professional values
 
 DROP PROCEDURE IF EXISTS  SP_SplitString_medDets;
 DELIMITER //
- CREATE PROCEDURE SP_SplitString_medDets(Value longtext)
+ CREATE PROCEDURE SP_SplitString_medDets(Value varchar(150))
    BEGIN
 	DECLARE front TEXT DEFAULT NULL;
 	DECLARE frontlen INT DEFAULT NULL;
 	DECLARE TempValue TEXT DEFAULT NULL;
-    declare b_disease longtext;
+    declare b_disease varchar(150);
 	drop table if exists dim.medDets;
 	create table medDets(id int not null auto_increment primary key, medDets varchar(30));
 	drop table if exists deniedIng;
@@ -253,9 +249,10 @@ DELIMITER //
    delimiter ;
 
 
+
 DROP PROCEDURE IF EXISTS  deniedingredients ;
 DELIMITER //
- CREATE PROCEDURE deniedingredients(Value longtext)
+ CREATE PROCEDURE deniedingredients(Value varchar(150))
    BEGIN
 	DECLARE front TEXT DEFAULT NULL;
 	DECLARE frontlen INT DEFAULT NULL;
@@ -282,7 +279,7 @@ DELIMITER //
 	DECLARE frontlen INT DEFAULT NULL;
 	DECLARE TempValue TEXT DEFAULT NULL;
     declare Value varchar(255);
-    select ingridientId from preferences where userId=b_userId into Value;
+    select ingredientId from preferences where userId=b_userId into Value;
 	drop table if exists preflist;
 	create table preflist(id int not null auto_increment primary key, ingredients varchar(30));
 	iterator:
@@ -298,11 +295,10 @@ DELIMITER //
    END LOOP;
    END //
    delimiter ;
-call preferencesIng('Malav Aneri Sameep Kashvi Nut I101' );
-select * from preflist;
 
 
 
+-- |||||||||||||||||||||||||||||||||||||||||||
 drop procedure if exists denied_recommendation;
 delimiter $$ 
 create procedure denied_recommendation()
@@ -332,7 +328,7 @@ begin
                                 if finished1 = 1 then
 									leave geting;
 								end if;
-								select dishId from menu where ingredients not like CONCAT ("%", r_ing, "%") into b_temp;
+								select dishId from menu where ingredientId not like CONCAT ("%", r_ing, "%") into b_temp;
                                 insert into almostfinalTable value(b_temp);
 							END LOOP;
                         close c_ing;
