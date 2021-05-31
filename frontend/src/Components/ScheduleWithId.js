@@ -42,7 +42,9 @@ class ScheduleWithId extends Component {
         axios.post('http://localhost:5000/addSchedule', data)
             .then(response => {
                 if(response.data.success) {
-                    console.log('Scheduled');
+                    this.setState({
+                        redirectVar: true,
+                    })
                 }
             })
             .catch(err => {
@@ -66,7 +68,6 @@ class ScheduleWithId extends Component {
 
     render() {
         if (this.state.redirectVar) {
-            alert("Get your recommend menu, best suited for you");
             return (
                 <Redirect to="/eat" />
             )

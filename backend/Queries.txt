@@ -17,3 +17,5 @@ insert into appointments values ("1","Aakash Hupta","2021-05-02","slot2","Traine
 insert into workout values('1','Leg Workout - Advance','31-4-2021','slot2');
 insert into appointments values ("1","Sanjay Shah","2021-05-31","slot3","Physiotherapist");
 insert into appointments values ("1","Ashna Gandhi","2021-05-27","slot1","Trainer");
+insert into user(firstName, lastName, email, age, weight, height, bloodGroup) values('Kashvi','Gandhi','kashvi.g@ahduni.edu.in','20','59','155','A-');
+insert into workout values('1','Abs - Adance','31-4-2021','slot1');
