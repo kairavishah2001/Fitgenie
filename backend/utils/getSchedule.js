@@ -11,7 +11,7 @@ exports.getSchedule = (req, res) => {
                 data: null,
             });
         } else {
-            let fetch = 'select * from exercise where id = "' + req.headers.id + '";';
+            let fetch = 'select * from exercise where workoutId = "' + req.headers.id + '";';
             pool.query(fetch, (err, result) => {
                 if (err) {
                     console.log("QUERY ERROR: " + err);

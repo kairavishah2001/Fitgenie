@@ -34,7 +34,7 @@ function DisplayExercise({ result }) {
                             <h5>{rl.workType}</h5>
                             <p className="mt-3" style={{ color: "#6B7284", size: "10px" }}>Fingerstache flexitarian street art 8-bit waistcoat. Distillery hexagon disrupt edison bulbche.</p>
                             <div className="d-flex justify-content-center">
-                                <Button style={{ backgroundColor: '#D37B22', height: '37px', width: '100px', borderRadius: '10vw', borderColor: '#D37B22' }} className="img-fluid btn mb-2 stretched-link" id={rl.id} onClick={handleClick}>Go</Button>
+                                <Button style={{ backgroundColor: '#D37B22', height: '37px', width: '100px', borderRadius: '10vw', borderColor: '#D37B22' }} className="img-fluid btn mb-2 stretched-link" id={rl.workoutId} onClick={handleClick}>Go</Button>
                             </div>
                         </CardBody>
                     </div>
