@@ -1,28 +1,73 @@
 import React, { Component } from 'react';
 import axios from 'axios';
-
+import Header from './Header';
 class Recomendations extends Component {
 
     constructor(props){
         super(props);
+
+        this.state={
+            data: []
+        }
+
+        this.renderDishes = this.renderDishes.bind(this);
     }
-//1. back, workout sp req components
-//2. remove all components with allergy
-//3. find and print food
+
+    renderDishes(){
+        let renderList = this.state.map((rl) => {
+            return (
+                <div className="col-md-3">
+                    <Card style={{ borderColor: 'white' }}>
+                        <div className="d-flex justify-content-center">
+                            <CardImg style={{ width: '90%', height: '60%', borderRadius: '7.5%' }} id={rl.dishId} role="button" onClick={description} src={rl.image} />
+                        </div>
+                        <p style={{ fontSize: '14px' }} className="mt-2">{rl.dishName}</p>
+                        <div className="row">
+                            <div className="col-6">
+                                <p>	&#8377; {rl.price}</p>
+                            </div>
+                            <div className="d-flex justify-content-end col-6">
+                                <Button style={{ height: '30px', width: '100px', borderRadius: '10vw', borderColor: 'red' }} className="btn-sm" color="white" id={rl.dishId} onClick={addItemToCart}>ADD</Button>
+                            </div>
+                        </div>
+                    </Card>
+                </div>
+            );
+        })
+        return (
+            <div className="row">
+                {renderList}
+            </div>
+        );
+    }
 
     componentDidMount(){
-        axios.get("http://localhost:5000/getIngrediant", {headers: {id: this.props.id}})
+        axios.get("http://localhost:5000/getRecommendation", {headers: {id: this.props.id}})
         .then( response => {
             if(response.data.success){
-                console.log("Dish Added");
+                this.setState({
+                    data: response.data.FinalResult,
+                })   
             }
         })
     }
 
     render() {
+
+        if(this.state.data.length==0){
+            return (
+                <div>
+                    <Header/>
+                </div>
+            );
+        }
         return (
             <div>
-                 
+                <Header/>
+                <div className="container">
+                    <h2 style={{color:"#D37B22"}}>Here are the best recommendations from our experts, best fitting to your preferences and your workout</h2>
+                    {this.renderDishes}
+                </div>
             </div>
         );
     }

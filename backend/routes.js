@@ -11,6 +11,7 @@ const appointment = require('./utils/appointment');
 const scheduleList = require('./utils/scheduleList');
 const getSchedule = require('./utils/getSchedule');
 const addSchedule = require('./utils/addSchedule');
+const getRecomendation = require('./utils/getRecomendation');
 
 router.get('/eat', eat.eat);
 router.get('/getDish', getDish.getDish);
@@ -20,7 +21,7 @@ router.get('/getList', getList.getList);
 router.get('/addToCart', addToCart.addToCart);
 router.get('/scheduleList', scheduleList.scheduleList);
 router.get('/getSchedule', getSchedule.getSchedule);
-
+router.get('/getRecomendation', getRecomendation.getRecomendation);
 router.post('/addSchedule', addSchedule.addSchedule);
 router.post('/signUp', signUp.signUp);
 router.post('/appointment', appointment.appointment);
