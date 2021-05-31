@@ -32,4 +32,6 @@
 body {
   overflow-x: hidden;
 }
-
+.react-rater-hover{
+  react-rater-hover:red; 
+}
