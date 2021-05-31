@@ -52,18 +52,18 @@ CREATE TABLE `preferences` (
 	primary key(`userId`)
 );
 
-
 CREATE TABLE `exercise` (
 	`workType` varchar(255) NOT NULL,
 	`reqNutrient` varchar(255) NOT NULL,
-	PRIMARY KEY (`workType`)
+    `workoutId` int not null auto_increment,
+	PRIMARY KEY (`workoutId`)
 );
 
--- WType is the FK and Date and time are added as columns 
+-- WType is the FK and Date and time are added as columns workout id
 -- userId+time+date added as the primary key
 CREATE TABLE `workout` (
 	`userId` int NOT NULL,
-	`workoutType` varchar(255) NOT NULL
+	`workoutId` int NOT NULL
 );
 
 -- First and last name added 
@@ -72,8 +72,12 @@ CREATE TABLE `professional` (
 	`pFirstname` varchar(50) NOT NULL,
     `pLastname` varchar(50) NOT NULL,
 	`role` varchar(50) NOT NULL,
+<<<<<<< HEAD
+	`qualification` varchar(50) NOT NULL
+=======
 	`qualification` varchar(50) NOT NULL,
 	primary key(`pId`)
+>>>>>>> 56bdb78257eca118b56e0bc53e91f5bfbacc9db3
 );
 
 -- Date column is dropped and UserId is PK
@@ -111,11 +115,6 @@ ALTER TABLE `preferences` ADD CONSTRAINT `preferences_fk0` FOREIGN KEY (`userId`
 ALTER TABLE `preferences` add CONSTRAINT `preferences_fk1` FOREIGN KEY (`ingredientId`) REFERENCES `ingredients`(`ingredientId`);
 
 ALTER TABLE `workout` ADD CONSTRAINT `workout_fk0` FOREIGN KEY (`userId`) REFERENCES `user`(`userId`);
-alter table `workout` modify column date varchar(20);
-ALTER TABLE `dim`.`workout` 
-CHANGE COLUMN `time` `time` VARCHAR(10) NOT NULL ;
-
-ALTER TABLE `workout` ADD CONSTRAINT `workout_fk1` FOREIGN KEY (`workoutType`) REFERENCES `exercise`(`workType`);
 
 ALTER TABLE `cart` ADD CONSTRAINT `cart_fk0` FOREIGN KEY (`userId`) REFERENCES `user`(`userId`);
 
@@ -127,7 +126,7 @@ ALTER TABLE `order` ADD CONSTRAINT `order_fk1` FOREIGN KEY (`dishId`) REFERENCES
 
 alter table workout add column date date;
 
-alter table workout add column time time;
+alter table workout add column time varchar(20);
 
 alter table medicalDetails add column userMed varchar(200);
 
@@ -144,7 +143,6 @@ alter table `cart` add primary key(`userId`);
 alter table medicalDetails add primary key(`userId`);
 
 alter table exercise add column image varchar(255);
-alter table exercise add column id int;
 
 INSERT INTO ingredients Values
 ('I101','Dairy', 'protein'),
@@ -168,10 +166,12 @@ INSERT INTO ingredients Values
 ('I119', 'Gluten', 'protein'),
 ('I120', 'Sugar','fats');
  
+ UPDATE `dim`.`ingredients` SET `ingredientType` = 'protein' WHERE (`ingredientId` = 'I106');
+ 
 INSERT INTO menu VALUES 
 ('MV101','Butter Paneer Kulcha Burger', 'High protien','https://cdn-images.cure.fit/www-curefit-com/image/upload/fl_progressive,f_auto,q_auto:eco,w_600,ar_1.33,c_fit/dpr_2/image/singles/eat/meals/EAT6108/primary/5_1.jpg', 99,483,16,57,11,18, 'I101 I102 I103 I104 I105 I119'),
 ('MV102','Classic Paneer Pizza', 'High Protein','https://cdn-images.cure.fit/www-curefit-com/image/upload/w_295,ar_1.33,fl_progressive,f_auto,q_auto:eco/dpr_2/image/singles/eat/meals/EAT6394/primary/2_1.jpg' ,270,723,28,80,5,29, 'I106 I109 I110 '),
-('MV103','Marconi Pepper Salad with Cream Jalapeno', 'Low Calorie','https://cdn-images.cure.fit/www-curefit-com/image/upload/w_295,ar_1.33,fl_progressive,f_auto,q_auto:eco/dpr_2/image/singles/eat/meals/EAT5370/primary/4_1.jpg', 129, 329,11,47,9,11, 'I102 I103 I105 I106 '),
+('MV103','Marconi Pepper Salad with Cream Jalapeno', 'Low Calorie','https://cdn-images.cure.fit/www-curefit-com/image/upload/w_295,ar_1.33,fl_progressive,f_auto,q_auto:eco/dpr_2/image/singles/eat/meals/EAT5370/primary/4_1.jpg', 129, 329,11,47,9,11, 'I102 I103 I105 I106'),
 ('MN101','Butter Chicken Kulcha Burger', 'High Protein' ,'https://cdn-images.cure.fit/www-curefit-com/image/upload/w_295,ar_1.33,fl_progressive,f_auto,q_auto:eco/dpr_2/image/singles/eat/meals/EAT6107/primary/5_1.jpg', 99,483,18,56,12,16, 'I101 I102 I103 I104 I105 I119'),
 ('MN102','Indian Chicken Pizza', 'High Carbs','https://cdn-images.cure.fit/www-curefit-com/image/upload/w_295,ar_1.33,fl_progressive,f_auto,q_auto:eco/dpr_2/image/singles/eat/meals/EAT6393/primary/2_1.jpg' , 270, 669,57,11,18,50, 'I106 I104 I109 I118'),
 ('MN103','Sweet Potato Herbed Grilled Chicken with Honey Mustard', 'High Fibre' , 'https://www.archanaskitchen.com/images/archanaskitchen/1-Author/Soni_Khadilkar/grilled_chicken_salad_1600.jpg' ,149,14,57,11,18,8, 'I106 I103 I118'),
@@ -188,7 +188,7 @@ INSERT INTO medicalIssues VALUES
 ('thyroid','Dairy Gluten Sugar'),
 ('blood pressure','Sugar Meat Caffeine');
 
-insert into exercise values
+insert into exercise (`workType`, `reqNutrient`,`image`) values
 ('Leg Workout - Beginner', 'fibre','https://c4.wallpaperflare.com/wallpaper/409/386/366/legs-female-workout-crossfit-wallpaper-preview.jpg'),
 ('Leg Workout - Advance', 'carbs','https://cdn.discordapp.com/attachments/802068802732425227/848791002210631720/download.jpg'),
 ('Upper Body - Beginner', 'fats','https://images.hdqwalls.com/download/fitness-gym-girl-nb-1920x1080.jpg'),
@@ -206,14 +206,163 @@ insert into professional values
 ('P105','Vibha', 'Patel', 'Nutritionist','M.Sc in Nutrition'),
 ('P106','Vikas', 'Bothra', 'Nutritionist','M.Sc in Nutrition');
 
-UPDATE `dim`.`exercise` SET `id` = '1' WHERE (`workType` = 'Abs - Adance');
-UPDATE `dim`.`exercise` SET `id` = '2' WHERE (`workType` = 'Abs- Beginner');
-UPDATE `dim`.`exercise` SET `id` = '3' WHERE (`workType` = 'Cardio - Adance');
-UPDATE `dim`.`exercise` SET `id` = '4' WHERE (`workType` = 'Cardio - Beginner');
-UPDATE `dim`.`exercise` SET `id` = '5' WHERE (`workType` = 'Leg Workout - Advance');
-UPDATE `dim`.`exercise` SET `id` = '6' WHERE (`workType` = 'Leg Workout - Beginner');
-UPDATE `dim`.`exercise` SET `id` = '7' WHERE (`workType` = 'Upper Body - Adance');
-UPDATE `dim`.`exercise` SET `id` = '8' WHERE (`workType` = 'Upper Body - Beginner');
+
+DROP PROCEDURE IF EXISTS  SP_SplitString_medDets;
+DELIMITER //
+ CREATE PROCEDURE SP_SplitString_medDets(Value longtext)
+   BEGIN
+	DECLARE front TEXT DEFAULT NULL;
+	DECLARE frontlen INT DEFAULT NULL;
+	DECLARE TempValue TEXT DEFAULT NULL;
+	drop table if exists dim.medDets;
+	create table medDets(id int not null auto_increment primary key, medDets varchar(30));
+	iterator:
+	LOOP  
+		IF LENGTH(TRIM(Value)) = 0 OR Value IS NULL THEN
+			LEAVE iterator;
+		END IF;
+		SET front = SUBSTRING_INDEX(Value,' ',1);
+		SET frontlen = LENGTH(front);
+		SET TempValue = TRIM(front);
+		INSERT INTO medDets (medDets) VALUES ( TempValue);
+		SET Value = INSERT(Value,1,frontlen + 1,'');
+   END LOOP;
+   END //
+   delimiter ;
+call SP_SplitString('Malav Aneri Sameep Kashvi' );
+select * from medDets;
+
+DROP PROCEDURE IF EXISTS  deniedingredients ;
+DELIMITER //
+ CREATE PROCEDURE deniedingredients(Value longtext)
+   BEGIN
+	DECLARE front TEXT DEFAULT NULL;
+	DECLARE frontlen INT DEFAULT NULL;
+	DECLARE TempValue TEXT DEFAULT NULL;
+	drop table if exists deniedIng;
+	create table deniedIng(id int not null auto_increment primary key, ingredients varchar(30));
+	iterator:
+	LOOP  
+		IF LENGTH(TRIM(Value)) = 0 OR Value IS NULL THEN
+			LEAVE iterator;
+		END IF;
+		SET front = SUBSTRING_INDEX(Value,' ',1);
+		SET frontlen = LENGTH(front);
+		SET TempValue = TRIM(front);
+		INSERT INTO deniedIng (ingredients) VALUES ( TempValue);
+		SET Value = INSERT(Value,1,frontlen + 1,'');
+   END LOOP;
+   END //
+   delimiter ;
+call deniedingredients('Malav Aneri Sameep Kashvi' );
+select * from deniedIng;
+
+DROP PROCEDURE IF EXISTS  preferencesIng ;
+DELIMITER //
+ CREATE PROCEDURE preferencesIng(Value varchar(255))
+   BEGIN
+	DECLARE front TEXT DEFAULT NULL;
+	DECLARE frontlen INT DEFAULT NULL;
+	DECLARE TempValue TEXT DEFAULT NULL;
+	drop table if exists preflist;
+	create table preflist(id int not null auto_increment primary key, ingredients varchar(30));
+	iterator:
+	LOOP  
+		IF LENGTH(TRIM(Value)) = 0 OR Value IS NULL THEN
+			LEAVE iterator;
+		END IF;
+		SET front = SUBSTRING_INDEX(Value,' ',1);
+		SET frontlen = LENGTH(front);
+		SET TempValue = TRIM(front);
+		INSERT INTO preflist (ingredients) VALUES ( TempValue);
+		SET Value = INSERT(Value,1,frontlen + 1,'');
+   END LOOP;
+   END //
+   delimiter ;
+call preferencesIng('Malav Aneri Sameep Kashvi Nut I101' );
+select * from preflist;
+
+
+
+drop procedure if exists denied_recommedation;
+delimiter $$ 
+create procedure denied_recommendation()
+begin 
+	declare finished int default 0;
+    declare r_dish varchar(100);
+    declare c_dish cursor for 
+		select dishId from menu;
+        declare continue handler for not found set finished = 1;
+        drop table if exists almostfinalTable;
+		create table almostfinalTable(dishId varchar(50) primary key);
+        open c_dish;
+			getdish:LOOP
+				FETCH c_dish into r_dish;
+				if finished = 1 then
+					leave c_loop;
+                end if;
+                begin
+					declare finished1 int default 0;
+                    declare r_ing varchar(255);
+                    declare b_temp varchar(50);
+                    declare c_ing cursor for 
+						select ingredients from deniedIng;
+						open c_ing;
+							geting: LOOP
+								fetch c_ing into r_ing;
+                                if finished1 = 1 then
+									leave c_loop;
+								end if;
+								select dishId from menu where ingredients not like CONCAT ("%", r_ing, "%") into b_temp;
+                                insert into almostfinalTable value(b_temp);
+				
+							END LOOP;
+                        close c_ing;
+                end;
+			END LOOP;
+        close c_dish;
+end$$
+delimiter ;
+
+
+
+drop procedure if exists final_recommedation;
+delimiter $$ 
+create procedure final_recommendation(nutrient varchar(50))
+begin 
+	declare finished int default 0;
+    declare r_dish varchar(100);
+    declare c_dish cursor for 
+		select dishId from menu;
+        declare continue handler for not found set finished = 1;
+        drop table if exists finalTable;
+		create table finalTable(dishId varchar(50) primary key);
+        open c_dish;
+			getdish:LOOP
+				FETCH c_dish into r_dish;
+				if finished = 1 then
+					leave c_loop;
+                end if;
+                begin
+					declare finished1 int default 0;
+                    declare r_ing varchar(255);
+                    declare b_temp varchar(50);
+                    declare c_ing cursor for 
+						select i.ingredientId from ingredients i right join preflist p on p.ingredients = i.ingredientId where i.ingredientType="protein";						open c_ing;
+							geting: LOOP
+								fetch c_ing into r_ing;
+                                if finished1 = 1 then
+									leave c_loop;
+								end if;
+								select dishId from almosfinaltTable where ingredients like CONCAT ("%", r_ing, "%") into b_temp;
+                                insert into finalTable value(b_temp);
+							END LOOP;
+                        close c_ing;
+                end;
+			END LOOP;
+        close c_dish;
+end$$
+delimiter ;
 
 
 -- insert into user(firstName, lastName, email, age, weight, height, bloodGroup) values('Aneri','Dalwadi','aneri.d@ahduni.edu.in','20','55','150','B+');
