@@ -56,7 +56,7 @@ class Recomendations extends Component {
 
     render() {
 
-        if(this.state.data.length==0){
+        if(this.state.data.length===0){
             return (
                 <div>
                     <Header/>

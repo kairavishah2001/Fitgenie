@@ -1,9 +1,9 @@
 import axios from 'axios';
 import React, { Component } from 'react';
-import { Redirect } from 'react-router';
+// import { Redirect } from 'react-router';
 import { Card, CardImg, CardBody, Button, Form, Label, Input } from 'reactstrap';
 import Header from './Header';
-import Recommendation from './Recomendations';
+// import Recommendation from './Recomendations';
 
 class ScheduleWithId extends Component {
 
