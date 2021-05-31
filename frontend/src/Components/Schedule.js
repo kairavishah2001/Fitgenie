@@ -71,7 +71,7 @@ export default class Schedule extends Component {
 
     componentDidMount() {
         axios.defaults.withCredentials = true;
-        axios.get('http://localhost:5000/scheduleList')
+        axios.get('http://194.195.115.31:5000/scheduleList')
             .then(response => {
                 if (response.data.success) {
                     this.setState({
