@@ -184,6 +184,11 @@ INSERT INTO medicalIssues VALUES
 ('thyroid','Dairy Gluten Sugar'),
 ('blood pressure','Sugar Meat Caffeine');
 
+UPDATE `dim`.`medicalissues` SET `deniedIngredients` = 'I120 I115' WHERE (`disease` = 'blood pressure');
+UPDATE `dim`.`medicalissues` SET `deniedIngredients` = 'I101 I118' WHERE (`disease` = 'cholesterol');
+UPDATE `dim`.`medicalissues` SET `deniedIngredients` = 'I120' WHERE (`disease` = 'diabetes');
+UPDATE `dim`.`medicalissues` SET `deniedIngredients` = 'I101 I120 I119' WHERE (`disease` = 'thyroid');
+
 insert into exercise (`workType`, `reqNutrient`,`image`) values
 ('Leg Workout - Beginner', 'fibre','https://c4.wallpaperflare.com/wallpaper/409/386/366/legs-female-workout-crossfit-wallpaper-preview.jpg'),
 ('Leg Workout - Advance', 'carbs','https://cdn.discordapp.com/attachments/802068802732425227/848791002210631720/download.jpg'),
