@@ -10,6 +10,7 @@ import Care from './Care';
 import Profile from './Profile';
 import Schedule from './Schedule';
 import ScheduleWithId from './ScheduleWithId';
+import Questionnair from './Questionnair';
 
 class Main extends Component {
     render() {
@@ -38,6 +39,7 @@ class Main extends Component {
                     <Route path='/profile' component={Profile} />
                     <Route exact path='/schedule' component={Schedule} />
                     <Route path='/schedule/:scheduleId' component={ScheduleWithId1} />
+                    <Route path='/questionnair' component={Questionnair} />
                     <Redirect to="/login" />
                 </Switch>
             </div>
