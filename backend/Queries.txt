@@ -8,3 +8,12 @@ insert into appointments values ("1","Malav Doshi","2021-05-02","slot3","Trainer
 insert into appointments values ("1","Sanjay Shah","2021-05-12","slot1","Physiotherapist");
 insert into appointments values ("1","Vikas Bothra","2021-06-01","slot3","Nutritionist");
 insert into appointments values ("1","Sumit Singh","2021-06-04","slot2","Trainer");
+insert into workout values('1','Abs - Adance','1622443700759','slot1');
+insert into workout values('1','Abs - Adance','1622443717614','slot1');
+insert into workout values('1','Abs - Adance','1622443882814','slot2');
+insert into workout values('1','Abs - Adance','1622443899100','slot3');
+insert into workout values('1','Abs - Adance','31-4-2021','slot3');
+insert into appointments values ("1","Aakash Hupta","2021-05-02","slot2","Trainer");
+insert into workout values('1','Leg Workout - Advance','31-4-2021','slot2');
+insert into appointments values ("1","Sanjay Shah","2021-05-31","slot3","Physiotherapist");
+insert into appointments values ("1","Ashna Gandhi","2021-05-27","slot1","Trainer");
