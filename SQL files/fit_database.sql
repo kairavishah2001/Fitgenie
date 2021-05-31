@@ -87,7 +87,6 @@ CREATE TABLE `cart` (
 	`quantity` INT NOT NULL,
 	`date` DATETIME NOT NULL
 );
-
 CREATE TABLE `order` (
 	`userId` int NOT NULL,
 	`orderId` varchar(255) NOT NULL,
@@ -116,8 +115,6 @@ ALTER TABLE `preferences` add CONSTRAINT `preferences_fk1` FOREIGN KEY (`ingredi
 
 ALTER TABLE `workout` ADD CONSTRAINT `workout_fk0` FOREIGN KEY (`userId`) REFERENCES `user`(`userId`);
 
-ALTER TABLE `cart` ADD CONSTRAINT `cart_fk0` FOREIGN KEY (`userId`) REFERENCES `user`(`userId`);
-
 ALTER TABLE `cart` ADD CONSTRAINT `cart_fk1` FOREIGN KEY (`dishId`) REFERENCES `menu`(`dishId`);
 
 ALTER TABLE `order` ADD CONSTRAINT `order_fk0` FOREIGN KEY (`userId`) REFERENCES `user`(`userId`);
@@ -138,11 +135,10 @@ alter table workout add primary key(`userId`,`date`,`time`);
 
 alter table cart drop column date;
 
-alter table `cart` add primary key(`userId`);
-
 alter table medicalDetails add primary key(`userId`);
 
 alter table exercise add column image varchar(255);
+
 
 INSERT INTO ingredients Values
 ('I101','Dairy', 'protein'),
