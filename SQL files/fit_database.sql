@@ -111,6 +111,9 @@ ALTER TABLE `preferences` ADD CONSTRAINT `preferences_fk0` FOREIGN KEY (`userId`
 ALTER TABLE `preferences` add CONSTRAINT `preferences_fk1` FOREIGN KEY (`ingredientId`) REFERENCES `ingredients`(`ingredientId`);
 
 ALTER TABLE `workout` ADD CONSTRAINT `workout_fk0` FOREIGN KEY (`userId`) REFERENCES `user`(`userId`);
+alter table `workout` modify column date varchar(20);
+ALTER TABLE `dim`.`workout` 
+CHANGE COLUMN `time` `time` VARCHAR(10) NOT NULL ;
 
 ALTER TABLE `workout` ADD CONSTRAINT `workout_fk1` FOREIGN KEY (`workoutType`) REFERENCES `exercise`(`workType`);
 

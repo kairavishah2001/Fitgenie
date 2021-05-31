@@ -32,6 +32,21 @@
 body {
   overflow-x: hidden;
 }
+
+input[type='radio']:checked:after {
+  width: 17px;
+  height: 17px;
+  border-radius: 15px;
+  top: -3px;
+  left: -1px;
+  position: relative;
+  background-color: #ffa500;
+  content: '';
+  display: inline-block;
+  visibility: visible;
+  border: 2px solid white;
+}
+
 .react-rater-hover{
   react-rater-hover:red; 
 }
