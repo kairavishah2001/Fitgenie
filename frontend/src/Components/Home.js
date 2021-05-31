@@ -72,7 +72,7 @@ class Home extends Component {
                         <Card style={{ border: 'white' }}>
                             <div className="row">
                                 <h3 className="col-10" style={{ fontFamily: 'cursive' }}>Care</h3>
-                                <a href="/" className="stretched-link col-2 mt-1 text-decoration-none d-flex justify-content-end" role="button" style={{ fontFamily: 'cursive' }}>Explore</a>
+                                <a href="/care" className="stretched-link col-2 mt-1 text-decoration-none d-flex justify-content-end" role="button" style={{ fontFamily: 'cursive' }}>Explore</a>
                             </div>
                             <h6>Making health rasy and accessible</h6>
                             <p style={{fontSize: '10px'}}>Book online doctor consultations and schedule diagnostic tests at home.</p>

@@ -48,7 +48,8 @@ CREATE TABLE `medicalIssues` (
 -- User Id is the only foreign key here
 CREATE TABLE `preferences` (
 	`userId` int NOT NULL,
-	`ingredientId` varchar(255) NOT NULL
+	`ingredientId` varchar(255) NOT NULL,
+	primary key(`userId`)
 );
 
 
@@ -71,7 +72,8 @@ CREATE TABLE `professional` (
 	`pFirstname` varchar(50) NOT NULL,
     `pLastname` varchar(50) NOT NULL,
 	`role` varchar(50) NOT NULL,
-	`qualification` varchar(50) NOT NULL
+	`qualification` varchar(50) NOT NULL,
+	primary key(`pId`)
 );
 
 -- Date column is dropped and UserId is PK
@@ -93,12 +95,14 @@ CREATE TABLE `order` (
 -- User id is PK
 create table `appointments`(
 	`userId` int not null ,
-    `pFirstname` varchar(50),
-	`pLastname` varchar(50),
-    `appointmentTime` varchar(50),
-    `role` varchar(50));
-    
- alter table appointments add primary key(`userId`);   
+    `pName` varchar(100),
+    `appointmentDate` date,
+	`appointmentTime` varchar(50),
+    `role` varchar(50),
+	primary key(`userId`, `appointmentDate`, `appointmentTime`)
+);
+
+alter table `appointments` modify appointmentDate varchar(50);
 
 ALTER TABLE `medicalDetails` ADD CONSTRAINT `medicalDetails_fk0` FOREIGN KEY (`userId`) REFERENCES `user`(`userId`);
 
@@ -137,6 +141,7 @@ alter table `cart` add primary key(`userId`);
 alter table medicalDetails add primary key(`userId`);
 
 alter table exercise add column image varchar(255);
+alter table exercise add column id int;
 
 INSERT INTO ingredients Values
 ('I101','Dairy', 'protein'),
@@ -182,7 +187,7 @@ INSERT INTO medicalIssues VALUES
 
 insert into exercise values
 ('Leg Workout - Beginner', 'fibre','https://c4.wallpaperflare.com/wallpaper/409/386/366/legs-female-workout-crossfit-wallpaper-preview.jpg'),
-('Leg Workout - Advance', 'carbs','https://lh3.googleusercontent.com/proxy/WsQf_FDqj0pL9myTM4sVkJ18j2RZf7P8PlEuFJWadEQ1NjoQY67skjEyEvbaNAZq21qsBxjRsMRDw6sxEbDP5Jb1wPE7rNIDCmLeKYO0AcfpnWUeYa7cgN4cB2at3WU551CkWl6C5xJFWpxA1w'),
+('Leg Workout - Advance', 'carbs','https://cdn.discordapp.com/attachments/802068802732425227/848791002210631720/download.jpg'),
 ('Upper Body - Beginner', 'fats','https://images.hdqwalls.com/download/fitness-gym-girl-nb-1920x1080.jpg'),
 ('Upper Body - Adance', 'fats','https://images.unsplash.com/photo-1605296867424-35fc25c9212a?ixid=MnwxMjA3fDB8MHxzZWFyY2h8Mnx8cHVsbCUyMHVwfGVufDB8fDB8fA%3D%3D&ixlib=rb-1.2.1&w=1000&q=80'),
 ('Cardio - Beginner', 'carbs','https://wallpapercave.com/wp/wp7535570.jpg'),
@@ -197,6 +202,15 @@ insert into professional values
 ('P104','Sanjay', 'Shah', 'Physiotherapist','B.Sc in Physiotherapy'),
 ('P105','Vibha', 'Patel', 'Nutritionist','M.Sc in Nutrition'),
 ('P106','Vikas', 'Bothra', 'Nutritionist','M.Sc in Nutrition');
+
+UPDATE `dim`.`exercise` SET `id` = '1' WHERE (`workType` = 'Abs - Adance');
+UPDATE `dim`.`exercise` SET `id` = '2' WHERE (`workType` = 'Abs- Beginner');
+UPDATE `dim`.`exercise` SET `id` = '3' WHERE (`workType` = 'Cardio - Adance');
+UPDATE `dim`.`exercise` SET `id` = '4' WHERE (`workType` = 'Cardio - Beginner');
+UPDATE `dim`.`exercise` SET `id` = '5' WHERE (`workType` = 'Leg Workout - Advance');
+UPDATE `dim`.`exercise` SET `id` = '6' WHERE (`workType` = 'Leg Workout - Beginner');
+UPDATE `dim`.`exercise` SET `id` = '7' WHERE (`workType` = 'Upper Body - Adance');
+UPDATE `dim`.`exercise` SET `id` = '8' WHERE (`workType` = 'Upper Body - Beginner');
 
 
 -- insert into user(firstName, lastName, email, age, weight, height, bloodGroup) values('Aneri','Dalwadi','aneri.d@ahduni.edu.in','20','55','150','B+');
