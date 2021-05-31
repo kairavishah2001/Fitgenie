@@ -104,6 +104,8 @@ create table `appointments`(
 
 alter table `appointments` modify appointmentDate varchar(50);
 
+alter table `user` add column fitCash int default 100;
+
 ALTER TABLE `medicalDetails` ADD CONSTRAINT `medicalDetails_fk0` FOREIGN KEY (`userId`) REFERENCES `user`(`userId`);
 
 ALTER TABLE `preferences` ADD CONSTRAINT `preferences_fk0` FOREIGN KEY (`userId`) REFERENCES `user`(`userId`);

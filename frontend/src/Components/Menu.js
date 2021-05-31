@@ -15,6 +15,7 @@ function DisplayMenu({ result }) {
     }
 
     function addItemToCart(event){
+        axios.defaults.withCredentials = true;
         axios.get("http://localhost:5000/addToCart", {headers: {id: event.target.id}})
             .then( response => {
                 if(response.data.success){

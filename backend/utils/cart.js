@@ -1,15 +1,9 @@
-const cookieParser = require('cookie-parser');
 const pool = require('../pool');
 
-exports.addToCart = (req, res) => {
-
-    let id = req.headers.id;
-    console.log(req.cookies);
-    let userId = req.cookies.cookie.userId ;
-
+exports.cart = (req, res) => {
     pool.getConnection((err) => {
         if (err) {
-            console.log("SQL CONNECTION ERROR: " + err.message);
+            console.log("CONNECTION ERROR: " + err.message);
             res.send({
                 status: 0,
                 msg: err.message,
@@ -17,12 +11,10 @@ exports.addToCart = (req, res) => {
                 data: null,
             });
         } else {
-            
-            let fetch = "insert into cart values('"+ JSON.parse(req.cookies.cookie).userId +"','" + id +"','"+ 1 + "');";
-
+            let fetch = "select c.*, d.* from cart c left join menu d on d.dishId = c.dishId where userId = '" + JSON.parse(req.cookies.cookie).userId + "';";
             pool.query(fetch, (err, result) => {
                 if (err) {
-                    console.log("SQL QUERY RUN ERROR: " + err.message);
+                    console.log("QUERY ERROR: " + err.message);
                     res.send({
                         status: 0,
                         msg: err.message,
@@ -32,12 +24,12 @@ exports.addToCart = (req, res) => {
                 } else {
                     res.send({
                         status: 1,
-                        msg: 'Added to cart',
+                        msg: 'Fetched',
                         success: true,
-                        data: [],
+                        data: result,
                     });
                 }
             });
         }
-    })
+    });
 }
