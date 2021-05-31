@@ -3,6 +3,7 @@ import React, { Component } from 'react';
 import { Redirect } from 'react-router';
 import { Card, CardImg, CardBody, Button, Form, Label } from 'reactstrap';
 import Header from './Header';
+import Recommendation from './Recomendations';
 
 class ScheduleWithId extends Component {
 
@@ -55,7 +56,9 @@ class ScheduleWithId extends Component {
         if(this.state.redirectVar){
             alert("Get your recommend menu, best suited for you");
             return(
-                <Redirect to="/eat"/>
+                <div>
+                    <Recommendation Data={id= this.state.id, slot= this.state.slot} />
+                </div>
             )
         }
         return (
