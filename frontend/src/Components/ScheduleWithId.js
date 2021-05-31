@@ -72,7 +72,7 @@ class ScheduleWithId extends Component {
             alert("Get your recommend menu, best suited for you");
             return(
                 <div>
-                    <Recommendation Data={this.state.id} />
+                    <Recommendation id={this.props.scheduleId} />
                 </div>
             )
         }
