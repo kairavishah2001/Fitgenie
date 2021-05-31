@@ -67,7 +67,7 @@ class Header extends Component {
                                     <NavLink className="nav-link" to="/cart">
                                         <h5 className="text-dark">
                                             <span className="fa fa-shopping-cart" /> Cart
-                                            <span className="cart-icon">0</span>
+                                            {/* <span className="cart-icon">0</span> */}
                                         </h5>
                                     </NavLink>
                                 </NavItem>
