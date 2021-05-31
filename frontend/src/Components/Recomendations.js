@@ -15,6 +15,8 @@ class Recomendations extends Component {
         this.renderDishes = this.renderDishes.bind(this);
     }
 
+    
+
     renderDishes(){
         let renderList = this.state.map((rl) => {
             return (
@@ -60,6 +62,7 @@ class Recomendations extends Component {
             return (
                 <div>
                     <Header/>
+                    You have no scheduled workout yet.
                 </div>
             );
         }
