@@ -16,7 +16,7 @@ function DisplayMenu({ result }) {
 
     function addItemToCart(event){
         axios.defaults.withCredentials = true;
-        axios.get("http://localhost:5000/addToCart", {headers: {id: event.target.id}})
+        axios.get("http://162.245.221.122:5000/addToCart", {headers: {id: event.target.id}})
             .then( response => {
                 if(response.data.success){
                     console.log("Dish Added");
@@ -66,7 +66,7 @@ export default class Menu extends Component {
     }
 
     componentDidMount() {
-        axios.get('http://localhost:5000/eat')
+        axios.get('http://162.245.221.122:5000/eat')
             .then(response => {
                 if (response.data.success) {
                     this.setState({
