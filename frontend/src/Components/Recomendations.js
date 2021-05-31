@@ -62,6 +62,7 @@ class Recomendations extends Component {
             return (
                 <div>
                     <Header/>
+                    You have no scheduled workout yet.
                 </div>
             );
         }

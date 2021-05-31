@@ -72,8 +72,12 @@ CREATE TABLE `professional` (
 	`pFirstname` varchar(50) NOT NULL,
     `pLastname` varchar(50) NOT NULL,
 	`role` varchar(50) NOT NULL,
+<<<<<<< HEAD
+	`qualification` varchar(50) NOT NULL
+=======
 	`qualification` varchar(50) NOT NULL,
 	primary key(`pId`)
+>>>>>>> 56bdb78257eca118b56e0bc53e91f5bfbacc9db3
 );
 
 -- Date column is dropped and UserId is PK
@@ -102,8 +106,6 @@ create table `appointments`(
 );
 
 alter table `appointments` modify appointmentDate varchar(50);
-
-alter table `user` add column fitCash int default 100;
 
 ALTER TABLE `medicalDetails` ADD CONSTRAINT `medicalDetails_fk0` FOREIGN KEY (`userId`) REFERENCES `user`(`userId`);
 
@@ -136,6 +138,21 @@ alter table cart drop column date;
 alter table medicalDetails add primary key(`userId`);
 
 alter table exercise add column image varchar(255);
+
+INSERT INTO `dim`.`user` (`userId`, `firstName`, `lastName`, `email`, `age`, `weight`, `height`, `bloodGroup`) VALUES ('1', 'Parth', 'Shah', 'parth1302@gmail.com', '19', '50', '165', 'AB+');
+INSERT INTO `dim`.`user` (`userId`, `firstName`, `lastName`, `email`, `age`, `weight`, `height`, `bloodGroup`) VALUES ('2', 'Malav', 'Doshi', 'malavdoshi312@gmail.com', '19', '75', '177', 'O+');
+INSERT INTO `dim`.`user` (`userId`, `firstName`, `lastName`, `email`, `age`, `weight`, `height`, `bloodGroup`) VALUES ('3 ', 'Parsha', 'Shah', 'parshwa@gmail.com', '15', '99', '130', 'B-');
+
+INSERT INTO `dim`.`medicaldetails` (`userId`, `userMed`) VALUES ('1', 'cholesterol diabetes thyroid');
+INSERT INTO `dim`.`medicaldetails` (`userId`, `userMed`) VALUES ('3', 'blood_pressure');
+
+insert into preferences values (1,'I101 I107 I109 I118'),(2,'I103 I106 I108 I118 I120'), (3,'I105 I111 I116 I114 I113 I112');
+
+INSERT INTO `dim`.`workout` (`userId`, `workoutId`, `time`, `date`) VALUES ('1', '3', '9 to 12', '1st June');
+INSERT INTO `dim`.`workout` (`userId`, `workoutId`, `time`, `date`) VALUES ('2', '8', '3 to 6', '1st June');
+INSERT INTO `dim`.`workout` (`userId`, `workoutId`, `time`, `date`) VALUES ('3', '1', '6 to 9', '1st June');
+
+
 
 
 INSERT INTO ingredients Values
@@ -182,6 +199,8 @@ INSERT INTO medicalIssues VALUES
 ('thyroid','Dairy Gluten Sugar'),
 ('blood pressure','Sugar Meat Caffeine');
 
+UPDATE `dim`.`medicalissues` SET `disease` = 'blood_pressure' WHERE (`disease` = 'blood pressure');
+
 UPDATE `dim`.`medicalissues` SET `deniedIngredients` = 'I120 I115' WHERE (`disease` = 'blood pressure');
 UPDATE `dim`.`medicalissues` SET `deniedIngredients` = 'I101 I118' WHERE (`disease` = 'cholesterol');
 UPDATE `dim`.`medicalissues` SET `deniedIngredients` = 'I120' WHERE (`disease` = 'diabetes');
@@ -213,8 +232,11 @@ DELIMITER //
 	DECLARE front TEXT DEFAULT NULL;
 	DECLARE frontlen INT DEFAULT NULL;
 	DECLARE TempValue TEXT DEFAULT NULL;
+    declare b_disease longtext;
 	drop table if exists dim.medDets;
 	create table medDets(id int not null auto_increment primary key, medDets varchar(30));
+	drop table if exists deniedIng;
+	create table deniedIng(id int not null auto_increment primary key, ingredients varchar(30));
 	iterator:
 	LOOP  
 		IF LENGTH(TRIM(Value)) = 0 OR Value IS NULL THEN
@@ -224,12 +246,12 @@ DELIMITER //
 		SET frontlen = LENGTH(front);
 		SET TempValue = TRIM(front);
 		INSERT INTO medDets (medDets) VALUES ( TempValue);
-		SET Value = INSERT(Value,1,frontlen + 1,'');
+		select deniedIngredients from medicalissues where disease=TempValue into b_disease;
+        call deniedingredients(b_disease);
    END LOOP;
    END //
    delimiter ;
-call SP_SplitString('Malav Aneri Sameep Kashvi' );
-select * from medDets;
+
 
 DROP PROCEDURE IF EXISTS  deniedingredients ;
 DELIMITER //
@@ -238,8 +260,6 @@ DELIMITER //
 	DECLARE front TEXT DEFAULT NULL;
 	DECLARE frontlen INT DEFAULT NULL;
 	DECLARE TempValue TEXT DEFAULT NULL;
-	drop table if exists deniedIng;
-	create table deniedIng(id int not null auto_increment primary key, ingredients varchar(30));
 	iterator:
 	LOOP  
 		IF LENGTH(TRIM(Value)) = 0 OR Value IS NULL THEN
@@ -253,16 +273,16 @@ DELIMITER //
    END LOOP;
    END //
    delimiter ;
-call deniedingredients('Malav Aneri Sameep Kashvi' );
-select * from deniedIng;
 
 DROP PROCEDURE IF EXISTS  preferencesIng ;
 DELIMITER //
- CREATE PROCEDURE preferencesIng(Value varchar(255))
+ CREATE PROCEDURE preferencesIng(b_userId int)
    BEGIN
 	DECLARE front TEXT DEFAULT NULL;
 	DECLARE frontlen INT DEFAULT NULL;
 	DECLARE TempValue TEXT DEFAULT NULL;
+    declare Value varchar(255);
+    select ingridientId from preferences where userId=b_userId into Value;
 	drop table if exists preflist;
 	create table preflist(id int not null auto_increment primary key, ingredients varchar(30));
 	iterator:
@@ -283,7 +303,7 @@ select * from preflist;
 
 
 
-drop procedure if exists denied_recommedation;
+drop procedure if exists denied_recommendation;
 delimiter $$ 
 create procedure denied_recommendation()
 begin 
@@ -298,7 +318,7 @@ begin
 			getdish:LOOP
 				FETCH c_dish into r_dish;
 				if finished = 1 then
-					leave c_loop;
+					leave getdish;
                 end if;
                 begin
 					declare finished1 int default 0;
@@ -310,11 +330,10 @@ begin
 							geting: LOOP
 								fetch c_ing into r_ing;
                                 if finished1 = 1 then
-									leave c_loop;
+									leave geting;
 								end if;
 								select dishId from menu where ingredients not like CONCAT ("%", r_ing, "%") into b_temp;
                                 insert into almostfinalTable value(b_temp);
-				
 							END LOOP;
                         close c_ing;
                 end;
@@ -327,31 +346,34 @@ delimiter ;
 
 drop procedure if exists final_recommedation;
 delimiter $$ 
-create procedure final_recommendation(nutrient varchar(50))
+create procedure final_recommendation(workoutId varchar(50))
 begin 
 	declare finished int default 0;
     declare r_dish varchar(100);
+    declare nutrient varchar(50);
     declare c_dish cursor for 
 		select dishId from menu;
         declare continue handler for not found set finished = 1;
+        select reqNutrient from exercise e where e.workoutId=workoutId into nutrient;
         drop table if exists finalTable;
 		create table finalTable(dishId varchar(50) primary key);
         open c_dish;
 			getdish:LOOP
 				FETCH c_dish into r_dish;
 				if finished = 1 then
-					leave c_loop;
+					leave getdish;
                 end if;
                 begin
 					declare finished1 int default 0;
                     declare r_ing varchar(255);
                     declare b_temp varchar(50);
                     declare c_ing cursor for 
-						select i.ingredientId from ingredients i right join preflist p on p.ingredients = i.ingredientId where i.ingredientType="protein";						open c_ing;
+						select i.ingredientId from ingredients i right join preflist p on p.ingredients = i.ingredientId where i.ingredientType=nutrient;						
+                        open c_ing;
 							geting: LOOP
 								fetch c_ing into r_ing;
                                 if finished1 = 1 then
-									leave c_loop;
+									leave geting;
 								end if;
 								select dishId from almosfinaltTable where ingredients like CONCAT ("%", r_ing, "%") into b_temp;
                                 insert into finalTable value(b_temp);
