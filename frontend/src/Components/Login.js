@@ -21,7 +21,7 @@ class Login extends Component {
     }
 
     responseGoogle = (res) => {
-        axios.get("http://162.245.221.122:5000/login", { headers: { email: res.profileObj.email } })
+        axios.get("http://194.195.115.31:5000/login", { headers: { email: res.profileObj.email } })
             .then((response) => {
                 if (response.data.success) {
                     cookie.save("cookie", { userId: response.data.data[0].userId, email: response.data.data[0].email, imageUrl: res.profileObj.imageUrl}, { path: '/' });

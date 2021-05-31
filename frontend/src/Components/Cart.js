@@ -63,7 +63,7 @@ export default class Cart extends Component {
 
     componentDidMount() {
         axios.defaults.withCredentials = true;
-        axios.get('http://162.245.221.122:5000/cart')
+        axios.get('http://194.195.115.31:5000/cart')
             .then(response => {
                 if (response.data.success) {
                     this.setState({

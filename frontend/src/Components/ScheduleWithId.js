@@ -40,7 +40,7 @@ class ScheduleWithId extends Component {
         // alert(data.time);
         
         axios.defaults.withCredentials = true;
-        axios.post('http://162.245.221.122:5000/addSchedule', data)
+        axios.post('http://194.195.115.31:5000/addSchedule', data)
             .then(response => {
                 if(response.data.success) {
                     this.setState({
@@ -54,7 +54,7 @@ class ScheduleWithId extends Component {
     }
 
     componentDidMount() {
-        axios.get('http://162.245.221.122:5000/getSchedule', { headers: { id: this.props.scheduleId } })
+        axios.get('http://194.195.115.31:5000/getSchedule', { headers: { id: this.props.scheduleId } })
             .then(response => {
                 if (response.data.success) {
                     this.setState({

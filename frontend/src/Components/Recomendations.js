@@ -46,7 +46,7 @@ class Recomendations extends Component {
     }
 
     componentDidMount(){
-        axios.get("http://162.245.221.122:5000/getRecommendation", {headers: {id: this.props.id}})
+        axios.get("http://194.195.115.31:5000/getRecommendation", {headers: {id: this.props.id}})
         .then( response => {
             if(response.data.success){
                 this.setState({
