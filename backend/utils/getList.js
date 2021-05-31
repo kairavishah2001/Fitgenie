@@ -12,7 +12,7 @@ exports.getList = (req, res) => {
             });
         } else {
             let objectCookie = JSON.parse(req.cookies.cookie);
-            let fetch = 'select * from appointments where userId = "' + objectCookie.userId + '";';
+            let fetch = 'select * from appointments where userId = "' + objectCookie.userId + '" order by appointmentDate desc;';
             pool.query(fetch, (err, result) => {
                 if (err) {
                     console.log("QUERY ERROR: " + err);
@@ -23,7 +23,6 @@ exports.getList = (req, res) => {
                         data: null,
                     });
                 } else {
-                    console.log(result);
                     res.send({
                         status: 1,
                         success: true,

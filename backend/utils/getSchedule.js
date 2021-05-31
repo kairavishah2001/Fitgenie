@@ -1,8 +1,8 @@
 const pool = require('../pool');
 
-exports.profile = (req, res) => {
+exports.getSchedule = (req, res) => {
     pool.getConnection((err) => {
-        if(err) {
+        if (err) {
             console.log("CONNECTION ERROR: " + err);
             res.send({
                 status: 0,
@@ -11,10 +11,9 @@ exports.profile = (req, res) => {
                 data: null,
             });
         } else {
-            let id = JSON.parse(req.cookies.cookie).userId;
-            let fetch = 'select * from user where userId = "' + id + '";';
+            let fetch = 'select * from exercise where id = "' + req.headers.id + '";';
             pool.query(fetch, (err, result) => {
-                if(err) {
+                if (err) {
                     console.log("QUERY ERROR: " + err);
                     res.send({
                         status: 0,
@@ -26,11 +25,11 @@ exports.profile = (req, res) => {
                     res.send({
                         status: 1,
                         success: true,
-                        msg: "Fetched",
+                        msg: 'Fetched',
                         data: result,
                     });
                 }
             });
         }
-    })
+    });
 }

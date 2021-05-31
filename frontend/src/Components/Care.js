@@ -3,17 +3,62 @@ import React, { Component } from 'react'
 import { Card, CardBody, FormGroup, Label, Input, Button } from 'reactstrap';
 import Header from './Header';
 
+function DisplayAppointments({ result }) {
+    let renderList
+    if (result.length === 0) {
+        renderList = <strong>Nothing Here</strong>
+    } else {
+        // eslint-disable-next-line array-callback-return
+        renderList = result.map((rl) => {
+            if (rl.appointmentTime === 'slot1') {
+                return (
+                    <tr>
+                        <td><div className="d-flex justify-content-center">{rl.pName}</div></td>
+                        <td><div className="d-flex justify-content-center">{rl.appointmentDate}</div></td>
+                        <td><div className="d-flex justify-content-center">7am - 8:30am</div></td>
+                        <td><div className="d-flex justify-content-center">{rl.role}</div></td>
+                    </tr>
+                );
+            } else if (rl.appointmentTime === 'slot2') {
+                return (
+                    <tr>
+                        <td><div className="d-flex justify-content-center">{rl.pName}</div></td>
+                        <td><div className="d-flex justify-content-center">{rl.appointmentDate}</div></td>
+                        <td><div className="d-flex justify-content-center">10am - 11:30am</div></td>
+                        <td><div className="d-flex justify-content-center">{rl.role}</div></td>
+                    </tr>
+                );
+            }
+            return (
+                <tr>
+                    <td><div className="d-flex justify-content-center">{rl.pName}</div></td>
+                    <td><div className="d-flex justify-content-center">{rl.appointmentDate}</div></td>
+                    <td><div className="d-flex justify-content-center">5pm - 6:30pm</div></td>
+                    <td><div className="d-flex justify-content-center">{rl.role}</div></td>
+                </tr>
+            );
+        })
+
+    }
+
+    return (
+        renderList
+    );
+}
+
 export default class Care extends Component {
     constructor(props) {
         super(props);
 
         this.state = {
-            role: 'trainer',
+            role: 'Trainer',
             trainer: [],
             nutritionist: [],
-            professional: 'Malav Doshi',
+            physiotherapist: [],
+            professional: 'Ashna Gandhi',
             date: '',
             time: 'slot1',
+            result: [],
         }
 
         this.handleInputChange = this.handleInputChange.bind(this);
@@ -24,9 +69,9 @@ export default class Care extends Component {
         axios.defaults.withCredentials = true;
         axios.get('http://localhost:5000/getList')
             .then(response => {
-                if(response.data.success) {
+                if (response.data.success) {
                     this.setState({
-                        
+                        result: response.data.data,
                     });
                 }
             })
@@ -36,7 +81,6 @@ export default class Care extends Component {
     }
 
     book(event) {
-        // alert(JSON.stringify(this.state))
         let data = {
             role: this.state.role,
             name: this.state.professional,
@@ -47,12 +91,15 @@ export default class Care extends Component {
         axios.defaults.withCredentials = true;
         axios.post('http://localhost:5000/appointment', data)
             .then(response => {
-                if(response.data.success) {
-                    alert(response.data.msg);
+                if (response.data.success) {
+                    console.log("Inserted");
                 }
             })
             .catch(err => {
                 alert(err)
+            })
+            .finally(res => {
+                window.location.reload();
             })
     }
 
@@ -68,18 +115,20 @@ export default class Care extends Component {
 
     render() {
         let displayProfessional;
-        if (this.state.role === 'trainer') {
+        if (this.state.role === 'Trainer') {
             displayProfessional = <select onChange={this.handleInputChange} className="mt-2" name="professional" style={{ border: '1px solid black', width: "100%" }} id="professional">
-                <option value="Malav Doshi">Malav Doshi</option>
+                <option value="Ashna Gandhi">Ashna Gandhi</option>
+                <option value="Sumit Singh">Sumit Singh</option>
+                <option value="Aakash Hupta">Aakash Hupta</option>
             </select>
-        } else if(this.state.role === 'physiotherapist') {
+        } else if (this.state.role === 'Physiotherapist') {
             displayProfessional = <select onChange={this.handleInputChange} onBlur={this.handleInputChange} className="mt-2" name="professional" style={{ border: '1px solid black', width: "100%" }} id="professional">
-                <option value="Samkit Kundalia">Samkit Kundalia</option>
+                <option value="Sanjay Shah">Sanjay Shah</option>
             </select>
         } else {
             displayProfessional = <select onChange={this.handleInputChange} onBlur={this.handleInputChange} className="mt-2" name="professional" style={{ border: '1px solid black', width: "100%" }} id="professional">
-                <option value="Parth Shah">Parth Shah</option>
-                <option value="Aneri Dalwadi">Aneri Dalwadi</option>
+                <option value="Vibha Patel">Vibha Ptel</option>
+                <option value="Vikas Bothra">Vikas Bothra</option>
             </select>
         }
 
@@ -99,18 +148,7 @@ export default class Care extends Component {
                                         <th><div className="d-flex justify-content-center">Time</div></th>
                                         <th><div className="d-flex justify-content-center">Role</div></th>
                                     </tr>
-                                    <tr>
-                                        <td><div className="d-flex justify-content-center">Malav Doshi</div></td>
-                                        <td><div className="d-flex justify-content-center">May 28, 2021</div></td>
-                                        <td><div className="d-flex justify-content-center">1730 IST</div></td>
-                                        <td><div className="d-flex justify-content-center">Trainer</div></td>
-                                    </tr>
-                                    <tr>
-                                        <td><div className="d-flex justify-content-center">Parth Shah</div></td>
-                                        <td><div className="d-flex justify-content-center">May 29, 2021</div></td>
-                                        <td><div className="d-flex justify-content-center">1800 IST</div></td>
-                                        <td><div className="d-flex justify-content-center">Nutritionist</div></td>
-                                    </tr>
+                                    <DisplayAppointments result={this.state.result} />
                                 </table>
                             </div>
                         </CardBody>
@@ -122,9 +160,9 @@ export default class Care extends Component {
                                 <FormGroup className="mt-2">
                                     <Label>Choose role</Label>
                                     <select onChange={this.handleInputChange} className="mt-2" name="role" style={{ border: '1px solid black', width: "100%" }} id="role">
-                                        <option value="trainer">Trainer</option>
-                                        <option value="nutritionist">Nutritionist</option>
-                                        <option value="physiotherapist">Physiotherapist</option>
+                                        <option value="Trainer">Trainer</option>
+                                        <option value="Nutritionist">Nutritionist</option>
+                                        <option value="Physiotherapist">Physiotherapist</option>
                                     </select>
                                 </FormGroup>
                                 <FormGroup className="mt-2">
