@@ -43,7 +43,9 @@ class ScheduleWithId extends Component {
         axios.post('http://localhost:5000/addSchedule', data)
             .then(response => {
                 if(response.data.success) {
-                    console.log('Scheduled');
+                    this.setState({
+                        redirectVar: true,
+                    })
                 }
             })
             .catch(err => {

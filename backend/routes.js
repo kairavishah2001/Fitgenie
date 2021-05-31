@@ -10,6 +10,7 @@ const getList = require('./utils/getList');
 const appointment = require('./utils/appointment');
 const scheduleList = require('./utils/scheduleList');
 const getSchedule = require('./utils/getSchedule');
+const getUserSchedule = require('./utils/getUserSchedule');
 const addSchedule = require('./utils/addSchedule');
 const getRecomendation = require('./utils/getRecomendation');
 
@@ -22,6 +23,8 @@ router.get('/addToCart', addToCart.addToCart);
 router.get('/scheduleList', scheduleList.scheduleList);
 router.get('/getSchedule', getSchedule.getSchedule);
 router.get('/getRecomendation', getRecomendation.getRecomendation);
+router.get('/getUserSchedule', getUserSchedule.getUserSchedule);
+
 router.post('/addSchedule', addSchedule.addSchedule);
 router.post('/signUp', signUp.signUp);
 router.post('/appointment', appointment.appointment);
