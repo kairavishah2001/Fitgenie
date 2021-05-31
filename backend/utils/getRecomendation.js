@@ -1,9 +1,8 @@
 const pool = require('../pool');
 
 exports.getRecomendation = (req,res) =>{
-    let id = req.headers.id;
-    console.log(req.cookies);
-    let userId = req.cookies.cookie.userId ;
+    let workoutId = req.headers.id;
+    let userId = JSON.parse(req.cookies.cookie).userId ;
 
     pool.getConnection((err) => {
         if (err) {
@@ -13,9 +12,27 @@ exports.getRecomendation = (req,res) =>{
                 msg: err.message,
                 success: false,
                 data: null,
+                diseaseString:"",
             });
         } else {
-            let fetch = `call m1(`+ +`,`+   +`);`;
+            let query = "SELECT userMed from medicalDetails where userId = '" + userId + "';";
+            pool.query(fetch2, (err, result) => {
+                if (err) {
+                    console.log("SQL QUERY RUN ERROR: " + err.message);
+                    res.send({
+                        status: 0,
+                        msg: err.message,
+                        success: false,
+                        data: null,
+                    });
+                } else{
+                    alert(result[0]);
+                    this.setState({
+                        diseaseString: result[0],
+                    })
+                }   
+            });
+            let fetch = `call SP_SplitString_medDets(` + diseaseString +`);`;
             pool.query(fetch, (err, result) => {
                 if (err) {
                     console.log("SQL QUERY RUN ERROR: " + err.message);
@@ -26,7 +43,7 @@ exports.getRecomendation = (req,res) =>{
                         data: null,
                     });
                 } else {
-                    let fetch1 = `call m2(`+ + `,`+   +`);`;   
+                    let fetch1 = `call preferencesIng(`+ userId +`);`;   
                     pool.query(fetch1, (err, result) => {
                         if (err) {
                             console.log("SQL QUERY RUN ERROR: " + err.message);
@@ -37,7 +54,7 @@ exports.getRecomendation = (req,res) =>{
                                 data: null,
                             });
                         } else {
-                            let fetch2 = `call m3(`+ +`,`+   +`);`;   
+                            let fetch2 = `call denied_recommendation();`;   
                             pool.query(fetch2, (err, result) => {
                                 if (err) {
                                     console.log("SQL QUERY RUN ERROR: " + err.message);
@@ -48,7 +65,7 @@ exports.getRecomendation = (req,res) =>{
                                         data: null,
                                     });
                                 } else {
-                                    let fetch3 = `call m4(`+ +`,`+   +`);`;   
+                                    let fetch3 = `call final_recommendation(`+ workoutId +`);`;   
                                     pool.query(fetch3, (err, Finalresult) => {
                                         if (err) {
                                             console.log("SQL QUERY RUN ERROR: " + err.message);
