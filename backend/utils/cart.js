@@ -11,6 +11,7 @@ exports.cart = (req, res) => {
                 data: null,
             });
         } else {
+console.log(req.cookies.cookie);
             let fetch = "select c.*, d.* from cart c left join menu d on d.dishId = c.dishId where userId = '" + JSON.parse(req.cookies.cookie).userId + "';";
             pool.query(fetch, (err, result) => {
                 if (err) {
