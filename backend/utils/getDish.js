@@ -1,7 +1,7 @@
 const pool = require('../pool'); 
 
 exports.getDish = (req, res) => {
-    pool.getConnection((err) => {
+    pool.getConnection((err, connection) => {
         if(err) {
             console.log("CONNECTION ERROR: " + err.message);
             res.send({
@@ -31,5 +31,6 @@ exports.getDish = (req, res) => {
                 }
             });
         }
+        connection.release();
     });
 }

@@ -1,7 +1,7 @@
 const pool = require('../pool');
 
 exports.getList = (req, res) => {
-    pool.getConnection((err) => {
+    pool.getConnection((err, connection) => {
         if (err) {
             console.log("CONNECTION ERROR: " + err);
             res.send({
@@ -33,5 +33,6 @@ exports.getList = (req, res) => {
                 }
             });
         }
+        connection.release();
     });
 }
