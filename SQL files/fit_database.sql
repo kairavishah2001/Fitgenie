@@ -220,6 +220,12 @@ insert into professional values
 ('P105','Vibha', 'Patel', 'Nutritionist','M.Sc in Nutrition'),
 ('P106','Vikas', 'Bothra', 'Nutritionist','M.Sc in Nutrition');
 
+-- "chol joon ty"
+-- loop: 
+--   chol
+--   call(col: ing_banned --> "a b c")
+
+UPDATE `dim`.`medicalissues` SET `deniedIngredients` = 'I101 I118 I119' WHERE (`disease` = 'blood_pressure');
 
 DROP PROCEDURE IF EXISTS  SP_SplitString_medDets;
 DELIMITER //
@@ -296,15 +302,14 @@ DELIMITER //
    END //
    delimiter ;
 
-
-
--- |||||||||||||||||||||||||||||||||||||||||||
+-- ||||||||||||||||||||||||||||||||||||||||||||
 drop procedure if exists denied_recommendation;
 delimiter $$ 
 create procedure denied_recommendation()
 begin 
 	declare finished int default 0;
     declare r_dish varchar(100);
+    -- get all dishes ID from menu
     declare c_dish cursor for 
 		select dishId from menu;
         declare continue handler for not found set finished = 1;
@@ -312,11 +317,13 @@ begin
 		create table almostfinalTable(dishId varchar(50) primary key);
         open c_dish;
 			getdish:LOOP
+				-- r_dish has ID of each dish in menu
 				FETCH c_dish into r_dish;
 				if finished = 1 then
 					leave getdish;
                 end if;
                 begin
+					-- cecking each ingrediend of that string that is not from denied
 					declare finished1 int default 0;
                     declare r_ing varchar(255);
                     declare b_temp varchar(50);
@@ -324,12 +331,21 @@ begin
 						select ingredients from deniedIng;
 						open c_ing;
 							geting: LOOP
+								-- getting ingr ID in r_ing
 								fetch c_ing into r_ing;
                                 if finished1 = 1 then
 									leave geting;
 								end if;
-								select dishId from menu where ingredientId not like CONCAT ("%", r_ing, "%") into b_temp;
-                                insert into almostfinalTable value(b_temp);
+--  dish id pirmary key
+-- "a b c"
+								select dishId from menu where ingredientId not like CONCAT ("%", r_ing, "%") and dishId = r_dish into b_temp;
+                                INSERT INTO almostfinalTable (dishId)
+								SELECT * FROM (SELECT b_temp) AS dishId
+									WHERE NOT EXISTS (
+										SELECT * from almostfinalTable where dishId = b_temp
+									) LIMIT 1;
+                                    
+                                insert into almostfinalTable value(b_temp) ;
 							END LOOP;
                         close c_ing;
                 end;
@@ -339,8 +355,9 @@ end$$
 delimiter ;
 
 
+select dishId from menu where ingredientId not like "%I106%"; 
 
-drop procedure if exists final_recommedation;
+drop procedure if exists final_recommendation;
 delimiter $$ 
 create procedure final_recommendation(workoutId varchar(50))
 begin 
@@ -372,8 +389,10 @@ begin
 									leave geting;
 								end if;
 								select dishId from almosfinaltTable where ingredients like CONCAT ("%", r_ing, "%") into b_temp;
-                                insert into finalTable value(b_temp);
-							END LOOP;
+                                if b_temp != null then
+									insert into finalTable value(b_temp);
+								end if;
+                            END LOOP;
                         close c_ing;
                 end;
 			END LOOP;
