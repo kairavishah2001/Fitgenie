@@ -4,7 +4,7 @@ exports.getRecomendation = (req, res) => {
     let workoutId = req.headers.id;
     let userId = JSON.parse(req.cookies.cookie).userId;
     let diseaseString = [];
-    pool.getConnection((err) => {
+    pool.getConnection((err, connection) => {
         if (err) {
             console.log("SQL CONNECTION ERROR: " + err.message);
             res.send({
@@ -98,5 +98,6 @@ exports.getRecomendation = (req, res) => {
                 }
             });
          }
+         connection.release();
     })
 }

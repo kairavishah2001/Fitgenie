@@ -1,7 +1,7 @@
 const pool = require('../pool');
 
 exports.profile = (req, res) => {
-    pool.getConnection((err) => {
+    pool.getConnection((err, connection) => {
         if(err) {
             console.log("CONNECTION ERROR: " + err);
             res.send({
@@ -33,5 +33,6 @@ exports.profile = (req, res) => {
                 }
             });
         }
+        connection.release();
     })
 }

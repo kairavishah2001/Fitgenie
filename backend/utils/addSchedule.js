@@ -7,7 +7,7 @@ exports.addSchedule = (req, res) => {
     let time = req.body.time;
     let userId = JSON.parse(req.cookies.cookie).userId;
 
-    pool.getConnection((err) => {
+    pool.getConnection((err, connection) => {
         if (err) {
             console.log("SQL CONNECTION ERROR: " + err.message);
             res.send({
@@ -47,5 +47,6 @@ exports.addSchedule = (req, res) => {
                 }
             });
         }
+        connection.release();
     })
 }
