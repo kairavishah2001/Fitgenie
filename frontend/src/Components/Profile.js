@@ -37,7 +37,7 @@ export default class Profile extends Component {
 
     componentDidMount() {
         axios.defaults.withCredentials = true;
-        axios.get('http://fitgenie.ml:5000/profile')
+        axios.get('http://localhost:5000/profile')
             .then(response => {
                 if (response.data.success) {
                     this.setState({
@@ -56,7 +56,7 @@ export default class Profile extends Component {
                 alert(err);
             })
         axios.defaults.withCredentials = true;
-        axios.get('http://fitgenie.ml:5000/getUserSchedule')
+        axios.get('http://localhost:5000/getUserSchedule')
             .then(response => {
                 if (response.data.success && response.data.data.length !== 0) {
                     this.setState({
