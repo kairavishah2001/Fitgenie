@@ -13,7 +13,11 @@ class DisplayCart extends Component {
     removeItem(event) {
         // alert(event.target.id)
         axios.defaults.withCredentials = true;
+<<<<<<< HEAD
         axios.get('http://194.195.115.31:5000/removeItem', { headers: { id: event.target.id } })
+=======
+        axios.get('http://fitgenie.ml:5000/removeItem', { headers: { id: event.target.id } })
+>>>>>>> 8b67d70ae6452e2ecc31b8013d6fda7b0a5d05b8
             .then(response => {
                 // alert(response.data.success);
                 if (response.data.success) {
@@ -79,7 +83,7 @@ export default class Cart extends Component {
 
     componentDidMount() {
         axios.defaults.withCredentials = true;
-        axios.get('http://194.195.115.31:5000/cart', {withCredentials: true})
+        axios.get('http://fitgenie.ml:5000/cart')
             .then(response => {
                 if (response.data.success) {
                     this.setState({

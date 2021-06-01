@@ -89,7 +89,7 @@ export default class Care extends Component {
         };
 
         axios.defaults.withCredentials = true;
-        axios.post('http://localhost:5000/appointment', data)
+        axios.post('http://fitgenie.ml:5000/appointment', data)
             .then(response => {
                 if (response.data.success) {
                     console.log("Inserted");
