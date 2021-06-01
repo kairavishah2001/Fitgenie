@@ -10,7 +10,7 @@ exports.login = (req, res) => {
             data: {},
         });
     } else {
-        pool.getConnection(function (err) {
+        pool.getConnection(function (err, connection) {
             if (err) {
                 res.send({
                     status: 0,
@@ -45,6 +45,7 @@ exports.login = (req, res) => {
                      }
                 });
             }
+            connection.release();
         });
     }
 }

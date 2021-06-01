@@ -1,7 +1,7 @@
 const pool = require('../pool');
 
 exports.getSchedule = (req, res) => {
-    pool.getConnection((err) => {
+    pool.getConnection((err, connection) => {
         if (err) {
             console.log("CONNECTION ERROR: " + err);
             res.send({
@@ -31,5 +31,6 @@ exports.getSchedule = (req, res) => {
                 }
             });
         }
+        connection.release();
     });
 }

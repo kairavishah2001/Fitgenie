@@ -1,9 +1,9 @@
 const pool = require('../pool');
 
-exports.cart = (req, res) => {
+exports.getIngredients = (req, res) => {
     pool.getConnection((err, connection) => {
         if (err) {
-            console.log("CONNECTION ERROR: " + err.message);
+            console.log("SQL CONNECTION ERROR: " + err.message);
             res.send({
                 status: 0,
                 msg: err.message,
@@ -11,10 +11,10 @@ exports.cart = (req, res) => {
                 data: null,
             });
         } else {
-            let fetch = "select c.*, d.* from cart c left join menu d on d.dishId = c.dishId where userId = '" + JSON.parse(req.cookies.cookie).userId + "';";
+            let fetch = 'select * from ingredients;';
             pool.query(fetch, (err, result) => {
                 if (err) {
-                    console.log("QUERY ERROR: " + err.message);
+                    console.log("SQL QUERY RUN ERROR: " + err.message);
                     res.send({
                         status: 0,
                         msg: err.message,

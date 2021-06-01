@@ -1,7 +1,7 @@
 const pool = require('../pool');
 
 exports.deleteItemCart = (req, res) => {
-    pool.getConnection((err) => {
+    pool.getConnection((err, connection) => {
         if (err) {
             console.log("CONNECTION ERROR: " + err);
             res.send({
@@ -34,5 +34,6 @@ exports.deleteItemCart = (req, res) => {
                 }
             });
         }
+        connection.release();
     })
 }

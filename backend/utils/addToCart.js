@@ -7,7 +7,7 @@ exports.addToCart = (req, res) => {
     console.log(req.cookies);
     let userId = req.cookies.cookie.userId ;
 
-    pool.getConnection((err) => {
+    pool.getConnection((err, connection) => {
         if (err) {
             console.log("SQL CONNECTION ERROR: " + err.message);
             res.send({
@@ -39,5 +39,6 @@ exports.addToCart = (req, res) => {
                 }
             });
         }
+        connection.release();
     })
 }

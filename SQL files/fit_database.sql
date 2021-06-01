@@ -339,14 +339,16 @@ begin
 --  dish id pirmary key
 -- "a b c"
 								select dishId from menu where ingredientId not like CONCAT ("%", r_ing, "%") and dishId = r_dish into b_temp;
-                                INSERT INTO almostfinalTable (dishId)
-								SELECT * FROM (SELECT b_temp) AS dishId
-									WHERE NOT EXISTS (
-										SELECT * from almostfinalTable where dishId = b_temp
-									) LIMIT 1;
+                                if b_temp != null then
+									INSERT INTO almostfinalTable (dishId)
+									SELECT * FROM (SELECT b_temp) AS dishId
+										WHERE NOT EXISTS (
+											SELECT * from almostfinalTable where dishId = b_temp
+										) LIMIT 1;
                                     
-                                insert into almostfinalTable value(b_temp) ;
-							END LOOP;
+										insert into almostfinalTable value(b_temp) ;
+									end if;
+                            END LOOP;
                         close c_ing;
                 end;
 			END LOOP;
@@ -354,6 +356,7 @@ begin
 end$$
 delimiter ;
 
+call denied_recommendation();
 
 select dishId from menu where ingredientId not like "%I106%"; 
 
