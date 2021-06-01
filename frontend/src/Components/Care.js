@@ -67,7 +67,7 @@ export default class Care extends Component {
 
     componentDidMount() {
         axios.defaults.withCredentials = true;
-        axios.get('http://194.195.115.31:5000/getList')
+	axios.get('http://fitgenie.ml:5000/getList')
             .then(response => {
                 if (response.data.success) {
                     this.setState({
@@ -89,7 +89,7 @@ export default class Care extends Component {
         };
 
         axios.defaults.withCredentials = true;
-        axios.post('http://194.195.115.31:5000/appointment', data)
+        axios.post('http://localhost:5000/appointment', data)
             .then(response => {
                 if (response.data.success) {
                     console.log("Inserted");

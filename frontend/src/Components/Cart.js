@@ -13,7 +13,7 @@ class DisplayCart extends Component {
     removeItem(event) {
         // alert(event.target.id)
         axios.defaults.withCredentials = true;
-        axios.get('http://localhost:5000/removeItem', { headers: { id: event.target.id } })
+        axios.get('http://194.195.115.31:5000/removeItem', { headers: { id: event.target.id } })
             .then(response => {
                 // alert(response.data.success);
                 if (response.data.success) {
@@ -79,7 +79,7 @@ export default class Cart extends Component {
 
     componentDidMount() {
         axios.defaults.withCredentials = true;
-        axios.get('http://194.195.115.31:5000/cart')
+        axios.get('http://194.195.115.31:5000/cart', {withCredentials: true})
             .then(response => {
                 if (response.data.success) {
                     this.setState({
