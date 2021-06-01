@@ -2,7 +2,7 @@ const pool = require('../pool');
 const fs = require('fs');
 
 exports.appointment = (req, res) => {
-    pool.getConnection((err) => {
+    pool.getConnection((err, connection) => {
         if (err) {
             console.log("CONNECTION ERROR: " + err);
             res.send({
@@ -37,5 +37,6 @@ exports.appointment = (req, res) => {
                 }
             });
         }
+        connection.release();
     });
 }

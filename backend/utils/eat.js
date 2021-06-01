@@ -1,7 +1,7 @@
 const pool = require('../pool');
 
 exports.eat = (req, res) => {
-    pool.getConnection((err) => {
+    pool.getConnection((err, connection) => {
         if (err) {
             console.log("SQL CONNECTION ERROR: " + err.message);
             res.send({
@@ -31,5 +31,6 @@ exports.eat = (req, res) => {
                 }
             });
         }
+        connection.release();
     });
 }

@@ -1,7 +1,7 @@
 const pool = require('../pool');
 
 exports.cart = (req, res) => {
-    pool.getConnection((err) => {
+    pool.getConnection((err, connection) => {
         if (err) {
             console.log("CONNECTION ERROR: " + err.message);
             res.send({
@@ -31,5 +31,6 @@ exports.cart = (req, res) => {
                 }
             });
         }
+        connection.release();
     });
 }
