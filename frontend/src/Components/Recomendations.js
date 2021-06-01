@@ -62,7 +62,11 @@ class Recomendations extends Component {
             return (
                 <div>
                     <Header/>
-                    You have no scheduled workout yet.
+                    <div className="container mt-5 "> 
+                    <h4 className="d-flex justify-content-center" style={{color:"#D37B22"}}> Your health is up to date since you maintained streak to intake healthy diet and and be consistent in your workout</h4>
+                    <h6>Today is your cheat day</h6>
+                    <Button className="btn btn-success">go</Button>
+                    </div>
                 </div>
             );
         }
