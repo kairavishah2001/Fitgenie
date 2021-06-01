@@ -41,7 +41,6 @@ exports.getRecomendation = (req, res) => {
                         data: null,
                     });
                 } else {
-                    console.log
                     let fetch1 = `call preferencesIng(` + userId + `);`;
                     pool.query(fetch1, (err, result) => {
                         if (err) {
@@ -56,7 +55,7 @@ exports.getRecomendation = (req, res) => {
                             let fetch2 = `call denied_recommendation();`;
                             pool.query(fetch2, (err, result) => {
                                 if (err) {
-                                    console.log("SQL QUERY RUN ERROR: " + err.message);
+                                    console.log("SQL QUERY RUN ERROR: ~~~~~~~~~" + err.message);
                                     res.send({
                                         status: 0,
                                         msg: err.message,
