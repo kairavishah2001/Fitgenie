@@ -16,7 +16,7 @@ export default class DishWithId extends Component {
     }
 
     componentDidMount() {
-        axios.get('http://localhost:5000/getDish', { headers: { id: this.props.dishId } })
+        axios.get('http://fitgenie.ml:5000/getDish', { headers: { id: this.props.dishId } })
             .then(response => {
                 if (response.data.success) {
                     this.setState({
