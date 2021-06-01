@@ -17,6 +17,7 @@ exports.getRecomendation = (req, res) => {
             let query1 = "SELECT userMed from medicalDetails where userId = '" + userId + "';";
             console.log(query1);
             pool.query(query1, (err, result) => {
+                console.log("1st query success" + JSON.stringify(result[0].userMed))
                 if (err) {
                     console.log("SQL QUERY RUN ERROR: in 1st query" + err.message);
                     res.send({
@@ -26,8 +27,8 @@ exports.getRecomendation = (req, res) => {
                         data: null,
                     });
                 } else {
-                    console.log(result[0]);
-                    diseaseString= result[0];
+                    console.log(JSON.stringify(result[0].userMed))
+                    diseaseString= JSON.stringify(result[0].userMed);
                 }
             });
             let fetch = 'call SP_SplitString_medDets("' + diseaseString + '");';

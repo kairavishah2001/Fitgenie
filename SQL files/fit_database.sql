@@ -247,9 +247,9 @@ DELIMITER //
 		SET front = SUBSTRING_INDEX(Value,' ',1);
 		SET frontlen = LENGTH(front);
 		SET TempValue = TRIM(front);
-		INSERT INTO medDets (medDets) VALUES ( TempValue);
+		INSERT INTO medDets (medDets) VALUES (TempValue);
 		select deniedIngredients from medicalissues where disease=TempValue into b_disease;
-        call deniedingredients(b_disease);
+        -- call deniedingredients(b_disease);
    END LOOP;
    END //
    delimiter ;
