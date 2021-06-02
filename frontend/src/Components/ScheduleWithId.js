@@ -69,7 +69,6 @@ class ScheduleWithId extends Component {
 
     render() {
         if (this.state.redirectVar) {
-            alert("Get your recommend menu, best suited for you");
             return(
                 <div>
                     <Recommendation id={this.props.scheduleId} />

@@ -3,21 +3,9 @@ import axios from 'axios';
 import Header from './Header';
 import {Button, Card, CardImg} from 'reactstrap';
 
-class Recomendations extends Component {
-
-    constructor(props){
-        super(props);
-        this.state={
-            data: []
-        }
-
-        this.renderDishes = this.renderDishes.bind(this);
-    }
-
-    
-
-    renderDishes(){
-        let renderList = this.state.map((rl) => {
+function RenderDishes({data}) {
+        let renderList = data.map((rl) => {
+            if(rl.dishId== 'MN201' || rl.dishId== 'MV203' || rl.dishId== 'MV205' || rl.dishId== 'MN103' ){
             return (
                 <div className="col-md-3">
                     <Card style={{ borderColor: 'white' }}>
@@ -35,22 +23,34 @@ class Recomendations extends Component {
                         </div>
                     </Card>
                 </div>
-            );
+            );}
         })
         return (
             <div className="row">
                 {renderList}
             </div>
         );
+}
+
+class Recomendations extends Component {
+
+    constructor(props){
+        super(props);
+        this.state={
+            data: []
+        }
     }
+
+    
+
+    
 
     componentDidMount(){
         axios.get("http://localhost:5000/getRecomendation", {headers: {id: this.props.id}})
         .then( response => {
             if(response.data.success){
-                alert(JSON.stringify(response.data))
                 this.setState({
-                    data: response.data,
+                    data: response.data.data,
                 })   
             }
         })
@@ -75,7 +75,7 @@ class Recomendations extends Component {
                 <Header/>
                 <div className="container">
                     <h2 style={{color:"#D37B22"}}>Here are the best recommendations from our experts, best fitting to your preferences and your workout</h2>
-                    {this.renderDishes}
+                    <RenderDishes data={this.state.data} />
                 </div>
             </div>
         );
