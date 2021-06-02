@@ -67,7 +67,7 @@ class SignUp extends Component {
             }
 
             axios.defaults.withCredentials = true;
-            axios.post('http://fitgenie.ml:5000/signUp', data)
+            axios.post('http://localhost:5000/signUp', data)
                 .then(response => {
                     if (response.data.success) {
                         this.setState({
