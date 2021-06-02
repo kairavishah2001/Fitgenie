@@ -15,6 +15,9 @@ const addSchedule = require('./utils/addSchedule');
 const cart = require('./utils/cart');
 const getRecomendation = require('./utils/getRecomendation');
 const deleteItemCart = require('./utils/deleteItemCart');
+const getIngredients = require('./utils/getIngredients');
+const saveQuestions = require('./utils/saveQuestions');
+const placeOrder = require('./utils/placeOrder');
 
 router.get('/eat', eat.eat);
 router.get('/getDish', getDish.getDish);
@@ -28,9 +31,12 @@ router.get('/getRecomendation', getRecomendation.getRecomendation);
 router.get('/getUserSchedule', getUserSchedule.getUserSchedule);
 router.get('/cart', cart.cart);
 router.get('/removeItem', deleteItemCart.deleteItemCart);
+router.get('/getIngredients', getIngredients.getIngredients);
 
 router.post('/addSchedule', addSchedule.addSchedule);
+router.post('/saveQuestions', saveQuestions.saveQuestions);
 router.post('/signUp', signUp.signUp);
+router.post('/placeOrder', placeOrder.placeOrder);
 router.post('/appointment', appointment.appointment);
 
 module.exports = router;

@@ -2,6 +2,8 @@ import React, { Component } from 'react';
 // import { Button } from 'reactstrap';
 import Header from './Header';
 import axios from 'axios';
+import Aos from 'aos';
+import "aos/dist/aos.css";
 
 class DisplayCart extends Component {
     constructor(props) {
@@ -78,6 +80,7 @@ export default class Cart extends Component {
     }
 
     componentDidMount() {
+        Aos.init({ duration: 1000 });
         axios.defaults.withCredentials = true;
         axios.get('http://fitgenie.ml:5000/cart')
             .then(response => {
@@ -96,6 +99,7 @@ export default class Cart extends Component {
         let displayCart =
             <div className="container">
                 <div className='d-flex justify-content-center '>
+                    <img src="https://cdn.discordapp.com/attachments/802068802732425227/849505425966497822/Empty.gif" alt="nothing" />
                 <a href='/eat' color="primary" className="text-decoration-none mt-2">Add Something</a>
                 </div>
             </div>
@@ -187,7 +191,7 @@ export default class Cart extends Component {
             </div>
         }
         return (
-            <div>
+            <div  data-aos="fade-up">
                 <Header />
                 {displayCart}
 
