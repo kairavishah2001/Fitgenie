@@ -72,7 +72,7 @@ export default class Care extends Component {
     componentDidMount() {
         Aos.init({ duration: 1000 });
         axios.defaults.withCredentials = true;
-        axios.get('http://fitgenie.ml:5000/getList')
+        axios.get('http://fitgenie.ml:5000getList')
             .then(response => {
                 if (response.data.success) {
                     this.setState({
@@ -94,7 +94,7 @@ export default class Care extends Component {
         };
 
         axios.defaults.withCredentials = true;
-        axios.post('http://fitgenie.ml:5000/appointment', data)
+        axios.post('http://fitgenie.ml:5000appointment', data)
             .then(response => {
                 if (response.data.success) {
                     console.log("Inserted");

@@ -18,7 +18,7 @@ function DisplayMenu({ result }) {
 
     function addItemToCart(event){
         axios.defaults.withCredentials = true;
-        axios.get("http://fitgenie.ml:5000/addToCart", {headers: {id: event.target.id}})
+        axios.get("http://fitgenie.ml:5000addToCart", {headers: {id: event.target.id}})
             .then( response => {
                 if(response.data.success){
                     alert('Added to cart');
@@ -69,7 +69,7 @@ export default class Menu extends Component {
 
     componentDidMount() {
         Aos.init({ duration: 1000 });
-        axios.get('http://fitgenie.ml:5000/eat')
+        axios.get('http://fitgenie.ml:5000eat')
             .then(response => {
                 if (response.data.success) {
                     this.setState({

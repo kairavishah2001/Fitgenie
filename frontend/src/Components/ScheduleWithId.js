@@ -42,7 +42,7 @@ class ScheduleWithId extends Component {
         // alert(data.time);
         
         axios.defaults.withCredentials = true;
-        axios.post('http://fitgenie.ml:5000/addSchedule', data)
+        axios.post('http://fitgenie.ml:5000addSchedule', data)
             .then(response => {
                 if(response.data.success) {
                     this.setState({
@@ -57,7 +57,7 @@ class ScheduleWithId extends Component {
 
     componentDidMount() {
         Aos.init({ duration: 1000 });
-        axios.get('http://fitgenie.ml:5000/getSchedule', { headers: { id: this.props.scheduleId } })
+        axios.get('http://fitgenie.ml:5000getSchedule', { headers: { id: this.props.scheduleId } })
             .then(response => {
                 if (response.data.success) {
                     this.setState({

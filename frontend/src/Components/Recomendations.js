@@ -2,24 +2,10 @@ import React, { Component } from 'react';
 import axios from 'axios';
 import Header from './Header';
 import {Button, Card, CardImg} from 'reactstrap';
-import Aos from 'aos';
-import "aos/dist/aos.css";
 
-class Recomendations extends Component {
-
-    constructor(props){
-        super(props);
-        this.state={
-            data: []
-        }
-
-        this.renderDishes = this.renderDishes.bind(this);
-    }
-
-    
-
-    renderDishes(){
-        let renderList = this.state.map((rl) => {
+function RenderDishes({data}) {
+        let renderList = data.map((rl) => {
+            if(rl.dishId== 'MN201' || rl.dishId== 'MV203' || rl.dishId== 'MV205' || rl.dishId== 'MN103' ){
             return (
                 <div className="col-md-3">
                     <Card style={{ borderColor: 'white' }}>
@@ -37,23 +23,34 @@ class Recomendations extends Component {
                         </div>
                     </Card>
                 </div>
-            );
+            );}
         })
         return (
             <div className="row">
                 {renderList}
             </div>
         );
+}
+
+class Recomendations extends Component {
+
+    constructor(props){
+        super(props);
+        this.state={
+            data: []
+        }
     }
 
+    
+
+    
+
     componentDidMount(){
-        Aos.init({ duration: 1000 });
-        axios.get("http://fitgenie.ml:5000/getRecomendation", {headers: {id: this.props.id}})
+        axios.get("http://fitgenie.ml:5000getRecomendation", {headers: {id: this.props.id}})
         .then( response => {
             if(response.data.success){
-                alert(JSON.stringify(response.data))
                 this.setState({
-                    data: response.data,
+                    data: response.data.data,
                 })   
             }
         })
@@ -65,16 +62,20 @@ class Recomendations extends Component {
             return (
                 <div>
                     <Header/>
-                    You have no scheduled workout yet.
+                    <div className="container mt-5 "> 
+                    <h4 className="d-flex justify-content-center" style={{color:"#D37B22"}}> Your health is up to date since you maintained streak to intake healthy diet and and be consistent in your workout</h4>
+                    <h6>Today is your cheat day</h6>
+                    <Button className="btn btn-success">go</Button>
+                    </div>
                 </div>
             );
         }
         return (
             <div>
                 <Header/>
-                <div className="container"  data-aos="fade-up">
+                <div className="container">
                     <h2 style={{color:"#D37B22"}}>Here are the best recommendations from our experts, best fitting to your preferences and your workout</h2>
-                    {this.renderDishes}
+                    <RenderDishes data={this.state.data} />
                 </div>
             </div>
         );
