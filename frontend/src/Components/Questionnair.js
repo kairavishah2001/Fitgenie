@@ -20,7 +20,7 @@ class Questionnair extends Component {
     componentDidMount() {
         Aos.init({ duration: 1000 });
         axios.defaults.withCredentials = true;
-        axios.get('http://fitgenie.ml:5000getIngredients')
+        axios.get('http://fitgenie.ml:5000/getIngredients')
             .then(response => {
                 if (response.data.success) {
                     this.setState({

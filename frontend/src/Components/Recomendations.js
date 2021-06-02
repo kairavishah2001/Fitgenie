@@ -46,7 +46,7 @@ class Recomendations extends Component {
     
 
     componentDidMount(){
-        axios.get("http://fitgenie.ml:5000getRecomendation", {headers: {id: this.props.id}})
+        axios.get("http://fitgenie.ml:5000/getRecomendation", {headers: {id: this.props.id}})
         .then( response => {
             if(response.data.success){
                 this.setState({
