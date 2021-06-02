@@ -56,24 +56,6 @@ class SignUp extends Component {
     }
 
     async handleSignUpSubmit(event) {
-
-        // if (this.state.firstName.length === 0 || this.state.lastName.length === 0 || this.state.email.length === 0) {
-        //     this.setState({
-        //         TEMP: false,
-        //         standardSignUpError: "You have not filled all the fields",
-        //     });
-        // }
-        // else {
-        //     this.setState({
-        //         TEMP: true,
-        //     });
-        // }
-        // if (this.state.TEMP && this.state.standardSignUpError.length === 0) {
-        //     event.preventDefault();
-        //     this.setState({
-        //         redirectVarSignUp: true,
-        //     });
-
             let data = {
                 email: this.state.email,
                 firstName: this.state.firstName,
@@ -134,7 +116,7 @@ class SignUp extends Component {
 
         if (this.state.redirectVarSignUp) {
             return (
-                <Redirect to="/login" />
+                <Redirect to="/questionnair" />
             )
         }
         return (

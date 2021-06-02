@@ -3,6 +3,8 @@ import axios from 'axios';
 import Header from './Header';
 import cookie from 'react-cookies';
 import { Redirect } from 'react-router';
+import Aos from 'aos';
+import "aos/dist/aos.css";
 
 export default class Profile extends Component {
     constructor(props) {
@@ -36,6 +38,7 @@ export default class Profile extends Component {
     }
 
     componentDidMount() {
+        Aos.init({ duration: 1000 });
         axios.defaults.withCredentials = true;
         axios.get('http://fitgenie.ml:5000/profile')
             .then(response => {
@@ -137,8 +140,8 @@ export default class Profile extends Component {
         return (
             <div>
                 <Header />
-                <img className="img-fluid" src="https://cdn-images.cure.fit/www-curefit-com/image/upload/fl_progressive,f_auto,q_auto:eco,w_1440,ar_2880:595/dpr_2/image/vm/d4c7f869-682e-4df4-ba10-729c49042ce1.png" alt="emnem" />
-                <div className="container">
+                <img  data-aos="fade-up" className="img-fluid" src="https://cdn-images.cure.fit/www-curefit-com/image/upload/fl_progressive,f_auto,q_auto:eco,w_1440,ar_2880:595/dpr_2/image/vm/d4c7f869-682e-4df4-ba10-729c49042ce1.png" alt="emnem" />
+                <div  data-aos="fade-up" className="container">
                     <div className="row mt-2">
                         <div>
                             {displaySchedule}
@@ -146,7 +149,7 @@ export default class Profile extends Component {
                     </div>
 
                 </div>
-                <div className="row mt-2">
+                <div className="row mt-2"  data-aos="fade-up">
                     <div>
                         <div className="max-w-4xl flex items-center h-auto lg:h-screen flex-wrap mx-auto my-32 lg:my-0">
                             {/*Main Col*/}

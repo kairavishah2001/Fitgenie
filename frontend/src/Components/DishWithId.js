@@ -2,6 +2,8 @@ import axios from 'axios'
 import React, { Component } from 'react';
 import { Button } from 'reactstrap';
 import Header from './Header';
+import Aos from 'aos';
+import "aos/dist/aos.css";
 
 export default class DishWithId extends Component {
     constructor(props) {
@@ -13,9 +15,21 @@ export default class DishWithId extends Component {
             image: '',
 
         }
+        this.addItemToCart = this.addItemToCart.bind(this);
+    }
+
+    addItemToCart(event){
+        axios.defaults.withCredentials = true;
+        axios.get("http://fitgenie.ml:5000/addToCart", {headers: {id: event.target.id}})
+            .then( response => {
+                if(response.data.success){
+                    alert('Added to cart');
+                }
+            })
     }
 
     componentDidMount() {
+        Aos.init({ duration: 1000 });
         axios.get('http://fitgenie.ml:5000/getDish', { headers: { id: this.props.dishId } })
             .then(response => {
                 if (response.data.success) {
@@ -36,7 +50,7 @@ export default class DishWithId extends Component {
             <div>
                 <Header />
 
-                <div className="container mt-5">
+                <div className="container mt-5"  data-aos="fade-up">
 
                     <div className="row">
                         <div className="col-md-6">
@@ -52,7 +66,7 @@ export default class DishWithId extends Component {
                                 </div>
                             </div>
                             <div className="d-flex justify-content-end">
-                                <Button style={{ height: '40px', width: '100px', borderRadius: '10vw', borderColor: '#ff3278', backgroundColor: '#ff3278' }}>ADD</Button>
+                                <Button style={{ height: '40px', width: '100px', borderRadius: '10vw', borderColor: '#ff3278', backgroundColor: '#ff3278' }} id={this.props.dishId} onClick={this.addItemToCart}>ADD</Button>
                             </div>
                             <div className="pt-3">
                                 <hr />

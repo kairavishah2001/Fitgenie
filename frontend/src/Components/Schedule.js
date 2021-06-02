@@ -3,6 +3,8 @@ import Header from './Header';
 import { Card, CardBody, CardImg, Button } from 'reactstrap';
 import { Redirect } from 'react-router';
 import axios from 'axios';
+import Aos from 'aos';
+import "aos/dist/aos.css";
 
 function DisplayExercise({ result }) {
 
@@ -70,6 +72,7 @@ export default class Schedule extends Component {
     }
 
     componentDidMount() {
+        Aos.init({ duration: 1000 });
         axios.defaults.withCredentials = true;
         axios.get('http://fitgenie.ml:5000/scheduleList')
             .then(response => {
@@ -95,7 +98,7 @@ export default class Schedule extends Component {
         return (
             <div>
                 <Header />
-                <div className="container">
+                <div className="container"  data-aos="fade-up">
                     <h2 className="mt-4">Pick your choice of workout for today!</h2>
                     <p style={{ color: "#6B7284", size: "10px" }}>Whatever cardigan tote bag tumblr hexagon brooklyn asymmetrical gentrify, subway tile poke farm to table. Franzen you probably have not heard of them man bun deep jianbing selfies heirloom prism food truck ugh squid celiac humblebrag.</p>
 

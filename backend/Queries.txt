@@ -49,3 +49,5 @@ insert into workout values('1','1','1-5-2021','slot3');
 insert into workout values('1','2','1-5-2021','slot1');
 insert into workout values('1','1','1-5-2021','slot1');
 insert into workout values('1','4','1-5-2021','slot1');
+insert into user(firstName, lastName, email, age, weight, height, bloodGroup) values('Always','OP','aneri.sameep@gmail.com','123','123','123','B+');
+insert into user(firstName, lastName, email, age, weight, height, bloodGroup) values('Dipali','Vani','nwani63@gmail.com','123','123','123','A-');

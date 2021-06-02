@@ -2,11 +2,15 @@ import axios from 'axios';
 import React, { Component } from 'react'
 import { Card, CardBody, FormGroup, Label, Input, Button } from 'reactstrap';
 import Header from './Header';
+import Aos from 'aos';
+import "aos/dist/aos.css";
 
 function DisplayAppointments({ result }) {
     let renderList
     if (result.length === 0) {
-        renderList = <strong>Nothing Here</strong>
+        renderList = <div className="d-flex justify-content-center">
+            <img src="https://cdn.discordapp.com/attachments/802068802732425227/849505425966497822/Empty.gif" alt="nothing" />
+        </div>
     } else {
         // eslint-disable-next-line array-callback-return
         renderList = result.map((rl) => {
@@ -66,6 +70,7 @@ export default class Care extends Component {
     }
 
     componentDidMount() {
+        Aos.init({ duration: 1000 });
         axios.defaults.withCredentials = true;
         axios.get('http://fitgenie.ml:5000/getList')
             .then(response => {
@@ -135,8 +140,8 @@ export default class Care extends Component {
         return (
             <div>
                 <Header />
-                <img className="img-fluid" src='https://cdn-images.cure.fit/www-curefit-com/image/upload/fl_progressive,f_auto,q_auto:eco,w_1440,ar_2880:595/dpr_2/image/vm/6bd4f44d-7f9b-4971-8279-09097acd476a.png' alt="img" />
-                <div className="mt-5 container">
+                <img  data-aos="fade-up" className="img-fluid" src='https://cdn-images.cure.fit/www-curefit-com/image/upload/fl_progressive,f_auto,q_auto:eco,w_1440,ar_2880:595/dpr_2/image/vm/6bd4f44d-7f9b-4971-8279-09097acd476a.png' alt="img" />
+                <div className="mt-5 container" data-aos="fade-up">
                     <Card style={{ borderColor: 'white' }}>
                         <h4><div style={{ color: '#503FA8' }} className="d-flex justify-content-center">My Appointments</div></h4>
                         <CardBody>

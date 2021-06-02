@@ -3,6 +3,8 @@ import { Card, CardImg, Button } from 'reactstrap';
 import { Redirect } from 'react-router-dom';
 import axios from 'axios';
 import Header from './Header';
+import Aos from 'aos';
+import "aos/dist/aos.css";
 
 function DisplayMenu({ result }) {
     const [redirectVar, changeRedirectVar] = useState(false);
@@ -66,6 +68,7 @@ export default class Menu extends Component {
     }
 
     componentDidMount() {
+        Aos.init({ duration: 1000 });
         axios.get('http://fitgenie.ml:5000/eat')
             .then(response => {
                 if (response.data.success) {
@@ -84,8 +87,8 @@ export default class Menu extends Component {
         return (
             <div>
                 <Header />
-                <img style={{ width: '100vw' }} src="https://cdn-images.cure.fit/www-curefit-com/image/upload/fl_progressive,f_auto,q_auto:eco,w_1440,ar_2880:595/dpr_2/image/vm/52dad53b-dd43-489f-9ed4-02fb2c3461be.jpeg" alt="Offer" />
-                <div className="mt-5">
+                <img  data-aos="fade-up" style={{ width: '100vw' }} src="https://cdn-images.cure.fit/www-curefit-com/image/upload/fl_progressive,f_auto,q_auto:eco,w_1440,ar_2880:595/dpr_2/image/vm/52dad53b-dd43-489f-9ed4-02fb2c3461be.jpeg" alt="Offer" />
+                <div  data-aos="fade-up" className="mt-5">
                     <div className="container">
                         <DisplayMenu result={this.state.result} />
                     </div>

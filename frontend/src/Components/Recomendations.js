@@ -2,6 +2,8 @@ import React, { Component } from 'react';
 import axios from 'axios';
 import Header from './Header';
 import {Button, Card, CardImg} from 'reactstrap';
+import Aos from 'aos';
+import "aos/dist/aos.css";
 
 class Recomendations extends Component {
 
@@ -45,6 +47,7 @@ class Recomendations extends Component {
     }
 
     componentDidMount(){
+        Aos.init({ duration: 1000 });
         axios.get("http://fitgenie.ml:5000/getRecomendation", {headers: {id: this.props.id}})
         .then( response => {
             if(response.data.success){
@@ -69,7 +72,7 @@ class Recomendations extends Component {
         return (
             <div>
                 <Header/>
-                <div className="container">
+                <div className="container"  data-aos="fade-up">
                     <h2 style={{color:"#D37B22"}}>Here are the best recommendations from our experts, best fitting to your preferences and your workout</h2>
                     {this.renderDishes}
                 </div>

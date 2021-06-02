@@ -4,6 +4,8 @@ import React, { Component } from 'react';
 import { Card, CardImg, CardBody, Button, Form, Label, Input } from 'reactstrap';
 import Header from './Header';
 import Recommendation from './Recomendations';
+import Aos from 'aos';
+import "aos/dist/aos.css";
 
 class ScheduleWithId extends Component {
 
@@ -54,6 +56,7 @@ class ScheduleWithId extends Component {
     }
 
     componentDidMount() {
+        Aos.init({ duration: 1000 });
         axios.get('http://fitgenie.ml:5000/getSchedule', { headers: { id: this.props.scheduleId } })
             .then(response => {
                 if (response.data.success) {
@@ -79,7 +82,7 @@ class ScheduleWithId extends Component {
         return (
             <div>
                 <Header />
-                <Card className="m-2" role="button" style={{ backgroundColor: "#F3F4F6", borderColor: "#F3F4F6" }}>
+                <Card  data-aos="fade-up" className="m-2" role="button" style={{ backgroundColor: "#F3F4F6", borderColor: "#F3F4F6" }}>
                     <div className="row d-flex justify-content-center">
                         <div className="col-5 col" >
                             <CardImg className="mt-2" src={this.state.result.image}></CardImg>
