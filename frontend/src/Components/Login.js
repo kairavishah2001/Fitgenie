@@ -26,7 +26,7 @@ class Login extends Component {
             .then((response) => {
                 if (response.data.success) {
                     cookie.save("cookie", { userId: response.data.data[0].userId, email: response.data.data[0].email, imageUrl: res.profileObj.imageUrl}, { path: '/' });
-                    this.setState({
+		    this.setState({
                         redirectVar: true,
                     })
                 } else {
